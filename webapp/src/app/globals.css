@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  overflow: hidden;
+
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary : red;
+  --secondary: #f0f0f0;
+  --border: #e0e0e0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+    --secondary: #1a1a1a;
+    --border: #333333;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.redbtn-shadow {
+  box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.12), 0 0px 0px 0 rgba(0, 0, 0, 0.18);
+  border-radius: 50%;
+  user-select: none;
+}
+
+.redbtn-pulse {
+  animation: redbtn-pulse 1.6s infinite cubic-bezier(.4, 0, .6, 1);
+}
+
+@keyframes redbtn-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 18px rgba(255, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+  }
+}
+
+.dragging {
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.door {
+  position: fixed;
+  top: 0;
+  width: 50vw;
+  height: 100vh;
+  background: var(--secondary);
+  z-index: 40;
+  transition: transform 0.7s cubic-bezier(.4, 2, .6, 1);
+}
+
+.left-door {
+  left: 0;
+  border-right: 0.5px solid var(--border);
+}
+
+.right-door {
+  right: 0;
+  border-left: 0.5px solid var(--border);
+}
+
+.main-content {
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+.animate-fadein {
+  animation: fadein 1.2s cubic-bezier(.4, 0, .6, 1);
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
