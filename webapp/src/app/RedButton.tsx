@@ -178,12 +178,12 @@ export default function RedButton({
   const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
     if ("touches" in e && e.touches.length > 0) {
       e.preventDefault(); // Prevent scroll on touch start
-      let x = e.touches[0].clientX;
-      let y = e.touches[0].clientY;
+      const x = e.touches[0].clientX;
+      const y = e.touches[0].clientY;
       setPointerDownPos({ x, y });
     } else if ("clientX" in e) {
-      let x = e.clientX;
-      let y = e.clientY;
+      const x = e.clientX;
+      const y = e.clientY;
       setPointerDownPos({ x, y });
     }
   };

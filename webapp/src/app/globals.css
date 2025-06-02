@@ -71,12 +71,10 @@ body {
 
 .left-door {
   left: 0;
-  border-right: 0.5px solid var(--border);
 }
 
 .right-door {
   right: 0;
-  border-left: 0.5px solid var(--border);
 }
 
 .main-content {
