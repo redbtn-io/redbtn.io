@@ -4,13 +4,6 @@ import Image from "next/image";
 
 type Corner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
-const CORNER_POSITIONS: Record<Corner, { top: string; left: string; right: string; bottom: string }> = {
-  "top-left":    { top: "24px", left: "24px", right: "auto", bottom: "auto" },
-  "top-right":   { top: "24px", left: "auto", right: "24px", bottom: "auto" },
-  "bottom-left": { top: "auto", left: "24px", right: "auto", bottom: "24px" },
-  "bottom-right":{ top: "auto", left: "auto", right: "24px", bottom: "24px" },
-};
-
 function getNearestCorner(x: number, y: number, width: number, height: number): Corner {
   const corners: [Corner, number, number][] = [
     ["top-left", 0, 0],
@@ -31,45 +24,13 @@ function getNearestCorner(x: number, y: number, width: number, height: number): 
 }
 
 // Helper to get transform for each corner
-function getTransform(minimized: boolean, corner: Corner) {
-  const originalSize = 180;
-  const minimizedSize = 180;
-  const scale = minimized ? minimizedSize / originalSize : 1;
-  const margin = 24 + minimizedSize / 2; // 24px from edge + half the minimized button
-
-  if (!minimized) {
-    return "translate(-50%, -50%) scale(1)";
-  }
-
-  let tx = 0, ty = 0;
-  switch (corner) {
-    case "top-left":
-      tx = -window.innerWidth / 2 + margin;
-      ty = -window.innerHeight / 2 + margin;
-      break;
-    case "top-right":
-      tx = window.innerWidth / 2 - margin;
-      ty = -window.innerHeight / 2 + margin;
-      break;
-    case "bottom-left":
-      tx = -window.innerWidth / 2 + margin;
-      ty = window.innerHeight / 2 - margin;
-      break;
-    case "bottom-right":
-      tx = window.innerWidth / 2 - margin;
-      ty = window.innerHeight / 2 - margin;
-      break;
-  }
-  return `translate(-50%, -50%) translate(${tx}px, ${ty}px) scale(${scale})`;
-}
+// function getTransform(minimized: boolean, corner: Corner) { ... }
 
 export default function RedButton({
-  initialCenter = true,
   onPress,
   minimized,
   setMinimized,
 }: {
-  initialCenter?: boolean;
   onPress: () => void;
   minimized: boolean;
   setMinimized: (v: boolean) => void;
@@ -91,8 +52,8 @@ export default function RedButton({
     const onMove = (e: MouseEvent | TouchEvent) => {
       if ("touches" in e && e.touches.length > 0) {
         e.preventDefault(); // Prevent scrolling on mobile while dragging
-        let x = e.touches[0].clientX;
-        let y = e.touches[0].clientY;
+        const x = e.touches[0].clientX;
+        const y = e.touches[0].clientY;
         if (!dragging && pointerDownPos) {
           const dx = x - pointerDownPos.x;
           const dy = y - pointerDownPos.y;
@@ -105,8 +66,8 @@ export default function RedButton({
           setDragPos({ x, y });
         }
       } else if ("clientX" in e) {
-        let x = e.clientX;
-        let y = e.clientY;
+        const x = e.clientX;
+        const y = e.clientY;
         if (!dragging && pointerDownPos) {
           const dx = x - pointerDownPos.x;
           const dy = y - pointerDownPos.y;
@@ -168,7 +129,7 @@ export default function RedButton({
   }, [pointerDownPos, dragging, minimized, onPress, setMinimized]);
 
   // Positioning
-  let style: React.CSSProperties = {
+  const style: React.CSSProperties = {
     position: "fixed",
     zIndex: minimized ? 100 : 50,
     pointerEvents: dragging ? "none" : "auto",

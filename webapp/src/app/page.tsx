@@ -56,7 +56,6 @@ export default function Home() {
 
       {/* RedButton */}
       <RedButton
-        initialCenter={!minimized}
         minimized={minimized}
         setMinimized={setMinimized}
         onPress={() => {
