@@ -114,9 +114,11 @@ function MainContent() {
       <div className="bg-white/80 dark:bg-zinc-900/80 rounded-xl shadow-xl p-10 w-full max-w-2xl mb-8 border border-zinc-200 dark:border-zinc-800">
         <h1 className="text-4xl font-bold mb-4 text-red-700 drop-shadow">Welcome to redbtn.io</h1>
         <p className="text-lg mb-8 text-zinc-700 dark:text-zinc-200"><br/>
-          Digital consulting & development for businesses. <br /><br />
+          Digital consulting & development for businesses, creators, and dreamers. <br /><br />
           Web, native, APIs, automation, SEO, marketing, and more.<br /><br />
-          <span className="font-semibold text-red-600">Hit the red button to transform your business.</span>
+          <span className="font-semibold text-red-600">Hit the red button to turn ideas into action. 
+
+          </span>
         </p>
         {/* Add more content here */}
       </div>
