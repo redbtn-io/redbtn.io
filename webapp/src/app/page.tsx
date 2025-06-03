@@ -5,7 +5,20 @@ import RedButton from "./RedButton";
 export default function Home() {
   const [minimized, setMinimized] = useState(false);
   const [doorsVisible, setDoorsVisible] = useState(true);
-  const [showContact, setShowContact] = useState(false); // NEW
+  const [showContact, setShowContact] = useState(false);
+  const [showPrompt, setShowPrompt] = useState(false); // NEW
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | undefined;
+    if (!minimized) {
+      timeout = setTimeout(() => setShowPrompt(true), 5000);
+    } else {
+      setShowPrompt(false);
+    }
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [minimized]);
 
   useEffect(() => {
     if (minimized) {
@@ -33,7 +46,7 @@ export default function Home() {
         </>
       )}
       {/* Centered RedButton & title */}
-      {!minimized && (
+      {!minimized && showPrompt && (
         <div className="absolute inset-0 flex flex-col items-center justify-center z-50 pointer-events-none">
           <div className="
             mb-84
@@ -59,7 +72,7 @@ export default function Home() {
         minimized={minimized}
         setMinimized={setMinimized}
         onPress={() => {
-          setShowContact((prev) => !prev); // Toggle instead of always true
+          setShowContact((prev) => !prev);
         }}
       />
 
