@@ -78,7 +78,7 @@ export default function Home() {
           console.log("Button double-clicked!"); // Placeholder for double-click action
         }}
         onHold={() => {
-          console.log("Button held!"); // Placeholder for hold action
+          alert("josh u a bitch"); // Placeholder for hold action
         }}
         
       />
