@@ -74,6 +74,13 @@ export default function Home() {
         onPress={() => {
           setShowContact((prev) => !prev);
         }}
+        onDouble={() => {
+          console.log("Button double-clicked!"); // Placeholder for double-click action
+        }}
+        onHold={() => {
+          console.log("Button held!"); // Placeholder for hold action
+        }}
+        
       />
 
       {/* Main site content */}
