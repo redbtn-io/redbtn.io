@@ -7,6 +7,13 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  userScalable: "no",
+  initialScale: 1,
+  maximumScale: 1,
+  width: "device-width",
+};
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],

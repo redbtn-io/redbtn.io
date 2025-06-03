@@ -76,9 +76,11 @@ export default function Home() {
         }}
         onDouble={() => {
           console.log("Button double-clicked!"); // Placeholder for double-click action
+          setMinimized(false);
         }}
         onHold={() => {
-          alert("josh u a bitch"); // Placeholder for hold action
+          console.log("Button held!"); // Placeholder for hold action
+          setMinimized(false);
         }}
         
       />

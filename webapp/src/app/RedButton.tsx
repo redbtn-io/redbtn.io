@@ -51,40 +51,52 @@ export default function RedButton({
   useEffect(() => {
     if (!pointerDownPos) return;
 
+    // Hold detection
+    holdFired.current = false;
+    if (onHold && minimized) {
+      holdTimeout.current = setTimeout(() => {
+        if (!dragging && !holdFired.current) {
+          holdFired.current = true;
+          onHold();
+        }
+      }, 1000);
+    }
+
     const onMove = (e: MouseEvent | TouchEvent) => {
+      let x = 0, y = 0;
       if ("touches" in e && e.touches.length > 0) {
         e.preventDefault();
-        const x = e.touches[0].clientX;
-        const y = e.touches[0].clientY;
-        if (!dragging && pointerDownPos) {
-          const dx = x - pointerDownPos.x;
-          const dy = y - pointerDownPos.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist > 8) {
-            setDragging(true);
-          }
-        }
-        if (dragging) {
-          setDragPos({ x, y });
-        }
+        x = e.touches[0].clientX;
+        y = e.touches[0].clientY;
       } else if ("clientX" in e) {
-        const x = e.clientX;
-        const y = e.clientY;
-        if (!dragging && pointerDownPos) {
-          const dx = x - pointerDownPos.x;
-          const dy = y - pointerDownPos.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist > 8) {
-            setDragging(true);
+        x = e.clientX;
+        y = e.clientY;
+      }
+      if (!dragging && pointerDownPos) {
+        const dx = x - pointerDownPos.x;
+        const dy = y - pointerDownPos.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist > 8) {
+          setDragging(true);
+          // Cancel hold if drag starts
+          if (holdTimeout.current) {
+            clearTimeout(holdTimeout.current);
+            holdTimeout.current = null;
           }
+          holdFired.current = false;
         }
-        if (dragging) {
-          setDragPos({ x, y });
-        }
+      }
+      if (dragging) {
+        setDragPos({ x, y });
       }
     };
 
     const onUp = (e: MouseEvent | TouchEvent) => {
+      if (holdTimeout.current) {
+        clearTimeout(holdTimeout.current);
+        holdTimeout.current = null;
+      }
+
       let x = 0, y = 0;
       if ("changedTouches" in e && e.changedTouches.length > 0) {
         x = e.changedTouches[0].clientX;
@@ -97,38 +109,7 @@ export default function RedButton({
       const dy = y - pointerDownPos.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (!dragging && dist < 8 && !holdFired.current) {
-        if (minimized && onDouble) {
-          const now = Date.now();
-          if (now - lastTapRef.current < 350) {
-            // Double tap detected
-            if (pressTimeoutRef.current) {
-              clearTimeout(pressTimeoutRef.current);
-              pressTimeoutRef.current = null;
-            }
-            lastTapRef.current = 0;
-            onDouble();
-          } else {
-            // Schedule single tap
-            lastTapRef.current = now;
-            if (pressTimeoutRef.current) {
-              clearTimeout(pressTimeoutRef.current);
-              pressTimeoutRef.current = null;
-            }
-            pressTimeoutRef.current = setTimeout(() => {
-              onPress();
-              pressTimeoutRef.current = null;
-              lastTapRef.current = 0;
-            }, 350);
-          }
-          clearHold();
-        } else if (minimized) {
-          onPress();
-          clearHold();
-        } else {
-          setMinimized(true);
-        }
-      } else if (dragging) {
+      if (dragging) {
         setDragging(false);
         setDragPos(null);
         setJustDropped({ x, y });
@@ -139,11 +120,12 @@ export default function RedButton({
         }, 10);
       }
       setPointerDownPos(null);
+      holdFired.current = false;
     };
 
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
-    window.addEventListener("touchmove", onMove);
+    window.addEventListener("touchmove", onMove, { passive: false });
     window.addEventListener("touchend", onUp);
 
     return () => {
@@ -151,8 +133,10 @@ export default function RedButton({
       window.removeEventListener("mouseup", onUp);
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("touchend", onUp);
+      if (holdTimeout.current) clearTimeout(holdTimeout.current);
+      if (pressTimeoutRef.current) clearTimeout(pressTimeoutRef.current);
     };
-  }, [pointerDownPos, dragging, minimized, onPress, setMinimized, onDouble]);
+  }, [pointerDownPos, dragging, minimized, onPress, setMinimized, onDouble, onHold]);
 
   // Cancel hold if pointer moves too much
   useEffect(() => {
@@ -172,8 +156,8 @@ export default function RedButton({
         if (holdTimeout.current) {
           clearTimeout(holdTimeout.current);
           holdTimeout.current = null;
-          holdFired.current = false;
         }
+        holdFired.current = false;
       }
     };
     window.addEventListener("mousemove", onMove);
@@ -183,6 +167,103 @@ export default function RedButton({
       window.removeEventListener("touchmove", onMove);
     };
   }, [pointerDownPos]);
+
+  // PointerEvents for tap/double/hold (only if not dragging)
+  useEffect(() => {
+    const btn = btnRef.current;
+    if (!btn) return;
+
+    // Use refs so state persists across renders
+    const pointerDownPos = { current: null as { x: number; y: number } | null };
+    const holdTimeoutLocal = { current: null as NodeJS.Timeout | null };
+    const lastTapTime = { current: 0 };
+    const tapTimeout = { current: null as NodeJS.Timeout | null };
+    const doubleTapLock = { current: false };
+
+    const clearHold = () => {
+      if (holdTimeoutLocal.current) {
+        clearTimeout(holdTimeoutLocal.current);
+        holdTimeoutLocal.current = null;
+      }
+    };
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (dragging) return;
+      pointerDownPos.current = { x: e.clientX, y: e.clientY };
+      doubleTapLock.current = false;
+
+      // Hold detection
+      if (onHold && minimized) {
+        holdTimeoutLocal.current = setTimeout(() => {
+          if (!dragging && !holdFired.current) {
+            holdFired.current = true;
+            onHold();
+          }
+        }, 1000);
+      }
+    };
+
+    const onPointerUp = (e: PointerEvent) => {
+      if (dragging) return;
+      clearHold();
+
+      const x = e.clientX;
+      const y = e.clientY;
+      const dist = pointerDownPos.current
+        ? Math.hypot(x - pointerDownPos.current.x, y - pointerDownPos.current.y)
+        : 0;
+
+      if (dist < 8 && !holdFired.current) {
+        const now = Date.now();
+        if (minimized && onDouble) {
+          if (lastTapTime.current && now - lastTapTime.current < 350 && !doubleTapLock.current) {
+            doubleTapLock.current = true;
+            if (tapTimeout.current) {
+              clearTimeout(tapTimeout.current);
+              tapTimeout.current = null;
+            }
+            lastTapTime.current = 0;
+            onDouble();
+          } else {
+            lastTapTime.current = now;
+            if (tapTimeout.current) clearTimeout(tapTimeout.current);
+            tapTimeout.current = setTimeout(() => {
+              if (!doubleTapLock.current) {
+                onPress();
+              }
+              lastTapTime.current = 0;
+              tapTimeout.current = null;
+            }, 350);
+          }
+        } else if (minimized) {
+          onPress();
+        } else {
+          setMinimized(true);
+        }
+      }
+      pointerDownPos.current = null;
+      holdFired.current = false;
+    };
+
+    btn.addEventListener("pointerdown", onPointerDown);
+    btn.addEventListener("pointerup", onPointerUp);
+
+    return () => {
+      btn.removeEventListener("pointerdown", onPointerDown);
+      btn.removeEventListener("pointerup", onPointerUp);
+      clearHold();
+      if (tapTimeout.current) clearTimeout(tapTimeout.current);
+    };
+  }, [dragging, minimized, onPress, setMinimized, onDouble, onHold]);
+
+  // Helper to clear hold timer for drag logic
+  const clearHold = () => {
+    if (holdTimeout.current) {
+      clearTimeout(holdTimeout.current);
+      holdTimeout.current = null;
+    }
+    holdFired.current = false;
+  };
 
   // Positioning
   const style: React.CSSProperties = {
@@ -230,46 +311,20 @@ export default function RedButton({
     style.transition = "transform 0.7s cubic-bezier(.4,2,.6,1)";
   }
 
-  // Helper to clear hold timer
-  const clearHold = () => {
-    if (holdTimeout.current) {
-      clearTimeout(holdTimeout.current);
-      holdTimeout.current = null;
-    }
-  };
-
-  // Pointer down handler
-  const handlePointerDown = (e: React.MouseEvent | React.TouchEvent) => {
-    let x = 0, y = 0;
-    if ("touches" in e && e.touches.length > 0) {
-      e.preventDefault();
-      x = e.touches[0].clientX;
-      y = e.touches[0].clientY;
-    } else if ("clientX" in e) {
-      x = e.clientX;
-      y = e.clientY;
-    }
-    setPointerDownPos({ x, y });
-
-    // Hold detection
-    if (onHold && minimized) {
-      holdFired.current = false;
-      holdTimeout.current = setTimeout(() => {
-        holdFired.current = true;
-        onHold();
-      }, 1000);
-    }
-  };
-
   return (
     <div
       ref={btnRef}
       style={style}
       className={`redbtn-shadow ${minimized ? "cursor-grab" : "cursor-pointer"} ${dragging ? "dragging" : ""} select-none`}
-      onMouseDown={handlePointerDown}
-      onTouchStart={handlePointerDown}
       tabIndex={0}
       aria-label="Press the red button"
+      onPointerDown={e => {
+        // Only left mouse/touch/pen
+        if (e.button !== undefined && e.button !== 0) return;
+        setPointerDownPos({ x: e.clientX, y: e.clientY });
+        // For mobile Safari, ensure focus
+        (e.target as HTMLElement).focus?.();
+      }}
     >
       <div className="relative flex items-center justify-center select-none">
         <Image
