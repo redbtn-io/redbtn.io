@@ -45,7 +45,6 @@ export default function RedButton({
   const holdFired = useRef(false);
   const btnRef = useRef<HTMLDivElement>(null);
   const pressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const lastTapRef = useRef(0);
 
   // Drag logic
   useEffect(() => {
@@ -75,8 +74,7 @@ export default function RedButton({
       if (!dragging && pointerDownPos) {
         const dx = x - pointerDownPos.x;
         const dy = y - pointerDownPos.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist > 8) {
+        if (Math.sqrt(dx * dx + dy * dy) > 8) {
           setDragging(true);
           // Cancel hold if drag starts
           if (holdTimeout.current) {
@@ -105,9 +103,6 @@ export default function RedButton({
         x = e.clientX;
         y = e.clientY;
       }
-      const dx = x - pointerDownPos.x;
-      const dy = y - pointerDownPos.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
 
       if (dragging) {
         setDragging(false);
@@ -128,13 +123,17 @@ export default function RedButton({
     window.addEventListener("touchmove", onMove, { passive: false });
     window.addEventListener("touchend", onUp);
 
+    // Fix: copy ref values for cleanup
+    const holdTimeoutCurrent = holdTimeout.current;
+    const pressTimeoutCurrent = pressTimeoutRef.current;
+
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseup", onUp);
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("touchend", onUp);
-      if (holdTimeout.current) clearTimeout(holdTimeout.current);
-      if (pressTimeoutRef.current) clearTimeout(pressTimeoutRef.current);
+      if (holdTimeoutCurrent) clearTimeout(holdTimeoutCurrent);
+      if (pressTimeoutCurrent) clearTimeout(pressTimeoutCurrent);
     };
   }, [pointerDownPos, dragging, minimized, onPress, setMinimized, onDouble, onHold]);
 
@@ -255,15 +254,6 @@ export default function RedButton({
       if (tapTimeout.current) clearTimeout(tapTimeout.current);
     };
   }, [dragging, minimized, onPress, setMinimized, onDouble, onHold]);
-
-  // Helper to clear hold timer for drag logic
-  const clearHold = () => {
-    if (holdTimeout.current) {
-      clearTimeout(holdTimeout.current);
-      holdTimeout.current = null;
-    }
-    holdFired.current = false;
-  };
 
   // Positioning
   const style: React.CSSProperties = {
