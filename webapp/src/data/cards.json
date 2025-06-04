@@ -55,7 +55,7 @@
           { "text": "redbook", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Redbook is a simple CRM for managing contacts, automating emails, and handling phone numbers.",
+          "A simple CRM for managing contacts, automating emails, and handling phone numbers.",
           "Keep your relationships organized and automate your outreach with ease.",
           "<span class='font-semibold text-red-600'>Stay in touch with redbook.</span>"
         ],
@@ -68,7 +68,7 @@
           { "text": "redmeet", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Redmeet is a fast, privacy-first calendar booking tool for teams and individuals.",
+          "A fast, privacy-first calendar booking tool for teams and individuals.",
           "Share your link, let people book, and keep your schedule in sync—no fuss, no tracking.",
           "<span class='font-semibold text-red-600'>Book meetings your way with redmeet.</span>"
         ],
@@ -81,7 +81,7 @@
           { "text": "redsign", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Redsign makes document signatures fast and easy—no accounts, no hassle.",
+          "Makes document signatures fast and easy—no accounts, no hassle.",
           "Send, sign, and manage documents securely from anywhere.",
           "<span class='font-semibold text-red-600'>Sign documents simply with redsign.</span>"
         ],
@@ -112,7 +112,7 @@
           { "text": "George Anthony", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "George Anthony provides financial services for businesses and individuals.",
+          "Financial services for businesses and individuals.",
           "Expertise includes financial planning, investment strategies, and comprehensive life insurance solutions.",
           "<span class='font-semibold text-red-600'>Secure your future with trusted financial guidance.</span>"
         ],
@@ -125,7 +125,7 @@
           { "text": "Elite Entries", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Elite Entries is a financial, trading, and strategy automation platform built on redbtn.",
+          "A financial, trading, and strategy automation platform built on redbtn.",
           "Automate trading workflows, manage strategies, and streamline financial operations with ease.",
           "<span class='font-semibold text-red-600'>Power your trading with Elite Entries and redbtn.</span>"
         ],
@@ -138,8 +138,8 @@
           { "text": "Peak Solutions Logistics", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Peak Solutions Logistics is a 3PL provider leveraging technology to streamline freight and logistics operations.",
-          "Their platform features a modern load board, real-time tracking, and tools for shippers and carriers.",
+          "A 3PL provider leveraging technology to streamline freight and logistics operations.",
+          "Features a modern load board, real-time tracking, and tools for shippers and carriers.",
           "<span class='font-semibold text-red-600'>Move freight smarter with Peak Solutions Logistics.</span>"
         ],
         "link": "https://peaksolutionslogistics.com",
