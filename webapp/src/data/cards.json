@@ -51,6 +51,19 @@
       },
       {
         "titleParts": [
+          { "text": "connect with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "redbook", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Redbook is a simple CRM for managing contacts, automating emails, and handling phone numbers.",
+          "Keep your relationships organized and automate your outreach with ease.",
+          "<span class='font-semibold text-red-600'>Stay in touch with redbook.</span>"
+        ],
+        "link": "https://github.com/redbtn-io/redbook",
+        "linkLabel": "try redbook"
+      },
+      {
+        "titleParts": [
           { "text": "schedule with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "redmeet", "className": "text-red-700 lowercase" }
         ],
@@ -61,6 +74,76 @@
         ],
         "link": "https://github.com/redbtn-io/redmeet",
         "linkLabel": "try redmeet"
+      },
+      {
+        "titleParts": [
+          { "text": "sign with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "redsign", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Redsign makes document signatures fast and easy—no accounts, no hassle.",
+          "Send, sign, and manage documents securely from anywhere.",
+          "<span class='font-semibold text-red-600'>Sign documents simply with redsign.</span>"
+        ],
+        "link": "https://github.com/redbtn-io/redsign",
+        "linkLabel": "try redsign"
+      }
+    ]
+  },
+  {
+    "key":"portfolio",
+    "pages": [
+      {
+        "titleParts": [
+          { "text": "explore our ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "portfolio", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Check out our work with clients, partners, and projects.",
+          "From startups to enterprises, we build solutions that make a difference.",
+          "<span class='font-semibold text-red-600'>See how we can help you succeed.</span>"
+        ],
+        "link": "/portfolio",
+        "linkLabel": "view portfolio"
+      },
+      {
+        "titleParts": [
+          { "text": "project: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "George Anthony", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "George Anthony provides financial services for businesses and individuals.",
+          "Expertise includes financial planning, investment strategies, and comprehensive life insurance solutions.",
+          "<span class='font-semibold text-red-600'>Secure your future with trusted financial guidance.</span>"
+        ],
+        "link": "https://georgeanthony.net",
+        "linkLabel": "visit georgeanthony.net"
+      },
+      {
+        "titleParts": [
+          { "text": "project: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "Elite Entries", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Elite Entries is a financial, trading, and strategy automation platform built on redbtn.",
+          "Automate trading workflows, manage strategies, and streamline financial operations with ease.",
+          "<span class='font-semibold text-red-600'>Power your trading with Elite Entries and redbtn.</span>"
+        ],
+        "link": "https://eliteentri.es",
+        "linkLabel": "visit eliteentri.es"
+      },
+      {
+        "titleParts": [
+          { "text": "project: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "Peak Solutions Logistics", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Peak Solutions Logistics is a 3PL provider leveraging technology to streamline freight and logistics operations.",
+          "Their platform features a modern load board, real-time tracking, and tools for shippers and carriers.",
+          "<span class='font-semibold text-red-600'>Move freight smarter with Peak Solutions Logistics.</span>"
+        ],
+        "link": "https://peaksolutionslogistics.com",
+        "linkLabel": "visit peaksolutionslogistics.com"
       }
     ]
   }
