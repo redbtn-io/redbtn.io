@@ -26,9 +26,9 @@
                 { "text": "redbtn", "className": "text-red-700 lowercase" }
             ],
             "body": [
-                "<span class='font-semibold text-red-600'>REDBTN</span> is a flexible and dynamic automation system designed to manage and execute automations within applications and simplify the process for creating interoperability between those applications.",
-                "This system allows for seamless integration of various automation processes, making it adaptable to a wide range of application needs. ",
-                "It requires no dependencies, and dynamically imports <span class='font-semibold text-red-600'>connectors</span> to load data from APIs, analyze that data, and interact with those APIs based on that analysis."
+              "A <span class='text-red-600'>flexible</span> automation system for building workflows and connecting apps.",
+              "No dependencies—just add connectors to load, analyze, and <span class='text-red-600'>automate</span> with any API.",
+              "<span class='font-semibold text-red-600'>Automate anything with redbtn.</span>"
             ],
             "link": "https://github.com/redbtn-io/redbtn",
             "linkLabel": "build with redbtn"
