@@ -32,6 +32,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="canonical" href="https://redbtn.io/" />
+        <meta property="og:title" content="redbtn" />
+        <meta
+          property="og:description"
+          content="Redbtn.io offers expert digital consulting and development services for businesses, including web, native, APIs, automation, SEO, and marketing solutions."
+        />
+        <meta property="og:url" content="https://redbtn.io/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://redbtn.io/red.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="redbtn" />
+        <meta
+          name="twitter:description"
+          content="Redbtn.io offers expert digital consulting and development services for businesses, including web, native, APIs, automation, SEO, and marketing solutions."
+        />
+        <meta name="twitter:image" content="https://redbtn.io/red.png" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
