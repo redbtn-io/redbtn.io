@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined;
     if (!minimized) {
-      timeout = setTimeout(() => setShowPrompt(true), 5000);
+      timeout = setTimeout(() => setShowPrompt(true), 3000);
     } else {
       setShowPrompt(false);
     }
@@ -48,21 +48,43 @@ export default function Home() {
       {/* Centered RedButton & title */}
       {!minimized && showPrompt && (
         <div className="absolute inset-0 flex flex-col items-center justify-center z-50 pointer-events-none">
-          <div className="
-            mb-84
-            text-4xl
-            sm:text-5xl
-            font-extrabold
-            uppercase
-            tracking-widest
-            text-center
-            text-red-700
-            drop-shadow-lg
-            animate-fadein
-            select-none
-            pointer-events-none
-          ">
-            press<br />the red button
+          <div
+            className="
+              mb-84
+              text-4xl
+              sm:text-5xl
+              font-extrabold
+              uppercase
+              tracking-widest
+              text-center
+              drop-shadow-lg
+              select-none
+              pointer-events-none
+            "
+          >
+            <span
+              className="inline-block text-zinc-900 dark:text-zinc-100 animate-fadein"
+            >
+              press
+            </span><br/>
+            <span
+              className="p-2 inline-block opacity-0 text-zinc-900 dark:text-zinc-100 animate-fadein"
+              style={{ animationDelay: "1000ms" }}
+            >
+              the
+            </span>
+            <span
+              className="p-2 inline-block opacity-0 text-red-700 animate-fadein"
+              style={{ animationDelay: "1500ms" }}
+            >
+              red
+            </span>
+            <span
+              className="p-2 inline-block opacity-0 text-red-700 animate-fadein"
+              style={{ animationDelay: "1750ms" }}
+            >
+              button
+            </span>
           </div>
         </div>
       )}

@@ -89,7 +89,7 @@ body {
 }
 
 .animate-fadein {
-  animation: fadein 1.2s cubic-bezier(.4, 0, .6, 1);
+  animation: fadein 1.2s cubic-bezier(.4, 0, .6, 1) forwards;
 }
 
 @keyframes fadein {
