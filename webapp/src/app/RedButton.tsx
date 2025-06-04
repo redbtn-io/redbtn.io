@@ -305,7 +305,7 @@ export default function RedButton({
     <div
       ref={btnRef}
       style={style}
-      className={`redbtn-shadow ${minimized ? "cursor-grab" : "cursor-pointer"} ${dragging ? "dragging" : ""} select-none`}
+      className={`redbtn-shadow cursor-pointer ${dragging ? "dragging" : ""} select-none`}
       tabIndex={0}
       aria-label="Press the red button"
       onPointerDown={e => {
