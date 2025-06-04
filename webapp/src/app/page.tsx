@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, JSX } from "react";
 import RedButton from "./components/RedButton";
 import ContactForm from "./components/ContactForm";
 import TitleScreen from "./components/TitleScreen";
@@ -12,7 +12,7 @@ function renderHTML(html: string) {
 }
 
 // Icon components
-const cardIcons: any = {
+const cardIcons: Record<string, JSX.Element> = {
   main: (
     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.309.678.919.678 1.852 0 1.336-.012 2.417-.012 2.747 0 .267.18.577.688.48C19.138 20.2 22 16.448 22 12.021 22 6.484 17.523 2 12 2z"/>
@@ -25,8 +25,8 @@ const cardIcons: any = {
   ),
 };
 
-// New CardWithCarousel component
-function CardWithCarousel({ card }: { card: any }) {
+// CardWithCarousel component
+function CardWithCarousel({ card }: { card: CardData }) {
   const [pageIndex, setPageIndex] = useState(0);
   const pageCount = card.pages.length;
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,15 +87,15 @@ function CardWithCarousel({ card }: { card: any }) {
           transform: `translateX(${-pageIndex * 100}%)`
         }}
       >
-        {card.pages.map((page: any, idx: number) => (
+        {card.pages.map((page, idx) => (
           <div key={idx} className="w-full min-w-0 flex-shrink-0 px-2">
             <h1 className="text-4xl font-bold mb-4 drop-shadow">
-              {page.titleParts.map((part: any, i: number) => (
+              {page.titleParts.map((part, i) => (
                 <span key={i} className={part.className}>{part.text}</span>
               ))}
             </h1>
             <p className="text-lg mb-8 text-zinc-700 dark:text-zinc-200 space-y-4">
-              {page.body.map((line: string, i: number) => (
+              {page.body.map((line, i) => (
                 <span key={i} className="block">
                   {renderHTML(line)}
                 </span>
@@ -120,7 +120,7 @@ function CardWithCarousel({ card }: { card: any }) {
       {/* Carousel navigation dots */}
       {pageCount > 1 && (
         <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-          {card.pages.map((_: any, i: number) => (
+          {card.pages.map((_, i) => (
             <button
               key={i}
               className={`w-3 h-3 rounded-full ${i === pageIndex ? "bg-red-600" : "bg-zinc-300 dark:bg-zinc-700"} transition-colors`}
@@ -135,7 +135,7 @@ function CardWithCarousel({ card }: { card: any }) {
 }
 
 // Cards array now just passes card data
-const cards = cardsData.map(card => ({
+const cards = cardsData.map((card: CardData) => ({
   key: card.key,
   content: <CardWithCarousel card={card} />
 }));
@@ -273,7 +273,7 @@ export default function Home() {
             willChange: "transform",
           }}
         >
-          {cards.map((card, idx) => (
+          {cards.map((card) => (
             <div key={card.key} className="flex items-center justify-center min-h-screen w-full">
               <Content
                 onUserScroll={() => {
@@ -300,3 +300,16 @@ export default function Home() {
     </div>
   );
 }
+
+// Define types for card data
+type CardPage = {
+  titleParts: { text: string; className?: string }[];
+  body: string[];
+  link?: string;
+  linkLabel?: string;
+};
+
+type CardData = {
+  key: string;
+  pages: CardPage[];
+};
