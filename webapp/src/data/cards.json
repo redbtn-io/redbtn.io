@@ -1,0 +1,67 @@
+[
+  {
+    "key": "main",
+    "pages": [
+      {
+        "titleParts": [
+          { "text": "find your ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "red button", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Digital consulting & development for businesses, creators, and dreamers.",
+          "Web, native, APIs, automation, SEO, marketing, and more.",
+          "<span class='font-semibold text-red-600'>Hit the red button to turn ideas into action.</span>"
+        ],
+        "link": "https://github.com/redbtn-io",
+        "linkLabel": "GitHub"
+      }
+    ]
+  },
+  {
+    "key": "redbtn",
+    "pages": [
+        {
+            "titleParts": [
+                { "text": "automate with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+                { "text": "redbtn", "className": "text-red-700 lowercase" }
+            ],
+            "body": [
+                "<span class='font-semibold text-red-600'>REDBTN</span> is a flexible and dynamic automation system designed to manage and execute automations within applications and simplify the process for creating interoperability between those applications.",
+                "This system allows for seamless integration of various automation processes, making it adaptable to a wide range of application needs. ",
+                "It requires no dependencies, and dynamically imports <span class='font-semibold text-red-600'>connectors</span> to load data from APIs, analyze that data, and interact with those APIs based on that analysis."
+            ],
+            "link": "https://github.com/redbtn-io/redbtn",
+            "linkLabel": "build with redbtn"
+        }
+    ]
+  },
+  {
+    "key": "redwork",
+    "pages": [
+      {
+        "titleParts": [
+          { "text": "do more with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "redwork", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "A suite of <span class='font-semibold text-red-600'>workspace</span> software for teams and creators.",
+          "Project management, collaboration, automation, and more—built for speed and simplicity.",
+          "<span class='font-semibold text-red-600'>Redwork keeps your ideas moving forward.</span>"
+        ]
+      },
+      {
+        "titleParts": [
+          { "text": "schedule with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "redmeet", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Redmeet is a fast, privacy-first calendar booking tool for teams and individuals.",
+          "Share your link, let people book, and keep your schedule in sync—no fuss, no tracking.",
+          "<span class='font-semibold text-red-600'>Book meetings your way with redmeet.</span>"
+        ],
+        "link": "https://github.com/redbtn-io/redmeet",
+        "linkLabel": "try redmeet"
+      }
+    ]
+  }
+]
