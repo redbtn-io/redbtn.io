@@ -47,7 +47,7 @@ const cardIcons: Record<string, JSX.Element> = {
   </>
   ),
   bri: (
-    <Image src="/bri.png" alt="Bri Nicole Icon" width={64} height={64} className="hidden dark:block rounded-full" />
+    <Image src="/bri.png" alt="Bri Nicole Icon" width={64} height={64} className="rounded-full" />
   ),
   eliteentries: (
     <Image src="/eliteentries.ico" alt="Elite Entries Icon" width={64} height={64} className="rounded-full" />
