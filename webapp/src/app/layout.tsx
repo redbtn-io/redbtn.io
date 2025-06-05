@@ -49,6 +49,7 @@ export default function RootLayout({
           content="Redbtn.io offers expert digital consulting and development services for businesses, including web, native, APIs, automation, SEO, and marketing solutions."
         />
         <meta name="twitter:image" content="https://redbtn.io/red.png" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
