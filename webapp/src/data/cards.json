@@ -122,7 +122,7 @@
       },
       {
         "titleParts": [
-          { "text": "app: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "trade with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "Elite Entries", "className": "text-red-700 lowercase" }
         ],
         "body": [
@@ -135,7 +135,7 @@
       },
       {
         "titleParts": [
-          { "text": "app: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "invest with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "George Anthony", "className": "text-red-700 lowercase" }
         ],
         "body": [
@@ -148,7 +148,7 @@
       },
       {
         "titleParts": [
-          { "text": "app: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "move with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "Peak Solutions Logistics", "className": "text-red-700 lowercase" }
         ],
         "body": [
