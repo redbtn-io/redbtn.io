@@ -29,12 +29,14 @@ export default function RedButton({
   setMinimized,
   onDouble,
   onHold,
+  bounce = false,
 }: {
   onPress: () => void;
   minimized: boolean;
   setMinimized: (v: boolean) => void;
   onDouble?: () => void;
   onHold?: () => void;
+  bounce?: boolean;
 }) {
   const [corner, setCorner] = useState<Corner>("bottom-right");
   const [dragging, setDragging] = useState(false);
@@ -305,7 +307,7 @@ export default function RedButton({
     <div
       ref={btnRef}
       style={style}
-      className={`redbtn-shadow cursor-pointer ${dragging ? "dragging" : ""} select-none`}
+      className={`redbtn-shadow cursor-pointer ${dragging ? "dragging" : ""} select-none${bounce ? " animate-bounce-short" : ""}`}
       tabIndex={0}
       aria-label="Press the red button"
       onPointerDown={e => {

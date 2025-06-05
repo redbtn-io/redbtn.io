@@ -18,6 +18,22 @@
     ]
   },
   {
+    "key": "red",
+    "pages": [
+      {
+        "titleParts": [
+          { "text": "meet ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "red", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "An all-encompassing, customizable <span class='text-red-600'>AI</span> for personal and professional use.",
+          "Easy to use, highly adaptable, and always ready to help—he's on your screen right <span class='text-red-600'>now</span>.",
+          "<span class='font-semibold text-red-600'>Red adapts to you—your work, your life, your way.</span>"
+        ]
+      }
+    ]
+  },
+  {
     "key": "redbtn",
     "pages": [
         {

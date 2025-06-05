@@ -150,6 +150,7 @@ export default function Home() {
   const cardCount = cards.length;
   const cardContainerRef = useRef<HTMLDivElement>(null);
   const touchStartY = useRef<number | null>(null);
+  const currentCardKey = cards[cardIndex]?.key;
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined;
@@ -255,6 +256,7 @@ export default function Home() {
           console.log("Button held!"); // Placeholder for hold action
           setMinimized(false);
         }}
+        bounce={currentCardKey === "red"}
       />
 
       {/* Card carousel */}
