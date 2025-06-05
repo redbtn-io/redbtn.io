@@ -126,9 +126,9 @@
           { "text": "Elite Entries", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A financial, trading, and strategy automation platform built on redbtn for a client in the finance sector.",
+          "A financial, trading, and strategy automation platform built on redbtn.",
           "Automate trading workflows, manage strategies, and streamline financial operations with ease.",
-          "<span class='font-semibold text-red-600'>Power your trading with Elite Entries and redbtn.</span>"
+          "<span class='font-semibold text-red-600'>Power your trading with Elite Entries.</span>"
         ],
         "link": "https://eliteentri.es",
         "linkLabel": "try eliteentri.es"
@@ -139,7 +139,7 @@
           { "text": "George Anthony", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Financial services for businesses and individuals, developed for a client in the financial planning industry.",
+          "Forward looking and innovative financial services for businesses and individuals.",
           "Expertise includes financial planning, investment strategies, and comprehensive life insurance solutions.",
           "<span class='font-semibold text-red-600'>Secure your future with trusted financial guidance.</span>"
         ],
@@ -149,12 +149,12 @@
       {
         "titleParts": [
           { "text": "move with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "Peak Solutions Logistics", "className": "text-red-700 lowercase" }
+          { "text": "Peak Solutions", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A 3PL provider leveraging technology to streamline freight and logistics operations, built for a logistics client.",
+          "3PL logistics provider leveraging technology to streamline freight, warehousing, and logistics operations.",
           "Features a modern load board, real-time tracking, and tools for shippers and carriers.",
-          "<span class='font-semibold text-red-600'>Move freight smarter with Peak Solutions Logistics.</span>"
+          "<span class='font-semibold text-red-600'>Store and ship smarter with Peak Solutions Logistics.</span>"
         ],
         "link": "https://peaksolutionslogistics.com",
         "linkLabel": "try peaksolutionslogistics.com"
@@ -181,7 +181,7 @@
           { "text": "Bri Nicole", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A beautiful and soulful Caribbean artist sharing her music and story—site built for a creative client.",
+          "A beautiful and soulful Caribbean artist sharing her music and story.",
           "Experience original songs, vibrant performances, and creative expression.",
           "<span class='font-semibold text-red-600'>Listen and connect at brinicole.com.</span>"
         ],
@@ -194,7 +194,7 @@
           { "text": "Rose Digital Imaging", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A digital and graphic designer specializing in creative visual solutions—site created for a design client.",
+          "A digital and graphic designer specializing in creative visual solutions.",
           "Explore a portfolio of branding, digital art, and design for businesses and creators.",
           "<span class='font-semibold text-red-600'>See the work at rosedigitalimaging.com.</span>"
         ],
@@ -203,11 +203,11 @@
       },
       {
         "titleParts": [
-          { "text": "track the ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "Progression Fund", "className": "text-red-700 lowercase" }
+          { "text": "track ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "The Progression Fund", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A technology-focused fund investing in equities, derivatives, and crypto—site developed for a finance client.",
+          "A technology-focused fund investing in equities, derivatives, and cryptocurrencies.",
           "Follow the latest strategies, insights, and performance updates.",
           "<span class='font-semibold text-red-600'>Learn more about the Progression Fund.</span>"
         ],
