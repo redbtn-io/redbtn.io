@@ -52,17 +52,17 @@
     ]
   },
   {
-    "key": "redwork",
+    "key": "redsuite",
     "pages": [
       {
         "titleParts": [
           { "text": "do more with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redwork", "className": "text-red-700 lowercase" }
+          { "text": "redsuite", "className": "text-red-700 lowercase" }
         ],
         "body": [
           "A suite of <span class='font-semibold text-red-600'>workspace</span> software for teams and creators.",
           "Project management, collaboration, automation, and more—built for speed and simplicity.",
-          "<span class='font-semibold text-red-600'>Redwork keeps your ideas moving forward.</span>"
+          "<span class='font-semibold text-red-600'>redsuite keeps your ideas moving forward.</span>"
         ]
       },
       {
@@ -107,59 +107,112 @@
     ]
   },
   {
-    "key":"portfolio",
+    "key": "apps",
     "pages": [
       {
         "titleParts": [
-          { "text": "explore our ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "portfolio", "className": "text-red-700 lowercase" }
+          { "text": "try the ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "apps", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Check out our work with clients, partners, and projects.",
-          "From startups to enterprises, we build solutions that make a difference.",
-          "<span class='font-semibold text-red-600'>See how we can help you succeed.</span>"
-        ],
-        "link": "/portfolio",
-        "linkLabel": "view portfolio"
+          "Explore our suite of apps built for clients in business, finance, and logistics.",
+          "Each app is crafted for real-world results—fast, secure, and easy to use.",
+          "<span class='font-semibold text-red-600'>Get started with our featured client apps below.</span>"
+        ]
       },
       {
         "titleParts": [
-          { "text": "project: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "George Anthony", "className": "text-red-700 lowercase" }
-        ],
-        "body": [
-          "Financial services for businesses and individuals.",
-          "Expertise includes financial planning, investment strategies, and comprehensive life insurance solutions.",
-          "<span class='font-semibold text-red-600'>Secure your future with trusted financial guidance.</span>"
-        ],
-        "link": "https://georgeanthony.net",
-        "linkLabel": "visit georgeanthony.net"
-      },
-      {
-        "titleParts": [
-          { "text": "project: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "app: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "Elite Entries", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A financial, trading, and strategy automation platform built on redbtn.",
+          "A financial, trading, and strategy automation platform built on redbtn for a client in the finance sector.",
           "Automate trading workflows, manage strategies, and streamline financial operations with ease.",
           "<span class='font-semibold text-red-600'>Power your trading with Elite Entries and redbtn.</span>"
         ],
         "link": "https://eliteentri.es",
-        "linkLabel": "visit eliteentri.es"
+        "linkLabel": "try eliteentri.es"
       },
       {
         "titleParts": [
-          { "text": "project: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "app: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "George Anthony", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Financial services for businesses and individuals, developed for a client in the financial planning industry.",
+          "Expertise includes financial planning, investment strategies, and comprehensive life insurance solutions.",
+          "<span class='font-semibold text-red-600'>Secure your future with trusted financial guidance.</span>"
+        ],
+        "link": "https://georgeanthony.net",
+        "linkLabel": "try georgeanthony.net"
+      },
+      {
+        "titleParts": [
+          { "text": "app: ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "Peak Solutions Logistics", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A 3PL provider leveraging technology to streamline freight and logistics operations.",
+          "A 3PL provider leveraging technology to streamline freight and logistics operations, built for a logistics client.",
           "Features a modern load board, real-time tracking, and tools for shippers and carriers.",
           "<span class='font-semibold text-red-600'>Move freight smarter with Peak Solutions Logistics.</span>"
         ],
         "link": "https://peaksolutionslogistics.com",
-        "linkLabel": "visit peaksolutionslogistics.com"
+        "linkLabel": "try peaksolutionslogistics.com"
+      }
+    ]
+  },
+  {
+    "key": "sites",
+    "pages": [
+      {
+        "titleParts": [
+          { "text": "see the ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "sites", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "Discover a curated list of SEO-friendly sites we've built for clients—businesses, professionals, and creators.",
+          "Explore unique brands, creative portfolios, and innovative ventures.",
+          "<span class='font-semibold text-red-600'>Browse featured client sites below.</span>"
+        ]
+      },
+      {
+        "titleParts": [
+          { "text": "hear ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "Bri Nicole", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "A beautiful and soulful Caribbean artist sharing her music and story—site built for a creative client.",
+          "Experience original songs, vibrant performances, and creative expression.",
+          "<span class='font-semibold text-red-600'>Listen and connect at brinicole.com.</span>"
+        ],
+        "link": "https://brinicole.com",
+        "linkLabel": "visit brinicole.com"
+      },
+      {
+        "titleParts": [
+          { "text": "experience ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "Rose Digital Imaging", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "A digital and graphic designer specializing in creative visual solutions—site created for a design client.",
+          "Explore a portfolio of branding, digital art, and design for businesses and creators.",
+          "<span class='font-semibold text-red-600'>See the work at rosedigitalimaging.com.</span>"
+        ],
+        "link": "https://rosedigitalimaging.com",
+        "linkLabel": "visit rosedigitalimaging.com"
+      },
+      {
+        "titleParts": [
+          { "text": "track the ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "Progression Fund", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "A technology-focused fund investing in equities, derivatives, and crypto—site developed for a finance client.",
+          "Follow the latest strategies, insights, and performance updates.",
+          "<span class='font-semibold text-red-600'>Learn more about the Progression Fund.</span>"
+        ],
+        "link": "https://theprogressionfund.com",
+        "linkLabel": "visit theprogressionfund.com"
       }
     ]
   }
