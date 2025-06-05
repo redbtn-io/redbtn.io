@@ -56,7 +56,7 @@
     "pages": [
       {
         "titleParts": [
-          { "text": "do more with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "work with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "redsuite", "className": "text-red-700 lowercase" }
         ],
         "body": [
