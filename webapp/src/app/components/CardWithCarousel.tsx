@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, JSX } from "react";
+import React, { useEffect, useRef, JSX } from "react";
 
 export type CardPage = {
   titleParts: { text: string; className?: string }[];
