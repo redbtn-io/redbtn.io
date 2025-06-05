@@ -12,8 +12,13 @@
           "Web, native, APIs, automation, SEO, marketing, and more.",
           "<span class='font-semibold text-red-600'>Hit the red button to turn ideas into action.</span>"
         ],
-        "link": "https://github.com/redbtn-io",
-        "linkLabel": "GitHub"
+        "links": [
+          {
+            "link": "https://github.com/redbtn-io",
+            "label": "GitHub",
+            "icon": "github"
+          }
+        ]
       }
     ]
   },
@@ -36,19 +41,24 @@
   {
     "key": "redbtn",
     "pages": [
-        {
-            "titleParts": [
-                { "text": "automate with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-                { "text": "redbtn", "className": "text-red-700 lowercase" }
-            ],
-            "body": [
-              "A <span class='text-red-600'>flexible</span> automation system for building workflows and connecting apps.",
-              "No dependencies—just add connectors to load, analyze, and <span class='text-red-600'>automate</span> with any API.",
-              "<span class='font-semibold text-red-600'>Automate anything with redbtn.</span>"
-            ],
+      {
+        "titleParts": [
+          { "text": "automate with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "redbtn", "className": "text-red-700 lowercase" }
+        ],
+        "body": [
+          "A <span class='text-red-600'>flexible</span> automation system for building workflows and connecting apps.",
+          "No dependencies—just add connectors to load, analyze, and <span class='text-red-600'>automate</span> with any API.",
+          "<span class='font-semibold text-red-600'>Automate anything with redbtn.</span>"
+        ],
+        "links": [
+          {
             "link": "https://github.com/redbtn-io/redbtn",
-            "linkLabel": "build with redbtn"
-        }
+            "label": "build with redbtn",
+            "icon": "red"
+          }
+        ]
+      }
     ]
   },
   {
@@ -75,8 +85,13 @@
           "Keep your relationships organized and automate your outreach with ease.",
           "<span class='font-semibold text-red-600'>Stay in touch with redbook.</span>"
         ],
-        "link": "https://github.com/redbtn-io/redbook",
-        "linkLabel": "try redbook"
+        "links": [
+          {
+            "link": "https://github.com/redbtn-io/redmail",
+            "label": "try redbook",
+            "icon": "generic"
+          }
+        ]
       },
       {
         "titleParts": [
@@ -88,8 +103,13 @@
           "Share your link, let people book, and keep your schedule in sync—no fuss, no tracking.",
           "<span class='font-semibold text-red-600'>Book meetings your way with redmeet.</span>"
         ],
-        "link": "https://github.com/redbtn-io/redmeet",
-        "linkLabel": "try redmeet"
+        "links": [
+          {
+            "link": "https://github.com/redbtn-io/redmeet",
+            "label": "try redmeet",
+            "icon": "generic"
+          }
+        ]
       },
       {
         "titleParts": [
@@ -101,8 +121,13 @@
           "Send, sign, and manage documents securely from anywhere.",
           "<span class='font-semibold text-red-600'>Sign documents simply with redsign.</span>"
         ],
-        "link": "https://github.com/redbtn-io/redsign",
-        "linkLabel": "try redsign"
+        "links": [
+          {
+            "link": "https://github.com/redbtn-io/redsign",
+            "label": "try redsign",
+            "icon": "generic"
+          }
+        ]
       }
     ]
   },
@@ -130,8 +155,13 @@
           "Automate trading workflows, manage strategies, and streamline financial operations with ease.",
           "<span class='font-semibold text-red-600'>Power your trading with Elite Entries.</span>"
         ],
-        "link": "https://eliteentri.es",
-        "linkLabel": "try eliteentri.es"
+        "links": [
+          {
+            "link": "https://eliteentri.es",
+            "label": "try eliteentri.es",
+            "icon": "eliteentries"
+          }
+        ]
       },
       {
         "titleParts": [
@@ -143,8 +173,13 @@
           "Expertise includes financial planning, investment strategies, and comprehensive life insurance solutions.",
           "<span class='font-semibold text-red-600'>Secure your future with trusted financial guidance.</span>"
         ],
-        "link": "https://georgeanthony.net",
-        "linkLabel": "try georgeanthony.net"
+        "links": [
+          {
+            "link": "https://georgeanthony.net",
+            "label": "try georgeanthony.net",
+            "icon": "generic"
+          }
+        ]
       },
       {
         "titleParts": [
@@ -156,8 +191,13 @@
           "Features a modern load board, real-time tracking, and tools for shippers and carriers.",
           "<span class='font-semibold text-red-600'>Store and ship smarter with Peak Solutions Logistics.</span>"
         ],
-        "link": "https://peaksolutionslogistics.com",
-        "linkLabel": "try peaksolutionslogistics.com"
+        "links": [
+          {
+            "link": "https://peaksolutionslogistics.com",
+            "label": "try peaksolutionslogistics.com",
+            "icon": "peak"
+          }
+        ]
       }
     ]
   },
@@ -181,12 +221,17 @@
           { "text": "Bri Nicole", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A beautiful and soulful Caribbean artist sharing her music and story.",
-          "Experience original songs, vibrant performances, and creative expression.",
-          "<span class='font-semibold text-red-600'>Listen and connect at brinicole.com.</span>"
+          "Born to the rhythm of two islands, Bri Nicole is beautiful and soulful Caribbean artist sharing her music and story.",
+            "Experience original songs, vibrant performances, and creative expression. Bri creates music that’s soulful, grounded, and unmistakably hers.",
+          "<span class='font-semibold text-red-600'>Listen and connect with Bri at brinicole.com.</span>"
         ],
-        "link": "https://brinicole.com",
-        "linkLabel": "visit brinicole.com"
+        "links": [
+          {
+            "link": "https://brinicole.com",
+            "label": "visit brinicole.com",
+            "icon": "bri"
+          }
+        ]
       },
       {
         "titleParts": [
@@ -194,12 +239,17 @@
           { "text": "Rose Digital Imaging", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "A digital and graphic designer specializing in creative visual solutions.",
-          "Explore a portfolio of branding, digital art, and design for businesses and creators.",
+            "Digital graphic designer creating visual solutions for brands, businesses, and creators.",
+            "Explore a diverse portfolio featuring branding, photography, and design projects crafted to inspire and engage.",
           "<span class='font-semibold text-red-600'>See the work at rosedigitalimaging.com.</span>"
         ],
-        "link": "https://rosedigitalimaging.com",
-        "linkLabel": "visit rosedigitalimaging.com"
+        "links": [
+          {
+            "link": "https://rosedigitalimaging.com",
+            "label": "visit rosedigitalimaging.com",
+            "icon": "rdi"
+          }
+        ]
       },
       {
         "titleParts": [
@@ -208,11 +258,16 @@
         ],
         "body": [
           "A technology-focused fund investing in equities, derivatives, and cryptocurrencies.",
-          "Follow the latest strategies, insights, and performance updates.",
-          "<span class='font-semibold text-red-600'>Learn more about the Progression Fund.</span>"
+            "Follow the latest strategies, insights, and performance updates, including in-depth research and commentary from the team.",
+          "<span class='font-semibold text-red-600'>Learn more a theprogressionfund.com.</span>"
         ],
-        "link": "https://theprogressionfund.com",
-        "linkLabel": "visit theprogressionfund.com"
+        "links": [
+          {
+            "link": "https://theprogressionfund.com",
+            "label": "visit theprogressionfund.com",
+            "icon": "generic"
+          }
+        ]
       }
     ]
   }
