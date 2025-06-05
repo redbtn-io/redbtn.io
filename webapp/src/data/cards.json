@@ -22,7 +22,7 @@
     "pages": [
       {
         "titleParts": [
-          { "text": "meet ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "say hello to ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "red", "className": "text-red-700 lowercase" }
         ],
         "body": [
