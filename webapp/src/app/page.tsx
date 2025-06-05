@@ -247,6 +247,10 @@ export default function Home() {
         setMinimized={setMinimized}
         onPress={() => {
           setShowContact((prev) => !prev);
+          // Scroll to next card if not at the last card
+          if (cardIndex < cardCount - 1) {
+            setCardIndex(cardIndex + 1);
+          }
         }}
         onDouble={() => {
           console.log("Button double-clicked!"); // Placeholder for double-click action
