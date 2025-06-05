@@ -247,9 +247,11 @@ export default function Home() {
         setMinimized={setMinimized}
         onPress={() => {
           setShowContact((prev) => !prev);
-          // Scroll to next card if not at the last card
+          // Loop to first card if at the last card, otherwise go to next
           if (cardIndex < cardCount - 1) {
             setCardIndex(cardIndex + 1);
+          } else {
+            setCardIndex(0);
           }
         }}
         onDouble={() => {
