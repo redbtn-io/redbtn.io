@@ -6,6 +6,7 @@ import TitleScreen from "./components/TitleScreen";
 import Content from "./components/Content";
 import cardsData from "../data/cards.json";
 import Image from "next/image";
+import CardWithCarousel from "./components/CardWithCarousel";
 
 // Helper to render HTML safely (for the span)
 function renderHTML(html: string) {
@@ -18,6 +19,18 @@ const cardIcons: Record<string, JSX.Element> = {
     <svg width="48" height="48" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none" />
       <path d="M8.5 15.5l7-7m-4.5 0h4.5v4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+    </svg>
+  ),
+  next: (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="1" y1="12" x2="15" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    </svg>
+  ),
+  previous: (
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <line x1="9" y1="12" x2="23" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
     </svg>
   ),
   github: (
@@ -44,123 +57,7 @@ const cardIcons: Record<string, JSX.Element> = {
   )
 };
 
-// CardWithCarousel component
-function CardWithCarousel({ card }: { card: CardData }) {
-  const [pageIndex, setPageIndex] = useState(0);
-  const pageCount = card.pages.length;
-  const containerRef = useRef<HTMLDivElement>(null);
-  const touchStartX = useRef<number | null>(null);
 
-  // Horizontal swipe logic
-  useEffect(() => {
-    const ref = containerRef.current;
-    if (!ref) return;
-
-    let isTouching = false;
-
-    const onTouchStart = (e: TouchEvent) => {
-      isTouching = true;
-      touchStartX.current = e.touches[0].clientX;
-    };
-
-    const onTouchEnd = (e: TouchEvent) => {
-      if (!isTouching || touchStartX.current === null) return;
-      const deltaX = e.changedTouches[0].clientX - touchStartX.current;
-      if (deltaX > 60 && pageIndex > 0) {
-        setPageIndex(pageIndex - 1);
-      } else if (deltaX < -60 && pageIndex < pageCount - 1) {
-        setPageIndex(pageIndex + 1);
-      }
-      touchStartX.current = null;
-      isTouching = false;
-    };
-
-    ref.addEventListener("touchstart", onTouchStart);
-    ref.addEventListener("touchend", onTouchEnd);
-
-    return () => {
-      ref.removeEventListener("touchstart", onTouchStart);
-      ref.removeEventListener("touchend", onTouchEnd);
-    };
-  }, [pageIndex, pageCount]);
-
-  // Keyboard arrow navigation (optional)
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft" && pageIndex > 0) {
-        setPageIndex(pageIndex - 1);
-      } else if (e.key === "ArrowRight" && pageIndex < pageCount - 1) {
-        setPageIndex(pageIndex + 1);
-      }
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [pageIndex, pageCount]);
-
-  return (
-    <div ref={containerRef} className="relative w-full min-h-[320px] overflow-hidden">
-      {/* Content */}
-      <div
-        className="flex w-full min-w-0 transition-transform duration-500"
-        style={{
-          transform: `translateX(${-pageIndex * 100}%)`
-        }}
-      >
-        {card.pages.map((page, idx) => (
-          <div key={idx} className="w-full min-w-0 flex-shrink-0 px-2">
-            <h1 className="text-4xl font-bold mb-4 drop-shadow">
-              {page.titleParts.map((part, i) => (
-                <span key={i} className={part.className}>{part.text}</span>
-              ))}
-            </h1>
-            <p className="text-lg mb-8 text-zinc-700 dark:text-zinc-200 space-y-4">
-              {page.body.map((line, i) => (
-                <span key={i} className="block">
-                  {renderHTML(line)}
-                </span>
-              ))}
-            </p>
-            {page.links && page.links.length > 0 && (
-              <div className="flex justify-end mt-2 gap-2">
-                {page.links.map((l, i) => (
-                  <a
-                    key={i}
-                    href={l.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 hover:text-[var(--primary)] dark:hover:text-zinc-100 transition-colors"
-                    aria-label={l.label || "Link"}
-                  >
-                    {cardIcons[l.icon]}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      {/* Carousel navigation dots */}
-      {pageCount > 1 && (
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-          {card.pages.map((_, i) => (
-            <button
-              key={i}
-              className={`w-3 h-3 rounded-full ${i === pageIndex ? "bg-red-600" : "bg-zinc-300 dark:bg-zinc-700"} transition-colors`}
-              onClick={() => setPageIndex(i)}
-              aria-label={`Go to page ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// Cards array now just passes card data
-const cards = cardsData.map((card: CardData) => ({
-  key: card.key,
-  content: <CardWithCarousel card={card} />
-}));
 
 export default function Home() {
   const [minimized, setMinimized] = useState(false);
@@ -169,10 +66,40 @@ export default function Home() {
   const [showPrompt, setShowPrompt] = useState(false);
   const [cardIndex, setCardIndex] = useState(0);
   const [cooldown, setCooldown] = useState(false); // <-- Add this line
-  const cardCount = cards.length;
+  const [cardPageIndexes, setCardPageIndexes] = useState<Record<string, number>>({});
   const cardContainerRef = useRef<HTMLDivElement>(null);
-  const touchStartY = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);// Cards array now just passes card data
+
+  const cards = cardsData.map((card: CardData) => ({
+    key: card.key,
+    content: (
+      <CardWithCarousel
+        card={card}
+        cardIcons={cardIcons}
+        renderHTML={renderHTML}
+        pageIndex={cardPageIndexes[card.key] || 0}
+        onNextPage={() => handleNextPage(card.key, card.pages.length)}
+        onPrevPage={() => handlePrevPage(card.key)}
+      />
+    )
+  }));
+
   const currentCardKey = cards[cardIndex]?.key;
+  const cardCount = cards.length;
+
+  const handleNextPage = (cardKey: string, pageCount: number) => {
+    setCardPageIndexes((prev) => ({
+      ...prev,
+      [cardKey]: Math.min((prev[cardKey] || 0) + 1, pageCount - 1),
+    }));
+  };
+
+  const handlePrevPage = (cardKey: string) => {
+    setCardPageIndexes((prev) => ({
+      ...prev,
+      [cardKey]: Math.max((prev[cardKey] || 0) - 1, 0),
+    }));
+  };
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined;
