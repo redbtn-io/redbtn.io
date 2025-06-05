@@ -73,13 +73,6 @@
           "A suite of <span class='font-semibold text-red-600'>workspace</span> software for teams and creators.",
           "Project management, collaboration, automation, and more all built for speed and simplicity.",
           "<span class='font-semibold text-red-600'>redsuite keeps your ideas moving forward.</span>"
-        ],
-        "links": [
-          {
-            "link": "",
-            "label": "explore redsuite",
-            "icon": "next"
-          }
         ]
       },
       {
@@ -94,19 +87,14 @@
         ],
         "links": [
           {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          },
-          {
             "link": "https://github.com/redbtn-io/redmail",
             "label": "try redbook",
             "icon": "generic"
+          },
+          {
+            "link": "https://github.com/redbtn-io/redmail",
+            "label": "redbook gihub",
+            "icon": "github"
           }
         ]
       },
@@ -122,19 +110,14 @@
         ],
         "links": [
           {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          },
-          {
             "link": "https://github.com/redbtn-io/redmeet",
             "label": "try redmeet",
             "icon": "generic"
+          },
+          {
+            "link": "https://github.com/redbtn-io/redmeet",
+            "label": "redmeet gihub",
+            "icon": "github"
           }
         ]
       },
@@ -150,14 +133,14 @@
         ],
         "links": [
           {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
-          {
             "link": "https://github.com/redbtn-io/redsign",
             "label": "try redsign",
             "icon": "generic"
+          },
+          {
+            "link": "https://github.com/redbtn-io/redsign",
+            "label": "redsign gihub",
+            "icon": "github"
           }
         ]
       }
@@ -175,13 +158,6 @@
           "Explore our suite of apps built for clients in business, finance, logistics, and beyond.",
           "Each app is crafted for real-world results. Fast, secure, and easy to use.",
           "<span class='font-semibold text-red-600'>Get started with our featured client apps below.</span>"
-        ],
-        "links": [
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          }
         ]
       },
       {
@@ -195,16 +171,6 @@
           "<span class='font-semibold text-red-600'>Power your trading with Elite Entries.</span>"
         ],
         "links": [
-          {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          },
           {
             "link": "https://eliteentri.es",
             "label": "try eliteentri.es",
@@ -224,16 +190,6 @@
         ],
         "links": [
           {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          },
-          {
             "link": "https://georgeanthony.net",
             "label": "try georgeanthony.net",
             "icon": "generic"
@@ -251,11 +207,6 @@
           "<span class='font-semibold text-red-600'>Store and ship smarter with Peak Solutions Logistics.</span>"
         ],
         "links": [
-          {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
           {
             "link": "https://peaksolutionslogistics.com",
             "label": "try peaksolutionslogistics.com",
@@ -277,13 +228,6 @@
           "Discover a curated list of SEO-friendly sites we've built for clients including businesses, professionals, and creators.",
           "Explore unique brands, creative portfolios, and innovative ventures.",
           "<span class='font-semibold text-red-600'>Browse featured client sites below.</span>"
-        ],
-        "links": [
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          }
         ]
       },
       {
@@ -293,20 +237,10 @@
         ],
         "body": [
           "Born to the rhythm of two islands, Bri Nicole is beautiful and soulful Caribbean artist sharing her music and story.",
-            "Experience original songs, vibrant performances, and creative expression. Bri creates music that’s soulful, grounded, and unmistakably hers.",
+          "Experience original songs, vibrant performances, and creative expression. Bri creates music that’s soulful, grounded, and unmistakably hers.",
           "<span class='font-semibold text-red-600'>Listen and connect with Bri at <a href='https://brinicole.com' class='underline text-red-600' target='_blank' rel='noopener'>brinicole.com</a>.</span>"
         ],
         "links": [
-          {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          },
           {
             "link": "https://brinicole.com",
             "label": "visit brinicole.com",
@@ -320,21 +254,11 @@
           { "text": "Rose Digital Imaging", "className": "text-red-700 lowercase" }
         ],
         "body": [
-            "Digital graphic designer creating visual solutions for brands, businesses, and creators.",
-            "Explore a diverse portfolio featuring branding, photography, and design projects crafted to inspire and engage.",
+          "Digital graphic designer creating visual solutions for brands, businesses, and creators.",
+          "Explore a diverse portfolio featuring branding, photography, and design projects crafted to inspire and engage.",
           "<span class='font-semibold text-red-600'>See the work at <a href='https://rosedigitalimaging.com' class='underline text-red-600' target='_blank' rel='noopener'>rosedigitalimaging.com</a>.</span>"
         ],
         "links": [
-          {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
-          {
-            "link": "",
-            "label": "next",
-            "icon": "next"
-          },
           {
             "link": "https://rosedigitalimaging.com",
             "label": "visit rosedigitalimaging.com",
@@ -349,15 +273,10 @@
         ],
         "body": [
           "A technology-focused fund investing in equities, derivatives, and cryptocurrencies.",
-            "Follow the latest strategies, insights, and performance updates, including in-depth research and commentary from the team.",
+          "Follow the latest strategies, insights, and performance updates, including in-depth research and commentary from the team.",
           "<span class='font-semibold text-red-600'>Learn more at <a href='https://theprogressionfund.com' class='underline text-red-600' target='_blank' rel='noopener'>theprogressionfund.com</a>.</span>"
         ],
         "links": [
-          {
-            "link": "",
-            "label": "back",
-            "icon": "previous"
-          },
           {
             "link": "https://theprogressionfund.com",
             "label": "visit theprogressionfund.com",

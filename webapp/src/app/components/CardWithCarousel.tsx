@@ -94,67 +94,80 @@ export default function CardWithCarousel({
                 <span key={i} className={part.className}>{part.text}</span>
               ))}
             </h1>
-            <p className="text-lg mb-8 text-zinc-700 dark:text-zinc-200 space-y-4">
-              {page.body.map((line, i) => (
-                <span key={i} className="block">
-                  {renderHTML(line)}
-                </span>
-              ))}
-            </p>
-            {page.links && page.links.length > 0 && (
-              <div className="flex justify-end mt-2 gap-2">
-                {page.links.map((l, i) =>
-                  l.icon === "next" ? (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={onNextPage}
-                      className="text-zinc-400 hover:text-[var(--primary)] dark:hover:text-zinc-100 transition-colors flex items-center"
-                      aria-label={l.label || "Next"}
-                    >
-                      {cardIcons.next}
-                    </button>
-                  ) : l.icon === "previous" ? (
-                    <button
-                      key={i}
-                      type="button"
-                      onClick={onPrevPage}
-                      className="text-zinc-400 hover:text-[var(--primary)] dark:hover:text-zinc-100 transition-colors flex items-center"
-                      aria-label={l.label || "Previous"}
-                    >
-                      {cardIcons.previous}
-                    </button>
-                  ) : (
-                    <a
-                      key={i}
-                      href={l.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-zinc-400 hover:text-[var(--primary)] dark:hover:text-zinc-100 transition-colors flex items-center"
-                      aria-label={l.label || "Link"}
-                    >
-                      {cardIcons[l.icon]}
-                    </a>
-                  )
+            <div className="text-lg mb-8 text-zinc-700 dark:text-zinc-200 space-y-4">
+              {page.body.map((line, i) => {
+                // If last line, render links inline floated right
+                if (i === page.body.length - 1 && page.links && page.links.length > 0) {
+                  return (
+                    <div key={i} className="flex items-center justify-between">
+                      <span>{renderHTML(line)}</span>
+                      <span className="flex gap-2 ml-4">
+                        {page.links.map((l, j) => (
+                          <a
+                            key={j}
+                            href={l.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-zinc-400 hover:text-[var(--primary)] dark:hover:text-zinc-100 transition-colors flex items-center"
+                            aria-label={l.label || "Link"}
+                          >
+                            {cardIcons[l.icon]}
+                          </a>
+                        ))}
+                      </span>
+                    </div>
+                  );
+                }
+                return (
+                  <span key={i} className="block">
+                    {renderHTML(line)}
+                  </span>
+                );
+              })}
+            </div>
+            {/* Carousel navigation arrows */}
+            <div className="flex justify-between items-center mt-2">
+              <div>
+                {pageIndex > 0 && (
+                  <button
+                    type="button"
+                    onClick={onPrevPage}
+                    className="text-zinc-400 hover:text-[var(--primary)] dark:hover:text-zinc-100 transition-colors flex items-center"
+                    aria-label="Previous"
+                  >
+                    {cardIcons.previous}
+                  </button>
                 )}
+              </div>
+              <div>
+                {pageIndex < pageCount - 1 && (
+                  <button
+                    type="button"
+                    onClick={onNextPage}
+                    className="text-zinc-400 hover:text-[var(--primary)] dark:hover:text-zinc-100 transition-colors flex items-center"
+                    aria-label="Next"
+                  >
+                    {cardIcons.next}
+                  </button>
+                )}
+              </div>
+            </div>
+            {/* Carousel navigation dots */}
+            {pageCount > 1 && (
+              <div className="mt-2 bottom-4 left-0 right-0 flex justify-center gap-2">
+                {card.pages.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`w-3 h-3 rounded-full ${i === pageIndex ? "bg-red-600" : "bg-zinc-300 dark:bg-zinc-700"} transition-colors`}
+                    onClick={() => i > pageIndex ? onNextPage() : onPrevPage()}
+                    aria-label={`Go to page ${i + 1}`}
+                  />
+                ))}
               </div>
             )}
           </div>
         ))}
       </div>
-      {/* Carousel navigation dots */}
-      {pageCount > 1 && (
-        <div className="mt-2 bottom-4 left-0 right-0 flex justify-center gap-2">
-          {card.pages.map((_, i) => (
-            <button
-              key={i}
-              className={`w-3 h-3 rounded-full ${i === pageIndex ? "bg-red-600" : "bg-zinc-300 dark:bg-zinc-700"} transition-colors`}
-              onClick={() => i > pageIndex ? onNextPage() : onPrevPage()}
-              aria-label={`Go to page ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 }
