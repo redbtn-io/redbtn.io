@@ -10,7 +10,7 @@
         "body": [
           "Digital consulting & development for businesses, creators, and dreamers.",
           "Web, native, APIs, automation, SEO, marketing, and more.",
-          "<span class='font-semibold text-red-600'>Hit the red button to turn ideas into action.</span>"
+          "<span class='font-semibold text-red-600'>Hit the red button to see ideas turned into action.</span>"
         ],
         "links": [
           {
@@ -27,12 +27,12 @@
     "pages": [
       {
         "titleParts": [
-          { "text": "say hello to ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "say hi to ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "red", "className": "text-red-700 lowercase" }
         ],
         "body": [
           "An all-encompassing, customizable <span class='text-red-600'>AI</span> for personal and professional use.",
-          "Easy to use, highly adaptable, and always ready to help—he's on your screen right <span class='text-red-600'>now</span>.",
+          "Easy to use, highly adaptable, and always ready to help (in fact, he's on your screen right <span class='text-red-600'>now</span>).",
           "<span class='font-semibold text-red-600'>Red adapts to you—your work, your life, your way.</span>"
         ]
       }
@@ -48,7 +48,7 @@
         ],
         "body": [
           "A <span class='text-red-600'>flexible</span> automation system for building workflows and connecting apps.",
-          "No dependencies—just add connectors to load, analyze, and <span class='text-red-600'>automate</span> with any API.",
+          "No dependencies needed, just add connectors to load, analyze, and <span class='text-red-600'>automate</span> with any API.",
           "<span class='font-semibold text-red-600'>Automate anything with redbtn.</span>"
         ],
         "links": [
@@ -71,7 +71,7 @@
         ],
         "body": [
           "A suite of <span class='font-semibold text-red-600'>workspace</span> software for teams and creators.",
-          "Project management, collaboration, automation, and more—built for speed and simplicity.",
+          "Project management, collaboration, automation, and more all built for speed and simplicity.",
           "<span class='font-semibold text-red-600'>redsuite keeps your ideas moving forward.</span>"
         ],
         "links": [
@@ -117,7 +117,7 @@
         ],
         "body": [
           "A fast, privacy-first calendar booking tool for teams and individuals.",
-          "Share your link, let people book, and keep your schedule in sync—no fuss, no tracking.",
+          "Share your link, let people book, and keep your schedule in sync without all the fuss.",
           "<span class='font-semibold text-red-600'>Book meetings your way with redmeet.</span>"
         ],
         "links": [
@@ -144,7 +144,7 @@
           { "text": "redsign", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Makes document signatures fast and easy—no accounts, no hassle.",
+          "Makes document signatures fast and easy, with minimal friction and no hassle.",
           "Send, sign, and manage documents securely from anywhere.",
           "<span class='font-semibold text-red-600'>Sign documents simply with redsign.</span>"
         ],
@@ -172,8 +172,8 @@
           { "text": "apps", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Explore our suite of apps built for clients in business, finance, and logistics.",
-          "Each app is crafted for real-world results—fast, secure, and easy to use.",
+          "Explore our suite of apps built for clients in business, finance, logistics, and beyond.",
+          "Each app is crafted for real-world results. Fast, secure, and easy to use.",
           "<span class='font-semibold text-red-600'>Get started with our featured client apps below.</span>"
         ],
         "links": [
@@ -274,7 +274,7 @@
           { "text": "sites", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Discover a curated list of SEO-friendly sites we've built for clients—businesses, professionals, and creators.",
+          "Discover a curated list of SEO-friendly sites we've built for clients including businesses, professionals, and creators.",
           "Explore unique brands, creative portfolios, and innovative ventures.",
           "<span class='font-semibold text-red-600'>Browse featured client sites below.</span>"
         ],
