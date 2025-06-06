@@ -1,13 +1,12 @@
 "use client";
-import React, { useState, useEffect, useRef, JSX } from "react";
-import RedButton from "./components/RedButton";
-import ContactForm from "./components/ContactForm";
-import TitleScreen from "./components/TitleScreen";
-import Content from "./components/Content";
+import { useEffect, useRef, useState } from "react";
 import cardsData from "../data/cards.json";
-import Image from "next/image";
 import CardWithCarousel from "./components/CardWithCarousel";
+import ContactForm from "./components/ContactForm";
+import Content from "./components/Content";
 import Conversation from "./components/Conversation";
+import RedButton from "./components/RedButton";
+import TitleScreen from "./components/TitleScreen";
 import cardIcons from "./utils/cardIcons";
 
 // Helper to render HTML safely (for the span)

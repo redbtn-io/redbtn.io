@@ -1,6 +1,6 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 type Corner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 

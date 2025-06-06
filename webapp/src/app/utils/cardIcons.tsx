@@ -1,5 +1,5 @@
-import React, { JSX } from "react";
 import Image from "next/image";
+import { JSX } from "react";
 
 const cardIcons: Record<string, JSX.Element> = {
   generic: (
