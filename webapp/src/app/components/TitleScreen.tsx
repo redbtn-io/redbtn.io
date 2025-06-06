@@ -33,7 +33,7 @@ export default function TitleScreen({
         </>
       )}
       {show && (
-        <div className="fixed inset-0 z-30 flex items-center justify-center bg-transparent">
+        <div className="fixed inset-0 z-15 flex items-center justify-center bg-transparent">
           <div className="
               mb-86
               text-4xl
