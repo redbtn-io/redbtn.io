@@ -57,11 +57,11 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
   };
 
   // Determine slide direction
-  const slideFrom =
+  const slideFrom ='z-0' + 
     corner === "top-left" || corner === "top-right"
       ? "-translate-y-[100vh]"
       : "translate-y-[100vh]";
-  const slideTo = "translate-y-0";
+  const slideTo = "translate-y-0 z-20";
 
   if (!visible) return null;
 
@@ -79,7 +79,7 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
         aria-modal="true"
         role="dialog"
         onClick={onClose}
-      >
+      />
       {/* Modal */}
       <div
         className={`
@@ -128,6 +128,7 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
               placeholder="type your message…"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              autoFocus={open}
             />
             <button
               type="submit"
@@ -138,7 +139,6 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
             </button>
           </form>
         </div>
-      </div>
       </div>
       {/* Close button */}
     </>
