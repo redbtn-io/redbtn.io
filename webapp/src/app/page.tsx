@@ -7,6 +7,8 @@ import Content from "./components/Content";
 import cardsData from "../data/cards.json";
 import Image from "next/image";
 import CardWithCarousel from "./components/CardWithCarousel";
+import ChatBubble from "./components/ChatBubble";
+import Conversation from "./components/Conversation";
 
 // Helper to render HTML safely (for the span)
 function renderHTML(html: string) {
@@ -67,6 +69,9 @@ export default function Home() {
   const [cardIndex, setCardIndex] = useState(0);
   const [cooldown, setCooldown] = useState(false); // <-- Add this line
   const [cardPageIndexes, setCardPageIndexes] = useState<Record<string, number>>({});
+  const [chatBubble, setChatBubble] = useState(false);
+  const [redBtnCorner, setRedBtnCorner] = useState<"top-left"|"top-right"|"bottom-left"|"bottom-right">("bottom-right");
+  const [redBtnPos, setRedBtnPos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const cardContainerRef = useRef<HTMLDivElement>(null);
   const touchStartY = useRef<number | null>(null);// Cards array now just passes card data
 
@@ -195,7 +200,7 @@ export default function Home() {
         minimized={minimized}
         setMinimized={setMinimized}
         onPress={() => {
-          setShowContact((prev) => !prev);
+          //setShowContact((prev) => !prev);
           // Loop to first card if at the last card, otherwise go to next
           if (cardIndex < cardCount - 1) {
             setCardIndex(cardIndex + 1);
@@ -204,14 +209,24 @@ export default function Home() {
           }
         }}
         onDouble={() => {
-          console.log("Button double-clicked!"); // Placeholder for double-click action
-          setMinimized(false);
+          setChatBubble(true);
+          setTimeout(() => setChatBubble(false), 4000);
         }}
         onHold={() => {
-          console.log("Button held!"); // Placeholder for hold action
-          setMinimized(false);
+          alert("Button held!"); // Placeholder for hold action
         }}
         bounce={currentCardKey === "red"}
+        // Add a callback to get the current corner
+        onCornerChange={setRedBtnCorner}
+        onPositionChange={setRedBtnPos}
+      />
+
+      {/* ChatBubble */}
+
+      <Conversation
+        open={chatBubble}
+        onClose={() => setChatBubble(false)}
+        corner={redBtnCorner}
       />
 
       {/* Card carousel */}

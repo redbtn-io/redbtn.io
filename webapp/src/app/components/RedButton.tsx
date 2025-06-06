@@ -30,6 +30,8 @@ export default function RedButton({
   onDouble,
   onHold,
   bounce = false,
+  onCornerChange,
+  onPositionChange, // <-- add this
 }: {
   onPress: () => void;
   minimized: boolean;
@@ -37,6 +39,8 @@ export default function RedButton({
   onDouble?: () => void;
   onHold?: () => void;
   bounce?: boolean;
+  onCornerChange?: (corner: Corner) => void;
+  onPositionChange?: (pos: { x: number; y: number }) => void; // <-- add this
 }) {
   const [corner, setCorner] = useState<Corner>("bottom-right");
   const [dragging, setDragging] = useState(false);
@@ -257,6 +261,21 @@ export default function RedButton({
     };
   }, [dragging, minimized, onPress, setMinimized, onDouble, onHold]);
 
+  // Corner change effect
+  useEffect(() => {
+    if (onCornerChange) onCornerChange(corner);
+  }, [corner, onCornerChange]);
+
+  // Report position to parent
+  useEffect(() => {
+    if (!btnRef.current || !onPositionChange) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    onPositionChange({
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    });
+  }, [corner, minimized, dragging, dragPos, justDropped, onPositionChange]);
+
   // Positioning
   const style: React.CSSProperties = {
     position: "fixed",
@@ -281,11 +300,11 @@ export default function RedButton({
     switch (corner) {
       case "top-left":
         style.left = margin;
-        style.top = margin;
+        style.top = margin*3;
         break;
       case "top-right":
         style.left = window.innerWidth - margin - 100;
-        style.top = margin;
+        style.top = margin*3;
         break;
       case "bottom-left":
         style.left = margin;
