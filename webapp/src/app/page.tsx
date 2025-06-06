@@ -193,6 +193,13 @@ export default function Home() {
     console.log(redBtnPos)
   }, [redBtnPos])
 
+  // Prevent scroll restoration
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   return (
     <div className="relative min-h-screen bg-background transition-colors duration-700 overflow-hidden">
       {/* TitleScreen now includes the doors */}
@@ -217,8 +224,7 @@ export default function Home() {
         onHold={() => {
           alert("Button held!"); // Placeholder for hold action
         }}
-        bounce={currentCardKey === "red"}
-        // Add a callback to get the current corner
+        bounce={currentCardKey === "red" || chatBubble}
         onCornerChange={setRedBtnCorner}
         onPositionChange={setRedBtnPos}
       />

@@ -70,7 +70,7 @@ button {
   width: 50vw;
   height: 100vh;
   background: var(--secondary);
-  z-index: 40;
+  z-index: 10; /* was 20 */
   transition: transform 0.7s cubic-bezier(.4, 2, .6, 1);
 }
 
@@ -84,7 +84,7 @@ button {
 
 .main-content {
   position: relative;
-  z-index: 10;
+  z-index: 5; /* was 10 */
 }
 
 @media (max-width: 640px) {

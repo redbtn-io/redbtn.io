@@ -70,19 +70,20 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
       {/* Overlay */}
       <div
         className={`
-        fixed inset-0 z-[20] bg-black/60
+        fixed inset-0 bg-black/60
         transition-opacity duration-300
-        ${animateIn ? "opacity-100" : "opacity-0"}
+        ${animateIn ? "opacity-100 z-20" : "opacity-0 z-0"}
+        
       `}
         style={{ transitionProperty: "opacity" }}
         aria-modal="true"
         role="dialog"
         onClick={onClose}
-      />
+      >
       {/* Modal */}
       <div
         className={`
-        fixed inset-0 z-[21] flex items-center justify-center
+        fixed inset-0 flex items-center justify-center
         pointer-events-none
         transition-transform
         ${animateIn ? slideTo : slideFrom}
@@ -92,7 +93,7 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
         <div
           className={`
           pointer-events-auto
-          relative bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-md mx-4 flex flex-col h-[70vh]
+          relative bg-white dark:bg-zinc-900 rounded-xl shadow-2xl w-full max-w-6xl mx-4 flex flex-col h-[70vh]
         `}
           style={{ transitionProperty: "transform" }}
         >
@@ -127,7 +128,6 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
               placeholder="type your message…"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              autoFocus={open}
             />
             <button
               type="submit"
@@ -139,6 +139,8 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
           </form>
         </div>
       </div>
+      </div>
+      {/* Close button */}
     </>
   );
 }

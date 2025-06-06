@@ -16,18 +16,18 @@ export default function OverlayModal({
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center"
+      className="fixed inset-0 z-10 flex items-center justify-center" // was z-20
       aria-modal="true"
       role="dialog"
     >
       {/* Overlay */}
       <div
         className="absolute inset-0 bg-black/60 transition-opacity"
-        style={{ opacity: 0.7 }}
+        style={{ opacity: 0.7, zIndex: 10 }} // overlay at 10
         onClick={closeable ? onClose : undefined}
       />
       {/* Modal box */}
-      <div className="relative z-10 bg-white dark:bg-zinc-900 rounded-xl shadow-2xl p-6 max-w-lg w-full mx-4 flex flex-col items-end">
+      <div className="relative z-15 bg-white dark:bg-zinc-900 rounded-xl shadow-2xl p-6 max-w-lg w-full mx-4 flex flex-col items-end">
         {closeable && (
           <button
             aria-label="Close"

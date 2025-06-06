@@ -31,7 +31,8 @@ export default function RedButton({
   onHold,
   bounce = false,
   onCornerChange,
-  onPositionChange, // <-- add this
+  onPositionChange,
+  style: externalStyle, // <-- add this
 }: {
   onPress: () => void;
   minimized: boolean;
@@ -40,7 +41,8 @@ export default function RedButton({
   onHold?: () => void;
   bounce?: boolean;
   onCornerChange?: (corner: Corner) => void;
-  onPositionChange?: (pos: { x: number; y: number }) => void; // <-- add this
+  onPositionChange?: (pos: { x: number; y: number }) => void;
+  style?: React.CSSProperties; // <-- add this
 }) {
   const [corner, setCorner] = useState<Corner>("bottom-right");
   const [dragging, setDragging] = useState(false);
@@ -279,11 +281,12 @@ export default function RedButton({
   // Positioning
   const style: React.CSSProperties = {
     position: "fixed",
-    zIndex: minimized ? 100 : 50,
+    zIndex: minimized ? 20 : 15,
     pointerEvents: dragging ? "none" : "auto",
     width: minimized ? 100 : 180,
     height: minimized ? 100 : 180,
     transition: "left 0.5s cubic-bezier(.4,2,.6,1), top 0.5s cubic-bezier(.4,2,.6,1)",
+    ...externalStyle, // <-- merge external style last
   };
 
   if (dragging && dragPos && minimized) {

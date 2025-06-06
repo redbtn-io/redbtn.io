@@ -20,18 +20,20 @@ export default function TitleScreen({
             className="door left-door"
             style={{
               transform: minimized ? "translateX(-100%)" : "translateX(0)",
+              zIndex: 10, // was 20
             }}
           />
           <div
             className="door right-door"
             style={{
               transform: minimized ? "translateX(100%)" : "translateX(0)",
+              zIndex: 10, // was 20
             }}
           />
         </>
       )}
       {show && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-50 pointer-events-none">
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-15 pointer-events-none">
           <div
             className="
               mb-84
