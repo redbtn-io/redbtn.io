@@ -232,7 +232,7 @@
       },
       {
         "titleParts": [
-          { "text": "hear ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "vibe with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "Bri Nicole", "className": "text-red-700 lowercase" }
         ],
         "body": [
@@ -250,7 +250,7 @@
       },
       {
         "titleParts": [
-          { "text": "experience ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "create with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "Rose Digital Imaging", "className": "text-red-700 lowercase" }
         ],
         "body": [
@@ -268,7 +268,7 @@
       },
       {
         "titleParts": [
-          { "text": "track ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
+          { "text": "grow with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
           { "text": "The Progression Fund", "className": "text-red-700 lowercase" }
         ],
         "body": [
