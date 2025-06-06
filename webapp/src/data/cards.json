@@ -87,7 +87,7 @@
         ],
         "links": [
           {
-            "link": "https://github.com/redbtn-io/redmail",
+            "link": "https://book.redbtn.io",
             "label": "try redbook",
             "icon": "generic"
           },
@@ -110,7 +110,7 @@
         ],
         "links": [
           {
-            "link": "https://github.com/redbtn-io/redmeet",
+            "link": "https://meet.redbtn.io",
             "label": "try redmeet",
             "icon": "generic"
           },
@@ -133,7 +133,7 @@
         ],
         "links": [
           {
-            "link": "https://github.com/redbtn-io/redsign",
+            "link": "https://sign.redbtn.io",
             "label": "try redsign",
             "icon": "generic"
           },
