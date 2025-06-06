@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import initialMessages from "../../data/messages.json"; // Import the messages
 
 type Message = {
   id: number;
@@ -13,10 +14,12 @@ type ConversationProps = {
 };
 
 export default function Conversation({ open, onClose, corner }: ConversationProps) {
-  const [messages, setMessages] = useState<Message[]>([
-    { id: 1, sender: "user", text: "Hi there! Can you help me?" },
-    { id: 2, sender: "ai", text: "Of course! How can I assist you today?" },
-  ]);
+  const [messages, setMessages] = useState<Message[]>(
+    initialMessages.map((msg) => ({
+      ...msg,
+      sender: msg.sender === "user" ? "user" : "ai",
+    }))
+  );
   const [input, setInput] = useState("");
   const [visible, setVisible] = useState(open);
   const [animateIn, setAnimateIn] = useState(false);
