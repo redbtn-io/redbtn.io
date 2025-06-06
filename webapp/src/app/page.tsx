@@ -7,7 +7,6 @@ import Content from "./components/Content";
 import cardsData from "../data/cards.json";
 import Image from "next/image";
 import CardWithCarousel from "./components/CardWithCarousel";
-import ChatBubble from "./components/ChatBubble";
 import Conversation from "./components/Conversation";
 
 // Helper to render HTML safely (for the span)
@@ -189,6 +188,10 @@ export default function Home() {
     ref.addEventListener("wheel", onWheel, { passive: false });
     return () => ref.removeEventListener("wheel", onWheel);
   }, [cardIndex, cardCount, cooldown]);
+
+  useEffect(() => {
+    console.log(redBtnPos)
+  }, [redBtnPos])
 
   return (
     <div className="relative min-h-screen bg-background transition-colors duration-700 overflow-hidden">
