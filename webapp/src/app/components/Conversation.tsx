@@ -124,6 +124,7 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
               placeholder="type your message…"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              autoFocus={open}
             />
             <button
               type="submit"
