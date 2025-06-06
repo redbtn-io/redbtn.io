@@ -33,10 +33,9 @@ export default function TitleScreen({
         </>
       )}
       {show && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-15 pointer-events-none">
-          <div
-            className="
-              mb-84
+        <div className="fixed inset-0 z-30 flex items-center justify-center bg-transparent">
+          <div className="
+              mb-86
               text-4xl
               sm:text-5xl
               font-extrabold
@@ -45,9 +44,7 @@ export default function TitleScreen({
               text-center
               drop-shadow-lg
               select-none
-              pointer-events-none
-            "
-          >
+              pointer-events-none">
             <span className="inline-block text-zinc-900 dark:text-zinc-100 animate-fadein">
               press
             </span>

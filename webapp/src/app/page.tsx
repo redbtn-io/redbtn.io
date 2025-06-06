@@ -55,6 +55,9 @@ const cardIcons: Record<string, JSX.Element> = {
   ),
   peak:(
     <Image src="/peak.png" alt="Peak Icon" width={64} height={64} className="rounded-full" />
+  ),
+  ga:(
+    <Image src="/ga.png" alt="GA Icon" width={64} height={64} className="rounded-full" />
   )
 };
 
