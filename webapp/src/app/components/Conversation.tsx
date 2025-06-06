@@ -67,7 +67,7 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
       {/* Overlay */}
       <div
         className={`
-        fixed inset-0 z-[300] bg-black/60
+        fixed inset-0 z-[20] bg-black/60
         transition-opacity duration-300
         ${animateIn ? "opacity-100" : "opacity-0"}
       `}
@@ -79,7 +79,7 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
       {/* Modal */}
       <div
         className={`
-        fixed inset-0 z-[301] flex items-center justify-center
+        fixed inset-0 z-[21] flex items-center justify-center
         pointer-events-none
         transition-transform
         ${animateIn ? slideTo : slideFrom}
@@ -124,7 +124,6 @@ export default function Conversation({ open, onClose, corner }: ConversationProp
               placeholder="type your message…"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              autoFocus={open}
             />
             <button
               type="submit"

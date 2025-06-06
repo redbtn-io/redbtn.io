@@ -210,7 +210,6 @@ export default function Home() {
         }}
         onDouble={() => {
           setChatBubble(true);
-          setTimeout(() => setChatBubble(false), 4000);
         }}
         onHold={() => {
           alert("Button held!"); // Placeholder for hold action
