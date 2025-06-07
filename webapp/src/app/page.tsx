@@ -192,35 +192,37 @@ export default function Home() {
       />
 
       {/* Card carousel */}
-      <div
-        ref={cardContainerRef}
-        className="main-content flex flex-col items-center justify-center min-h-screen absolute inset-0 transition-all duration-700"
-        style={{
-          touchAction: "pan-y",
-          overflow: "hidden",
-        }}
-      >
+      {!chatBubble && (
         <div
-          className="w-full flex flex-col items-center transition-transform duration-500"
+          ref={cardContainerRef}
+          className="main-content flex flex-col items-center justify-center min-h-screen absolute inset-0 transition-all duration-700"
           style={{
-            transform: `translateY(${-cardIndex * 100}vh)`,
-            willChange: "transform",
+            touchAction: "pan-y",
+            overflow: "hidden",
           }}
         >
-          {cards.map((card) => (
-            <div key={card.key} className="flex items-center justify-center min-h-screen w-full">
-              <Content
-                onUserScroll={() => {
-                  setCooldown(true);
-                  setTimeout(() => setCooldown(false), 500); // 500ms or adjust as needed
-                }}
-              >
-                {card.content}
-              </Content>
-            </div>
-          ))}
+          <div
+            className="w-full flex flex-col items-center transition-transform duration-500"
+            style={{
+              transform: `translateY(${-cardIndex * 100}vh)`,
+              willChange: "transform",
+            }}
+          >
+            {cards.map((card) => (
+              <div key={card.key} className="flex items-center justify-center min-h-screen w-full">
+                <Content
+                  onUserScroll={() => {
+                    setCooldown(true);
+                    setTimeout(() => setCooldown(false), 500); // 500ms or adjust as needed
+                  }}
+                >
+                  {card.content}
+                </Content>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Contact form */}
       <div
