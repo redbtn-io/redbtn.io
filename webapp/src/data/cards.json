@@ -83,7 +83,7 @@
         "body": [
           "A simple CRM for managing contacts, automating emails, and handling phone numbers.",
           "Keep your relationships organized and automate your outreach with ease.",
-          "<span class='font-semibold text-red-600'>Stay in touch with redbook.</span>"
+          "<span class='font-semibold text-red-600'>Stay in touch with <a href='https://book.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>redbook</a>.</span>"
         ],
         "links": [
           {
@@ -106,7 +106,7 @@
         "body": [
           "A fast, privacy-first calendar booking tool for teams and individuals.",
           "Share your link, let people book, and keep your schedule in sync without all the fuss.",
-          "<span class='font-semibold text-red-600'>Book meetings your way with redmeet.</span>"
+          "<span class='font-semibold text-red-600'>Book meetings your way with <a href='https://meet.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>redmeet.</a></span>"
         ],
         "links": [
           {
@@ -129,7 +129,7 @@
         "body": [
           "Makes document signatures fast and easy, with minimal friction and no hassle.",
           "Send, sign, and manage documents securely from anywhere.",
-          "<span class='font-semibold text-red-600'>Sign documents simply with redsign.</span>"
+          "<span class='font-semibold text-red-600'>Sign documents simply with <a href='https://sign.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>redsign.</a></span>"
         ],
         "links": [
           {
@@ -155,8 +155,8 @@
           { "text": "apps", "className": "text-red-700 lowercase" }
         ],
         "body": [
-          "Explore our suite of apps built for clients in business, finance, logistics, and beyond.",
-          "Each app is crafted for real-world results. Fast, secure, and easy to use.",
+          "Explore our suite of apps built for clients in business, finance, logistics, and beyond. Each app is crafted for real-world results.",
+          "From automation to analytics, our apps are built to improve workflows and ensure users work smarter and grow faster.",
           "<span class='font-semibold text-red-600'>Get started with our featured client apps below.</span>"
         ]
       },
@@ -168,7 +168,7 @@
         "body": [
           "A financial, trading, and strategy automation platform built on redbtn.",
           "Automate trading workflows, manage strategies, and streamline financial operations with ease.",
-          "<span class='font-semibold text-red-600'>Power your trading with Elite Entries.</span>"
+          "<span class='font-semibold text-red-600'>Power your trading with <a href='https://eliteentri.es' class='underline text-red-600' target='_blank' rel='noopener'>Elite Entries.</a></span>"
         ],
         "links": [
           {
@@ -186,7 +186,7 @@
         "body": [
           "Forward looking and innovative financial services for businesses and individuals.",
           "Expertise includes financial planning, investment strategies, and comprehensive life insurance solutions.",
-          "<span class='font-semibold text-red-600'>Secure your future with trusted financial guidance.</span>"
+          "<span class='font-semibold text-red-600'>Secure your future with <a href='https://georgeanthony.net' class='underline text-red-600' target='_blank' rel='noopener'>George Anthony</a>.</span>"
         ],
         "links": [
           {
@@ -204,7 +204,7 @@
         "body": [
           "3PL logistics provider leveraging technology to streamline freight, warehousing, and logistics operations.",
           "Features a modern load board, real-time tracking, and tools for shippers and carriers.",
-          "<span class='font-semibold text-red-600'>Store and ship smarter with Peak Solutions Logistics.</span>"
+          "<span class='font-semibold text-red-600'>Store and ship smarter with <a href='https://peaksolutionslogistics.com' class='underline text-red-600' target='_blank' rel='noopener'>Peak Solutions Logistics.</a></span>"
         ],
         "links": [
           {
@@ -227,6 +227,7 @@
         "body": [
           "Discover a curated list of SEO-friendly sites we've built for clients including businesses, professionals, and creators.",
           "Explore unique brands, creative portfolios, and innovative ventures.",
+          "Each site is designed for performance, discoverability, and a memorable user experience.",
           "<span class='font-semibold text-red-600'>Browse featured client sites below.</span>"
         ]
       },
@@ -242,8 +243,8 @@
         ],
         "links": [
           {
-            "link": "https://brinicole.com",
-            "label": "visit brinicole.com",
+            "link": "https://linktr.ee/briburkley",
+            "label": "bri's linktree",
             "icon": "bri"
           }
         ]

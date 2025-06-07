@@ -29,21 +29,21 @@ const cardIcons: Record<string, JSX.Element> = {
     <Image src="/red.png" alt="Red Icon" width={48} height={48} />
   ),
   rdi: (<>
-    <Image src="/rdi.png" alt="RDI Icon" width={64} height={64} className="hidden dark:block" />
-    <Image src="/rdi-light.png" alt="RDI Icon Light" width={64} height={64} className="dark:hidden" />
+    <Image src="/rdi.png" alt="RDI Icon" width={96} height={96} className="hidden dark:block" />
+    <Image src="/rdi-light.png" alt="RDI Icon Light" width={96} height={96} className="dark:hidden" />
   </>
   ),
   bri: (
-    <Image src="/bri.png" alt="Bri Nicole Icon" width={64} height={64} className="rounded-full" />
+    <Image src="/bri.png" alt="Bri Nicole Icon" width={96} height={96} className="rounded" />
   ),
   eliteentries: (
-    <Image src="/eliteentries.ico" alt="Elite Entries Icon" width={64} height={64} className="rounded-full" />
+    <Image src="/eliteentries.ico" alt="Elite Entries Icon" width={64} height={64} className="rounded" />
   ),
   peak:(
-    <Image src="/peak.png" alt="Peak Icon" width={64} height={64} className="rounded-full" />
+    <Image src="/peak.png" alt="Peak Icon" width={96} height={96} className="rounded" />
   ),
   ga:(
-    <Image src="/ga.png" alt="GA Icon" width={64} height={64} className="rounded-full" />
+    <Image src="/ga.png" alt="GA Icon" width={96} height={96} className="rounded" />
   )
 };
 
