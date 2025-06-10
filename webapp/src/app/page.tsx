@@ -8,6 +8,7 @@ import Conversation from "./components/Conversation";
 import RedButton from "./components/RedButton";
 import TitleScreen from "./components/TitleScreen";
 import cardIcons from "./utils/cardIcons";
+import ComingSoon from "./components/ComingSoon";
 
 // Helper to render HTML safely (for the span)
 function renderHTML(html: string) {
@@ -153,6 +154,31 @@ export default function Home() {
       window.history.scrollRestoration = 'manual';
     }
   }, []);
+
+  // Detect subdomain
+  const [showComingSoon, setShowComingSoon] = useState(false);
+  const [comingSoonDescription, setComingSoonDescription] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const host = window.location.hostname;
+      const sub = host.split(".")[0];
+      // Map subdomains to product descriptions
+      const descriptions: Record<string, string> = {
+        meet: "redmeet is a fast, privacy-first calendar booking tool for teams and individuals. Share your link, let people book, and keep your schedule in sync—coming soon!",
+        book: "redbook is a simple CRM for managing contacts, automating emails, and handling phone numbers. Stay in touch and automate your outreach—coming soon!",
+        sign: "redsign is a secure, privacy-first e-signature platform for contracts and agreements. Sign documents with ease—coming soon!",
+      };
+      if (["meet", "book", "sign"].includes(sub)) {
+        setShowComingSoon(true);
+        setComingSoonDescription(descriptions[sub]);
+      }
+    }
+  }, []);
+
+  if (showComingSoon) {
+    return <ComingSoon description={comingSoonDescription} />;
+  }
 
   return (
     <div className="relative min-h-screen bg-background transition-colors duration-700 overflow-hidden">
