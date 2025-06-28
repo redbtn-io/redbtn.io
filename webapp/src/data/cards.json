@@ -53,9 +53,14 @@
         ],
         "links": [
           {
-            "link": "https://github.com/redbtn-io/redbtn",
+            "link": "app.redbtn.io",
             "label": "build with redbtn",
             "icon": "red"
+          },
+          {
+            "link": "https://github.com/redbtn-io/redbtn",
+            "label": "redbtn github",
+            "icon": "github"
           }
         ]
       }
