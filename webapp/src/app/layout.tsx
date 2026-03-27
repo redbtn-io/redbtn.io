@@ -7,6 +7,11 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
 export const viewport = {
   userScalable: "no",
   initialScale: 1,
@@ -14,15 +19,47 @@ export const viewport = {
   width: "device-width",
 };
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "redbtn",
+  title: "redbtn — AI-powered tools, infrastructure, and automation",
   description:
-    "Redbtn.io offers expert digital consulting and development services for businesses, including web, native, APIs, automation, SEO, and marketing solutions.",
+    "One platform, one AI assistant, everything connected. Build automations, deploy apps, and manage infrastructure with Red — the universal AI that lives across every redbtn app.",
+  keywords: [
+    "redbtn",
+    "AI",
+    "automation",
+    "infrastructure",
+    "Red",
+    "LangChain",
+    "LangGraph",
+    "serverless",
+    "FaaS",
+    "deploy",
+  ],
+  authors: [{ name: "redbtn", url: "https://redbtn.io" }],
+  openGraph: {
+    title: "redbtn — AI-powered tools, infrastructure, and automation",
+    description:
+      "Meet Red, the universal AI assistant. Build graphs, deploy apps, create documents, manage fleets — all through conversation.",
+    url: "https://redbtn.io/",
+    siteName: "redbtn",
+    type: "website",
+    images: [
+      {
+        url: "https://redbtn.io/red.png",
+        width: 512,
+        height: 512,
+        alt: "redbtn",
+      },
+    ],
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "redbtn — AI-powered tools, infrastructure, and automation",
+    description:
+      "Meet Red, the universal AI assistant. Build graphs, deploy apps, create documents, manage fleets — all through conversation.",
+    images: ["https://redbtn.io/red.png"],
+  },
 };
 
 export default function RootLayout({
@@ -34,22 +71,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://redbtn.io/" />
-        <meta property="og:title" content="redbtn" />
-        <meta
-          property="og:description"
-          content="Redbtn.io offers expert digital consulting and development services for businesses, including web, native, APIs, automation, SEO, and marketing solutions."
-        />
-        <meta property="og:url" content="https://redbtn.io/" />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://redbtn.io/red.png" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="redbtn" />
-        <meta
-          name="twitter:description"
-          content="Redbtn.io offers expert digital consulting and development services for businesses, including web, native, APIs, automation, SEO, and marketing solutions."
-        />
-        <meta name="twitter:image" content="https://redbtn.io/red.png" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
