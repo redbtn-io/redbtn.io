@@ -15,7 +15,8 @@ export default function ContactForm({ onBack }: Props) {
     const form = e.currentTarget;
     const formData = new FormData(form);
     const payload = {
-      send: "redbtnio@gmail.com",
+      send: "george@redbtn.io",
+      from: "noreply@redbtn.io",
       name: formData.get("name"),
       email: formData.get("email"),
       message: formData.get("message"),
