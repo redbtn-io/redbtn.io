@@ -12,6 +12,10 @@ function renderHTML(html: string) {
   return <span dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
+function stripHTML(html: string): string {
+  return html.replace(/<[^>]*>/g, "");
+}
+
 type CardPage = {
   titleParts: { text: string; className?: string }[];
   body: string[];
@@ -34,6 +38,7 @@ export default function Home() {
     "top-left" | "top-right" | "bottom-left" | "bottom-right"
   >("bottom-right");
   const snapContainerRef = useRef<HTMLDivElement>(null);
+  const scrollingRef = useRef(false);
   const cardCount = cardsData.length;
 
   // Subdomain detection
@@ -89,45 +94,65 @@ export default function Home() {
     }
   }, []);
 
-  // Sync snap scroll position with cardIndex
+  // Sync snap scroll position with cardIndex (programmatic navigation)
   useEffect(() => {
     const container = snapContainerRef.current;
     if (!container || !minimized) return;
     const targetCard = container.children[cardIndex] as HTMLElement;
     if (targetCard) {
+      scrollingRef.current = true;
       targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      // Use scrollend event if available, fall back to timeout
+      const unlock = () => { scrollingRef.current = false; };
+      if ("onscrollend" in container) {
+        const handler = () => { unlock(); container.removeEventListener("scrollend", handler); };
+        container.addEventListener("scrollend", handler);
+        // Safety fallback in case scrollend doesn't fire
+        setTimeout(() => { unlock(); container.removeEventListener("scrollend", handler); }, 2000);
+      } else {
+        setTimeout(unlock, 1500);
+      }
     }
   }, [cardIndex, minimized]);
 
-  // Track which card is visible via IntersectionObserver
+  // Track which card is snapped after user scrolling
   useEffect(() => {
     const container = snapContainerRef.current;
     if (!container || !minimized) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-            const idx = Number(
-              (entry.target as HTMLElement).dataset.cardIndex
-            );
-            if (!isNaN(idx)) {
-              setCardIndex(idx);
-            }
+    const detectSnapped = () => {
+      // Don't override programmatic scroll
+      if (scrollingRef.current) return;
+      const containerRect = container.getBoundingClientRect();
+      const centerY = containerRect.top + containerRect.height / 2;
+      for (const child of Array.from(container.children)) {
+        const rect = (child as HTMLElement).getBoundingClientRect();
+        if (rect.top <= centerY && rect.bottom >= centerY) {
+          const idx = Number((child as HTMLElement).dataset.cardIndex);
+          if (!isNaN(idx)) {
+            setCardIndex(idx);
           }
+          break;
         }
-      },
-      {
-        root: container,
-        threshold: 0.6,
       }
-    );
+    };
 
-    for (const child of Array.from(container.children)) {
-      observer.observe(child);
-    }
+    // Use scrollend for reliable snap detection (modern browsers)
+    container.addEventListener("scrollend", detectSnapped);
+    // Fallback: also check on scroll with debounce
+    let scrollTimer: NodeJS.Timeout;
+    const onScroll = () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(detectSnapped, 150);
+    };
+    container.addEventListener("scroll", onScroll, { passive: true });
 
-    return () => observer.disconnect();
+    return () => {
+      container.removeEventListener("scrollend", detectSnapped);
+      container.removeEventListener("scroll", onScroll);
+      clearTimeout(scrollTimer);
+    };
   }, [minimized]);
 
   // Carousel page navigation
@@ -160,7 +185,30 @@ export default function Home() {
   }
 
   return (
-    <div className="relative h-screen bg-background overflow-hidden">
+    <main className="relative h-screen bg-background overflow-hidden">
+      <h1 className="sr-only">redbtn — AI-powered tools, infrastructure, and automation</h1>
+
+      {/* Hidden SEO content — static HTML for crawlers that don't execute JS */}
+      <div className="sr-only" aria-hidden="false">
+        {cardsData.map((card: CardData) =>
+          card.pages.map((page: CardPage, pageIdx: number) => (
+            <section key={`${card.key}-seo-${pageIdx}`}>
+              <h2>
+                {page.titleParts.map((part) => part.text).join("")}
+              </h2>
+              {page.body.map((line: string, lineIdx: number) => (
+                <p key={lineIdx}>{stripHTML(line)}</p>
+              ))}
+              {page.links?.map((lnk, lnkIdx: number) => (
+                <a key={lnkIdx} href={lnk.link}>
+                  {lnk.label || lnk.link}
+                </a>
+              ))}
+            </section>
+          ))
+        )}
+      </div>
+
       {/* Title screen with doors */}
       <TitleScreen
         show={!minimized && showPrompt}
@@ -182,6 +230,7 @@ export default function Home() {
         onDouble={() => setChatOpen(true)}
         onHold={() => setChatOpen(true)}
         bounce={cardsData[cardIndex]?.key === "red" || chatOpen}
+        cornerDance={cardsData[cardIndex]?.key === "red"}
         onCornerChange={setRedBtnCorner}
       />
 
@@ -196,7 +245,7 @@ export default function Home() {
       {minimized && (
         <div ref={snapContainerRef} className="snap-container">
           {cardsData.map((card: CardData, idx: number) => (
-            <div
+            <section
               key={card.key}
               className="snap-card"
               data-card-index={idx}
@@ -217,7 +266,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-            </div>
+            </section>
           ))}
         </div>
       )}
@@ -260,6 +309,6 @@ export default function Home() {
           </svg>
         </div>
       )}
-    </div>
+    </main>
   );
 }

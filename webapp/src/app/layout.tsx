@@ -13,16 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport = {
-  userScalable: "no",
   initialScale: 1,
-  maximumScale: 1,
   width: "device-width",
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://redbtn.io"),
   title: "redbtn — AI-powered tools, infrastructure, and automation",
   description:
-    "One platform, one AI assistant, everything connected. Build automations, deploy apps, and manage infrastructure with Red — the universal AI that lives across every redbtn app.",
+    "One platform, one AI assistant, everything connected. Build automations, deploy apps, and manage infrastructure with Red.",
   keywords: [
     "redbtn",
     "AI",
@@ -46,8 +45,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: "https://redbtn.io/red.png",
-        width: 512,
-        height: 512,
+        width: 792,
+        height: 792,
         alt: "redbtn",
       },
     ],
@@ -55,6 +54,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@redbtn_io",
+    creator: "@redbtn_io",
     title: "redbtn — AI-powered tools, infrastructure, and automation",
     description:
       "Meet Red, the universal AI assistant. Build graphs, deploy apps, create documents, manage fleets — all through conversation.",
@@ -71,6 +72,32 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://redbtn.io/" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "redbtn",
+              url: "https://redbtn.io",
+              logo: "https://redbtn.io/red.png",
+              description:
+                "AI-powered tools, infrastructure, and automation for teams that build.",
+              sameAs: ["https://github.com/redbtn-io"],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "redbtn",
+              url: "https://redbtn.io",
+            }),
+          }}
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

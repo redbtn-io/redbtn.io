@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, JSX } from "react";
+import React, { useEffect, useRef, useState, JSX } from "react";
+import { sendContact } from "@/calls/contact";
 
 export type CardPage = {
   titleParts: { text: string; className?: string }[];
   body: string[];
   links?: { link: string; label?: string; icon: string }[];
+  contactForm?: boolean;
+  smallText?: boolean;
 };
 
 export type CardData = {
@@ -103,8 +106,20 @@ export default function CardWithCarousel({
               ))}
             </h2>
 
-            {/* Body */}
-            <div className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 space-y-3 leading-relaxed">
+            {/* Body — contact form or regular content */}
+            {page.contactForm ? (
+              <div>
+                {page.body.length > 0 && (
+                  <div className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 space-y-2 leading-relaxed mb-4">
+                    {page.body.map((line, i) => (
+                      <span key={i} className="block">{renderHTML(line)}</span>
+                    ))}
+                  </div>
+                )}
+                <InlineContactForm onSeeWork={pageCount > 1 ? onNextPage : undefined} />
+              </div>
+            ) : (
+            <div className={`${page.smallText ? "text-sm sm:text-base space-y-1.5" : "text-base sm:text-lg space-y-3"} text-zinc-600 dark:text-zinc-300 leading-relaxed`}>
               {page.body.map((line, i) => {
                 // Last line with links: render inline
                 if (
@@ -142,6 +157,7 @@ export default function CardWithCarousel({
                 );
               })}
             </div>
+            )}
           </div>
         ))}
       </div>
@@ -164,18 +180,23 @@ export default function CardWithCarousel({
           </button>
 
           {/* Page dots */}
-          <div className="flex gap-2">
+          <div className="flex gap-0">
             {card.pages.map((_, i) => (
               <button
                 key={i}
-                className={`rounded-full transition-all ${
-                  i === pageIndex
-                    ? "w-3 h-3 bg-red-600"
-                    : "w-2.5 h-2.5 bg-zinc-300 dark:bg-zinc-600 hover:bg-zinc-400 dark:hover:bg-zinc-500"
-                }`}
+                type="button"
+                className="p-2 flex items-center justify-center"
                 onClick={() => onSetPage(i)}
                 aria-label={`Page ${i + 1} of ${pageCount}`}
-              />
+              >
+                <span
+                  className={`block rounded-full transition-all ${
+                    i === pageIndex
+                      ? "w-3 h-3 bg-red-600"
+                      : "w-2.5 h-2.5 bg-zinc-300 dark:bg-zinc-600 hover:bg-zinc-400 dark:hover:bg-zinc-500"
+                  }`}
+                />
+              </button>
             ))}
           </div>
 
@@ -195,5 +216,96 @@ export default function CardWithCarousel({
         </div>
       )}
     </div>
+  );
+}
+
+function InlineContactForm({ onSeeWork }: { onSeeWork?: () => void }) {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    try {
+      const res = await sendContact({
+        send: "george@redbtn.io",
+        from: "noreply@redbtn.io",
+        name: fd.get("name"),
+        email: fd.get("email"),
+        message: fd.get("message"),
+        source: "redbtn.io",
+      });
+      if (res.ok) {
+        setStatus("sent");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "sent") {
+    return (
+      <div className="flex flex-col items-center gap-2 py-4 text-center">
+        <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M5 10l3.5 3.5L15 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+        <p className="text-sm text-zinc-600 dark:text-zinc-300 font-medium">Message sent. We&apos;ll be in touch.</p>
+        <button onClick={() => setStatus("idle")} className="text-xs text-red-600 hover:underline mt-1">Send another</button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+      <label htmlFor="contact-name" className="sr-only">Name</label>
+      <input
+        id="contact-name"
+        type="text"
+        name="name"
+        placeholder="Name"
+        required
+        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500"
+      />
+      <label htmlFor="contact-email" className="sr-only">Email</label>
+      <input
+        id="contact-email"
+        type="email"
+        name="email"
+        placeholder="Email"
+        required
+        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500"
+      />
+      <label htmlFor="contact-message" className="sr-only">Message</label>
+      <textarea
+        id="contact-message"
+        name="message"
+        placeholder="Message"
+        required
+        rows={3}
+        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500 resize-none"
+      />
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="bg-red-600 hover:bg-red-700 text-white font-medium py-2.5 px-5 rounded-lg transition-colors text-sm disabled:opacity-50"
+      >
+        {status === "sending" ? "Sending..." : status === "error" ? "Try again" : "Send message"}
+      </button>
+      {onSeeWork && (
+        <button
+          type="button"
+          onClick={onSeeWork}
+          className="text-xs text-zinc-400 hover:text-red-600 transition-colors mt-2 flex items-center gap-1 self-center"
+        >
+          See the work <span className="text-sm">→</span>
+        </button>
+      )}
+    </form>
   );
 }

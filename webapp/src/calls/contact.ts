@@ -1,5 +1,6 @@
 export type ContactPayload = {
   send: string;
+  from?: string;
   name: string | FormDataEntryValue | null;
   email: string | FormDataEntryValue | null;
   message: string | FormDataEntryValue | null;

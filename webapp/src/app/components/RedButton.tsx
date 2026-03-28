@@ -36,6 +36,7 @@ export default function RedButton({
   onHold,
   bounce = false,
   onCornerChange,
+  cornerDance = false,
 }: {
   onPress: () => void;
   minimized: boolean;
@@ -44,6 +45,8 @@ export default function RedButton({
   onHold?: () => void;
   bounce?: boolean;
   onCornerChange?: (corner: Corner) => void;
+  /** When true, Red jumps to all 4 corners before returning home */
+  cornerDance?: boolean;
 }) {
   const [corner, setCorner] = useState<Corner>("bottom-right");
   const [dragging, setDragging] = useState(false);
@@ -282,6 +285,34 @@ export default function RedButton({
   useEffect(() => {
     if (onCornerChange) onCornerChange(corner);
   }, [corner, onCornerChange]);
+
+  // Corner dance: jump to all corners then return home
+  const dancingRef = useRef(false);
+  useEffect(() => {
+    if (!cornerDance || !minimized || dancingRef.current) return;
+    dancingRef.current = true;
+
+    const home = corner;
+    const others: Corner[] = (
+      ["top-left", "top-right", "bottom-left", "bottom-right"] as Corner[]
+    ).filter((c) => c !== home);
+
+    // Shuffle for variety, then append home at the end
+    const sequence = [...others, home];
+    let i = 0;
+
+    const step = () => {
+      if (i < sequence.length) {
+        setCorner(sequence[i]);
+        i++;
+        setTimeout(step, 175);
+      } else {
+        dancingRef.current = false;
+      }
+    };
+
+    setTimeout(step, 100);
+  }, [cornerDance, minimized, corner]);
 
   // Compute style
   const btnSize = minimized ? 80 : 180;

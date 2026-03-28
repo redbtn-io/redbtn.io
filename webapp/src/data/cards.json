@@ -4,8 +4,14 @@
     "pages": [
       {
         "titleParts": [
-          { "text": "find your ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "red button", "className": "text-red-600 lowercase" }
+          {
+            "text": "find your ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "red button",
+            "className": "text-red-600 lowercase"
+          }
         ],
         "body": [
           "AI-powered tools, infrastructure, and automation for teams that build.",
@@ -27,8 +33,14 @@
     "pages": [
       {
         "titleParts": [
-          { "text": "say hi to ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "Red", "className": "text-red-600 lowercase" }
+          {
+            "text": "say hi to ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "Red",
+            "className": "text-red-600 lowercase"
+          }
         ],
         "body": [
           "<span class='text-red-600 font-semibold'>Red</span> is your universal AI assistant. Red lives on every redbtn app and controls the entire stack through conversation.",
@@ -44,8 +56,14 @@
     "pages": [
       {
         "titleParts": [
-          { "text": "build with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redbtn", "className": "text-red-600 lowercase" }
+          {
+            "text": "build with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redbtn",
+            "className": "text-red-600 lowercase"
+          }
         ],
         "body": [
           "The graph-based AI engine that powers Red and everything else. Config-driven graphs, nodes, and neurons — powered by <span class='text-red-600'>LangChain</span> and <span class='text-red-600'>LangGraph</span>.",
@@ -69,111 +87,18 @@
     ]
   },
   {
-    "key": "redsuite",
-    "pages": [
-      {
-        "titleParts": [
-          { "text": "work with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redSuite", "className": "text-red-600 lowercase" }
-        ],
-        "body": [
-          "Business productivity apps, each with <span class='text-red-600 font-semibold'>Red</span> built in. Documents, notes, meetings, signatures, contacts — all AI-native.",
-          "Every app connects to the redbtn graph engine. Red can help you inside each one — creating content, scheduling meetings, managing contacts, or drafting agreements.",
-          "<span class='font-semibold text-red-600'>Explore the suite.</span>"
-        ]
-      },
-      {
-        "titleParts": [
-          { "text": "create with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redDoc", "className": "text-red-600 lowercase" }
-        ],
-        "body": [
-          "A document and presentation builder with AI assistance. Create decks, reports, and proposals with Red guiding every step.",
-          "Rich editing, templates, export to PDF, and real-time collaboration. Red can draft, format, and refine your content on command.",
-          "<span class='font-semibold text-red-600'>Build documents smarter with redDoc.</span>"
-        ]
-      },
-      {
-        "titleParts": [
-          { "text": "capture with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redNote", "className": "text-red-600 lowercase" }
-        ],
-        "body": [
-          "Block-based collaborative notes. Organize ideas, meeting notes, and knowledge bases with a fast, flexible editor.",
-          "Drag and drop blocks. Nest pages. Share with your team. Red can summarize, expand, or restructure your notes instantly.",
-          "<span class='font-semibold text-red-600'>Take notes at <a href='https://note.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>note.redbtn.io</a>.</span>"
-        ],
-        "links": [
-          {
-            "link": "https://note.redbtn.io",
-            "label": "open redNote",
-            "icon": "external"
-          }
-        ]
-      },
-      {
-        "titleParts": [
-          { "text": "schedule with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redMeet", "className": "text-red-600 lowercase" }
-        ],
-        "body": [
-          "A fast, privacy-first calendar booking tool. Share your link, let people book, keep your schedule in sync.",
-          "No fuss. Red can manage your availability, suggest meeting times, and handle rescheduling.",
-          "<span class='font-semibold text-red-600'>Book meetings at <a href='https://meet.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>meet.redbtn.io</a>.</span>"
-        ],
-        "links": [
-          {
-            "link": "https://meet.redbtn.io",
-            "label": "open redMeet",
-            "icon": "external"
-          }
-        ]
-      },
-      {
-        "titleParts": [
-          { "text": "sign with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redSign", "className": "text-red-600 lowercase" }
-        ],
-        "body": [
-          "Secure, privacy-first e-signatures for contracts and agreements. Send, sign, and manage documents from anywhere.",
-          "Red can prepare documents, place signature fields, send reminders, and track completion status.",
-          "<span class='font-semibold text-red-600'>Sign documents at <a href='https://sign.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>sign.redbtn.io</a>.</span>"
-        ],
-        "links": [
-          {
-            "link": "https://sign.redbtn.io",
-            "label": "open redSign",
-            "icon": "external"
-          }
-        ]
-      },
-      {
-        "titleParts": [
-          { "text": "connect with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redBook", "className": "text-red-600 lowercase" }
-        ],
-        "body": [
-          "A simple CRM for managing contacts, automating outreach, and tracking relationships.",
-          "Red can draft emails, schedule follow-ups, segment contacts, and surface insights from your conversations.",
-          "<span class='font-semibold text-red-600'>Manage contacts at <a href='https://book.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>book.redbtn.io</a>.</span>"
-        ],
-        "links": [
-          {
-            "link": "https://book.redbtn.io",
-            "label": "open redBook",
-            "icon": "external"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "key": "infra",
     "pages": [
       {
         "titleParts": [
-          { "text": "deploy with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redRun", "className": "text-red-600 lowercase" }
+          {
+            "text": "deploy with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redRun",
+            "className": "text-red-600 lowercase"
+          }
         ],
         "body": [
           "A serverless FaaS platform. Deploy anything — apps, APIs, workers, cron jobs — from a Git repo or Docker image.",
@@ -196,8 +121,14 @@
       },
       {
         "titleParts": [
-          { "text": "manage with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redFleet", "className": "text-red-600 lowercase" }
+          {
+            "text": "manage with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redFleet",
+            "className": "text-red-600 lowercase"
+          }
         ],
         "body": [
           "Compute fleet management. Monitor, provision, and orchestrate your servers from a single dashboard.",
@@ -220,8 +151,14 @@
       },
       {
         "titleParts": [
-          { "text": "protect with ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "redAct", "className": "text-red-600 lowercase" }
+          {
+            "text": "protect with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redAct",
+            "className": "text-red-600 lowercase"
+          }
         ],
         "body": [
           "Document PII and PHI redaction powered by Microsoft Presidio. Upload documents, detect sensitive data, redact automatically.",
@@ -239,13 +176,171 @@
     ]
   },
   {
-    "key": "portfolio",
+    "key": "redsuite",
     "pages": [
       {
         "titleParts": [
-          { "text": "see the ", "className": "text-zinc-900 dark:text-zinc-100 lowercase" },
-          { "text": "work", "className": "text-red-600 lowercase" }
+          {
+            "text": "work with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redSuite",
+            "className": "text-red-600 lowercase"
+          }
         ],
+        "body": [
+          "Business productivity apps, each with <span class='text-red-600 font-semibold'>Red</span> built in. Documents, notes, meetings, signatures, contacts — all AI-native.",
+          "Every app connects to the redbtn graph engine. Red can help you inside each one — creating content, scheduling meetings, managing contacts, or drafting agreements.",
+          "<span class='font-semibold text-red-600'>Explore the suite.</span>"
+        ]
+      },
+      {
+        "titleParts": [
+          {
+            "text": "create with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redDoc",
+            "className": "text-red-600 lowercase"
+          }
+        ],
+        "body": [
+          "A document and presentation builder with AI assistance. Create decks, reports, and proposals with Red guiding every step.",
+          "Rich editing, templates, export to PDF, and real-time collaboration. Red can draft, format, and refine your content on command.",
+          "<span class='font-semibold text-red-600'>Build documents smarter with redDoc.</span>"
+        ]
+      },
+      {
+        "titleParts": [
+          {
+            "text": "capture with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redNote",
+            "className": "text-red-600 lowercase"
+          }
+        ],
+        "body": [
+          "Block-based collaborative notes. Organize ideas, meeting notes, and knowledge bases with a fast, flexible editor.",
+          "Drag and drop blocks. Nest pages. Share with your team. Red can summarize, expand, or restructure your notes instantly.",
+          "<span class='font-semibold text-red-600'>Take notes at <a href='https://note.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>note.redbtn.io</a>.</span>"
+        ],
+        "links": [
+          {
+            "link": "https://note.redbtn.io",
+            "label": "open redNote",
+            "icon": "external"
+          }
+        ]
+      },
+      {
+        "titleParts": [
+          {
+            "text": "schedule with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redMeet",
+            "className": "text-red-600 lowercase"
+          }
+        ],
+        "body": [
+          "A fast, privacy-first calendar booking tool. Share your link, let people book, keep your schedule in sync.",
+          "No fuss. Red can manage your availability, suggest meeting times, and handle rescheduling.",
+          "<span class='font-semibold text-red-600'>Book meetings at <a href='https://meet.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>meet.redbtn.io</a>.</span>"
+        ],
+        "links": [
+          {
+            "link": "https://meet.redbtn.io",
+            "label": "open redMeet",
+            "icon": "external"
+          }
+        ]
+      },
+      {
+        "titleParts": [
+          {
+            "text": "sign with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redSign",
+            "className": "text-red-600 lowercase"
+          }
+        ],
+        "body": [
+          "Secure, privacy-first e-signatures for contracts and agreements. Send, sign, and manage documents from anywhere.",
+          "Red can prepare documents, place signature fields, send reminders, and track completion status.",
+          "<span class='font-semibold text-red-600'>Sign documents at <a href='https://sign.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>sign.redbtn.io</a>.</span>"
+        ],
+        "links": [
+          {
+            "link": "https://sign.redbtn.io",
+            "label": "open redSign",
+            "icon": "external"
+          }
+        ]
+      },
+      {
+        "titleParts": [
+          {
+            "text": "connect with ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "redBook",
+            "className": "text-red-600 lowercase"
+          }
+        ],
+        "body": [
+          "A simple CRM for managing contacts, automating outreach, and tracking relationships.",
+          "Red can draft emails, schedule follow-ups, segment contacts, and surface insights from your conversations.",
+          "<span class='font-semibold text-red-600'>Manage contacts at <a href='https://book.redbtn.io' class='underline text-red-600' target='_blank' rel='noopener'>book.redbtn.io</a>.</span>"
+        ],
+        "links": [
+          {
+            "link": "https://book.redbtn.io",
+            "label": "open redBook",
+            "icon": "external"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "cta",
+    "pages": [
+      {
+        "titleParts": [
+          {
+            "text": "get in ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "touch",
+            "className": "text-red-600 lowercase"
+          }
+        ],
+        "body": [
+          "Have a project in mind or want to learn more? Whether it's AI automation, deployments, or a full product build — we can help."
+        ],
+        "contactForm": true
+      },
+      {
+        "titleParts": [
+          {
+            "text": "see the ",
+            "className": "text-zinc-900 dark:text-zinc-100 lowercase"
+          },
+          {
+            "text": "work",
+            "className": "text-red-600 lowercase"
+          }
+        ],
+        "smallText": true,
         "body": [
           "Apps and sites built for clients across finance, logistics, music, and design.",
           "<a href='https://eliteentri.es' class='underline text-red-600' target='_blank' rel='noopener'>Elite Entries</a> — Financial trading and strategy automation.",
