@@ -4,7 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 type Corner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
-function getNearestCorner(x: number, y: number, width: number, height: number): Corner {
+function getNearestCorner(
+  x: number,
+  y: number,
+  width: number,
+  height: number
+): Corner {
   const corners: [Corner, number, number][] = [
     ["top-left", 0, 0],
     ["top-right", width, 0],
@@ -31,8 +36,7 @@ export default function RedButton({
   onHold,
   bounce = false,
   onCornerChange,
-  onPositionChange,
-  style: externalStyle, // <-- add this
+  cornerDance = false,
 }: {
   onPress: () => void;
   minimized: boolean;
@@ -41,24 +45,29 @@ export default function RedButton({
   onHold?: () => void;
   bounce?: boolean;
   onCornerChange?: (corner: Corner) => void;
-  onPositionChange?: (pos: { x: number; y: number }) => void;
-  style?: React.CSSProperties; // <-- add this
+  /** When true, Red jumps to all 4 corners before returning home */
+  cornerDance?: boolean;
 }) {
   const [corner, setCorner] = useState<Corner>("bottom-right");
   const [dragging, setDragging] = useState(false);
-  const [dragPos, setDragPos] = useState<{ x: number; y: number } | null>(null);
-  const [justDropped, setJustDropped] = useState<{ x: number; y: number } | false>(false);
-  const [pointerDownPos, setPointerDownPos] = useState<{ x: number; y: number } | null>(null);
+  const [dragPos, setDragPos] = useState<{ x: number; y: number } | null>(
+    null
+  );
+  const [justDropped, setJustDropped] = useState<
+    { x: number; y: number } | false
+  >(false);
+  const [pointerDownPos, setPointerDownPos] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
   const holdTimeout = useRef<NodeJS.Timeout | null>(null);
   const holdFired = useRef(false);
   const btnRef = useRef<HTMLDivElement>(null);
-  const pressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Drag logic
   useEffect(() => {
     if (!pointerDownPos) return;
 
-    // Hold detection
     holdFired.current = false;
     if (onHold && minimized) {
       holdTimeout.current = setTimeout(() => {
@@ -70,7 +79,8 @@ export default function RedButton({
     }
 
     const onMove = (e: MouseEvent | TouchEvent) => {
-      let x = 0, y = 0;
+      let x = 0,
+        y = 0;
       if ("touches" in e && e.touches.length > 0) {
         e.preventDefault();
         x = e.touches[0].clientX;
@@ -84,7 +94,6 @@ export default function RedButton({
         const dy = y - pointerDownPos.y;
         if (Math.sqrt(dx * dx + dy * dy) > 8) {
           setDragging(true);
-          // Cancel hold if drag starts
           if (holdTimeout.current) {
             clearTimeout(holdTimeout.current);
             holdTimeout.current = null;
@@ -103,7 +112,8 @@ export default function RedButton({
         holdTimeout.current = null;
       }
 
-      let x = 0, y = 0;
+      let x = 0,
+        y = 0;
       if ("changedTouches" in e && e.changedTouches.length > 0) {
         x = e.changedTouches[0].clientX;
         y = e.changedTouches[0].clientY;
@@ -117,7 +127,12 @@ export default function RedButton({
         setDragPos(null);
         setJustDropped({ x, y });
         setTimeout(() => {
-          const nearest = getNearestCorner(x, y, window.innerWidth, window.innerHeight);
+          const nearest = getNearestCorner(
+            x,
+            y,
+            window.innerWidth,
+            window.innerHeight
+          );
           setCorner(nearest);
           setJustDropped(false);
         }, 10);
@@ -131,9 +146,7 @@ export default function RedButton({
     window.addEventListener("touchmove", onMove, { passive: false });
     window.addEventListener("touchend", onUp);
 
-    // Fix: copy ref values for cleanup
     const holdTimeoutCurrent = holdTimeout.current;
-    const pressTimeoutCurrent = pressTimeoutRef.current;
 
     return () => {
       window.removeEventListener("mousemove", onMove);
@@ -141,15 +154,15 @@ export default function RedButton({
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("touchend", onUp);
       if (holdTimeoutCurrent) clearTimeout(holdTimeoutCurrent);
-      if (pressTimeoutCurrent) clearTimeout(pressTimeoutCurrent);
     };
-  }, [pointerDownPos, dragging, minimized, onPress, setMinimized, onDouble, onHold]);
+  }, [pointerDownPos, dragging, minimized, onHold]);
 
-  // Cancel hold if pointer moves too much
+  // Cancel hold on large movement
   useEffect(() => {
     if (!pointerDownPos) return;
     const onMove = (e: MouseEvent | TouchEvent) => {
-      let x = 0, y = 0;
+      let x = 0,
+        y = 0;
       if ("touches" in e && e.touches.length > 0) {
         x = e.touches[0].clientX;
         y = e.touches[0].clientY;
@@ -175,13 +188,12 @@ export default function RedButton({
     };
   }, [pointerDownPos]);
 
-  // PointerEvents for tap/double/hold (only if not dragging)
+  // Tap / double-tap / hold detection
   useEffect(() => {
     const btn = btnRef.current;
     if (!btn) return;
 
-    // Use refs so state persists across renders
-    const pointerDownPos = { current: null as { x: number; y: number } | null };
+    const localPointerDownPos = { current: null as { x: number; y: number } | null };
     const holdTimeoutLocal = { current: null as NodeJS.Timeout | null };
     const lastTapTime = { current: 0 };
     const tapTimeout = { current: null as NodeJS.Timeout | null };
@@ -196,10 +208,9 @@ export default function RedButton({
 
     const onPointerDown = (e: PointerEvent) => {
       if (dragging) return;
-      pointerDownPos.current = { x: e.clientX, y: e.clientY };
+      localPointerDownPos.current = { x: e.clientX, y: e.clientY };
       doubleTapLock.current = false;
 
-      // Hold detection
       if (onHold && minimized) {
         holdTimeoutLocal.current = setTimeout(() => {
           if (!dragging && !holdFired.current) {
@@ -216,14 +227,21 @@ export default function RedButton({
 
       const x = e.clientX;
       const y = e.clientY;
-      const dist = pointerDownPos.current
-        ? Math.hypot(x - pointerDownPos.current.x, y - pointerDownPos.current.y)
+      const dist = localPointerDownPos.current
+        ? Math.hypot(
+            x - localPointerDownPos.current.x,
+            y - localPointerDownPos.current.y
+          )
         : 0;
 
       if (dist < 8 && !holdFired.current) {
         const now = Date.now();
         if (minimized && onDouble) {
-          if (lastTapTime.current && now - lastTapTime.current < 350 && !doubleTapLock.current) {
+          if (
+            lastTapTime.current &&
+            now - lastTapTime.current < 350 &&
+            !doubleTapLock.current
+          ) {
             doubleTapLock.current = true;
             if (tapTimeout.current) {
               clearTimeout(tapTimeout.current);
@@ -248,7 +266,7 @@ export default function RedButton({
           setMinimized(true);
         }
       }
-      pointerDownPos.current = null;
+      localPointerDownPos.current = null;
       holdFired.current = false;
     };
 
@@ -263,59 +281,84 @@ export default function RedButton({
     };
   }, [dragging, minimized, onPress, setMinimized, onDouble, onHold]);
 
-  // Corner change effect
+  // Notify parent of corner changes
   useEffect(() => {
     if (onCornerChange) onCornerChange(corner);
   }, [corner, onCornerChange]);
 
-  // Report position to parent
+  // Corner dance: jump to all corners then return home
+  const dancingRef = useRef(false);
   useEffect(() => {
-    if (!btnRef.current || !onPositionChange) return;
-    const rect = btnRef.current.getBoundingClientRect();
-    onPositionChange({
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2,
-    });
-  }, [corner, minimized, dragging, dragPos, justDropped, onPositionChange]);
+    if (!cornerDance || !minimized || dancingRef.current) return;
+    dancingRef.current = true;
 
-  // Positioning
+    const home = corner;
+    const others: Corner[] = (
+      ["top-left", "top-right", "bottom-left", "bottom-right"] as Corner[]
+    ).filter((c) => c !== home);
+
+    // Shuffle for variety, then append home at the end
+    const sequence = [...others, home];
+    let i = 0;
+
+    const step = () => {
+      if (i < sequence.length) {
+        setCorner(sequence[i]);
+        i++;
+        setTimeout(step, 175);
+      } else {
+        dancingRef.current = false;
+      }
+    };
+
+    setTimeout(step, 100);
+  }, [cornerDance, minimized, corner]);
+
+  // Compute style
+  const btnSize = minimized ? 80 : 180;
   const style: React.CSSProperties = {
     position: "fixed",
     zIndex: minimized ? 20 : 15,
     pointerEvents: dragging ? "none" : "auto",
-    width: minimized ? 100 : 180,
-    height: minimized ? 100 : 180,
-    transition: "left 0.5s cubic-bezier(.4,2,.6,1), top 0.5s cubic-bezier(.4,2,.6,1)",
-    ...externalStyle, // <-- merge external style last
+    width: btnSize,
+    height: btnSize,
+    transition:
+      "left 0.5s cubic-bezier(.4,2,.6,1), top 0.5s cubic-bezier(.4,2,.6,1), width 0.4s ease, height 0.4s ease",
   };
 
   if (dragging && dragPos && minimized) {
     style.left = dragPos.x - 40;
     style.top = dragPos.y - 40;
     style.transition = "none";
-  } else if (justDropped && minimized && typeof justDropped === "object") {
+  } else if (
+    justDropped &&
+    minimized &&
+    typeof justDropped === "object"
+  ) {
     style.left = justDropped.x - 40;
     style.top = justDropped.y - 40;
     style.transition = "none";
   } else if (minimized) {
-    const isMd = typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches;
+    const isMd =
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 768px)").matches;
     const margin = isMd ? 24 : 12;
     switch (corner) {
       case "top-left":
         style.left = margin;
-        style.top = margin*3;
+        style.top = margin * 3;
         break;
       case "top-right":
-        style.left = window.innerWidth - margin - 100;
-        style.top = margin*3;
+        style.left = window.innerWidth - margin - btnSize;
+        style.top = margin * 3;
         break;
       case "bottom-left":
         style.left = margin;
-        style.top = window.innerHeight - margin - 100;
+        style.top = window.innerHeight - margin - btnSize;
         break;
       case "bottom-right":
-        style.left = window.innerWidth - margin - 100;
-        style.top = window.innerHeight - margin - 100;
+        style.left = window.innerWidth - margin - btnSize;
+        style.top = window.innerHeight - margin - btnSize;
         break;
     }
   } else {
@@ -329,14 +372,14 @@ export default function RedButton({
     <div
       ref={btnRef}
       style={style}
-      className={`redbtn-shadow cursor-pointer ${dragging ? "dragging" : ""} select-none${bounce ? " animate-bounce-short" : ""}`}
+      className={`redbtn-shadow cursor-pointer select-none ${
+        dragging ? "dragging" : ""
+      }${bounce ? " animate-bounce-short" : ""}`}
       tabIndex={0}
-      aria-label="Press the red button"
-      onPointerDown={e => {
-        // Only left mouse/touch/pen
+      aria-label="Red button"
+      onPointerDown={(e) => {
         if (e.button !== undefined && e.button !== 0) return;
         setPointerDownPos({ x: e.clientX, y: e.clientY });
-        // For mobile Safari, ensure focus
         (e.target as HTMLElement).focus?.();
       }}
     >
@@ -346,7 +389,7 @@ export default function RedButton({
           alt="Red Button"
           width={minimized ? 80 : 180}
           height={minimized ? 80 : 180}
-          className="rounded-full select-none pointer-events-none redbtn-pulse "
+          className="rounded-full select-none pointer-events-none redbtn-pulse"
           draggable={false}
           priority
         />
