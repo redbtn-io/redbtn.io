@@ -185,7 +185,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative h-screen bg-background overflow-hidden">
+    <main className="relative h-screen bg-background overflow-hidden max-w-[1024px] mx-auto">
       <h1 className="sr-only">redbtn — AI-powered tools, infrastructure, and automation</h1>
 
       {/* Hidden SEO content — static HTML for crawlers that don't execute JS */}

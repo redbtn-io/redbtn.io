@@ -246,7 +246,7 @@ export default function Conversation({
               <input
                 ref={inputRef}
                 type="text"
-                className="flex-1 bg-transparent text-sm focus:outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                className="flex-1 bg-transparent text-base focus:outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
                 placeholder="Talk to Red..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
