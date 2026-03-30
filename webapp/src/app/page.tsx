@@ -273,40 +273,44 @@ export default function Home() {
 
       {/* Card position indicator */}
       {minimized && !chatOpen && (
-        <div className="fixed right-4 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-2">
-          {cardsData.map((_: CardData, idx: number) => (
-            <button
-              key={idx}
-              onClick={() => setCardIndex(idx)}
-              className={`card-indicator rounded-full transition-all ${
-                idx === cardIndex
-                  ? "w-2.5 h-2.5 bg-red-600"
-                  : "w-2 h-2 bg-zinc-400/50 dark:bg-zinc-600/50 hover:bg-zinc-400 dark:hover:bg-zinc-500"
-              }`}
-              aria-label={`Go to card ${idx + 1}`}
-            />
-          ))}
+        <div className="fixed inset-0 z-10 pointer-events-none max-w-[1024px] mx-auto">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 pointer-events-auto">
+            {cardsData.map((_: CardData, idx: number) => (
+              <button
+                key={idx}
+                onClick={() => setCardIndex(idx)}
+                className={`card-indicator rounded-full transition-all ${
+                  idx === cardIndex
+                    ? "w-2.5 h-2.5 bg-red-600"
+                    : "w-2 h-2 bg-zinc-400/50 dark:bg-zinc-600/50 hover:bg-zinc-400 dark:hover:bg-zinc-500"
+                }`}
+                aria-label={`Go to card ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       )}
 
       {/* Scroll hint on first card */}
       {minimized && cardIndex === 0 && !chatOpen && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-10 animate-scroll-hint">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="text-zinc-400 dark:text-zinc-500"
-          >
-            <path
-              d="M12 5v14m0 0l-6-6m6 6l6-6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+        <div className="fixed inset-0 z-10 pointer-events-none max-w-[1024px] mx-auto">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-scroll-hint">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="text-zinc-400 dark:text-zinc-500"
+            >
+              <path
+                d="M12 5v14m0 0l-6-6m6 6l6-6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </div>
       )}
     </main>
