@@ -49,6 +49,7 @@ export default function RedButton({
   cornerDance?: boolean;
 }) {
   const [corner, setCorner] = useState<Corner>("bottom-right");
+  const [imgLoaded, setImgLoaded] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [dragPos, setDragPos] = useState<{ x: number; y: number } | null>(
     null
@@ -400,9 +401,10 @@ export default function RedButton({
           alt="Red Button"
           width={minimized ? 80 : 180}
           height={minimized ? 80 : 180}
-          className="rounded-full select-none pointer-events-none redbtn-pulse"
+          className={`rounded-full select-none pointer-events-none transition-opacity duration-300 ${imgLoaded ? "opacity-100 redbtn-pulse" : "opacity-0"}`}
           draggable={false}
           priority
+          onLoad={() => setImgLoaded(true)}
         />
       </div>
     </div>
