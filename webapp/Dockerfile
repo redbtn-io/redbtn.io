@@ -27,6 +27,10 @@ RUN npm run build
 FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
+# Bind the Next.js standalone server to all interfaces. Without this it
+# resolves the container hostname to a loopback-only address (e.g.
+# 127.0.1.1) and the reverse proxy on the host IP gets a 502.
+ENV HOSTNAME=0.0.0.0
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/public ./public
