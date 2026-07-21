@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function LoadingWheel({ size = 40, color = "#dc2626" }: { size?: number; color?: string }) {
+export default function LoadingWheel({ size = 40, color = "var(--accent)" }: { size?: number; color?: string }) {
   return (
     <svg
       className="animate-spin"

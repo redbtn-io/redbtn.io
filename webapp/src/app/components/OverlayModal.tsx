@@ -27,11 +27,11 @@ export default function OverlayModal({
         onClick={closeable ? onClose : undefined}
       />
       {/* Modal box */}
-      <div className="relative z-15 bg-white dark:bg-zinc-900 rounded-xl shadow-2xl p-6 max-w-lg w-full mx-4 flex flex-col items-end">
+      <div className="relative z-15 bg-bg-elevated rounded-xl shadow-2xl p-6 max-w-lg w-full mx-4 flex flex-col items-end">
         {closeable && (
           <button
             aria-label="Close"
-            className="absolute top-3 right-3 text-2xl text-zinc-500 hover:text-red-600 font-bold focus:outline-none cursor-pointer"
+            className="absolute top-3 right-3 text-2xl text-text-muted hover:text-accent font-bold focus:outline-none cursor-pointer"
             onClick={onClose}
             tabIndex={0}
           >
