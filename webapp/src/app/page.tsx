@@ -185,7 +185,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative h-screen bg-background overflow-hidden">
+    <main className="relative h-screen bg-background overflow-hidden max-w-[1024px] mx-auto">
       <h1 className="sr-only">redbtn — AI-powered tools, infrastructure, and automation</h1>
 
       {/* Hidden SEO content — static HTML for crawlers that don't execute JS */}
@@ -251,7 +251,7 @@ export default function Home() {
               data-card-index={idx}
             >
               <div className="card-content w-full flex items-center justify-center px-4">
-                <div className="relative bg-white/80 dark:bg-zinc-900/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 sm:p-8 md:p-10 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl border border-zinc-200/60 dark:border-zinc-800/60">
+                <div className="relative bg-bg-elevated/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 sm:p-8 md:p-10 w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl border border-border/60">
                   <CardWithCarousel
                     card={card}
                     cardIcons={cardIcons}
@@ -273,40 +273,44 @@ export default function Home() {
 
       {/* Card position indicator */}
       {minimized && !chatOpen && (
-        <div className="fixed right-4 top-1/2 -translate-y-1/2 z-10 flex flex-col gap-2">
-          {cardsData.map((_: CardData, idx: number) => (
-            <button
-              key={idx}
-              onClick={() => setCardIndex(idx)}
-              className={`card-indicator rounded-full transition-all ${
-                idx === cardIndex
-                  ? "w-2.5 h-2.5 bg-red-600"
-                  : "w-2 h-2 bg-zinc-400/50 dark:bg-zinc-600/50 hover:bg-zinc-400 dark:hover:bg-zinc-500"
-              }`}
-              aria-label={`Go to card ${idx + 1}`}
-            />
-          ))}
+        <div className="fixed inset-0 z-10 pointer-events-none max-w-[1024px] mx-auto">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2 pointer-events-auto">
+            {cardsData.map((_: CardData, idx: number) => (
+              <button
+                key={idx}
+                onClick={() => setCardIndex(idx)}
+                className={`card-indicator rounded-full transition-all ${
+                  idx === cardIndex
+                    ? "w-2.5 h-2.5 bg-accent"
+                    : "w-2 h-2 bg-text-disabled/50 hover:bg-text-muted"
+                }`}
+                aria-label={`Go to card ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       )}
 
       {/* Scroll hint on first card */}
       {minimized && cardIndex === 0 && !chatOpen && (
-        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-10 animate-scroll-hint">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="text-zinc-400 dark:text-zinc-500"
-          >
-            <path
-              d="M12 5v14m0 0l-6-6m6 6l6-6"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+        <div className="fixed inset-0 z-10 pointer-events-none max-w-[1024px] mx-auto">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-scroll-hint">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="text-text-muted"
+            >
+              <path
+                d="M12 5v14m0 0l-6-6m6 6l6-6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </div>
       )}
     </main>

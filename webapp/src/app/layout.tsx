@@ -69,8 +69,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(() => {
+              const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+              document.documentElement.classList.toggle("light", !prefersDark);
+            })();`,
+          }}
+        />
         <link rel="canonical" href="https://redbtn.io/" />
         <script
           type="application/ld+json"

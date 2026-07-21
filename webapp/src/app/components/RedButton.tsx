@@ -49,6 +49,7 @@ export default function RedButton({
   cornerDance?: boolean;
 }) {
   const [corner, setCorner] = useState<Corner>("bottom-right");
+  const [imgLoaded, setImgLoaded] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [dragPos, setDragPos] = useState<{ x: number; y: number } | null>(
     null
@@ -314,6 +315,16 @@ export default function RedButton({
     setTimeout(step, 100);
   }, [cornerDance, minimized, corner]);
 
+  // Compute container bounds (respects max-width constraint)
+  const getContainerBounds = () => {
+    if (typeof window === "undefined") return { left: 0, right: 1024, width: 1024 };
+    const maxW = 1024;
+    const vw = window.innerWidth;
+    const containerWidth = Math.min(vw, maxW);
+    const containerLeft = (vw - containerWidth) / 2;
+    return { left: containerLeft, right: containerLeft + containerWidth, width: containerWidth };
+  };
+
   // Compute style
   const btnSize = minimized ? 80 : 180;
   const style: React.CSSProperties = {
@@ -343,21 +354,22 @@ export default function RedButton({
       typeof window !== "undefined" &&
       window.matchMedia("(min-width: 768px)").matches;
     const margin = isMd ? 24 : 12;
+    const bounds = getContainerBounds();
     switch (corner) {
       case "top-left":
-        style.left = margin;
+        style.left = bounds.left + margin;
         style.top = margin * 3;
         break;
       case "top-right":
-        style.left = window.innerWidth - margin - btnSize;
+        style.left = bounds.right - margin - btnSize;
         style.top = margin * 3;
         break;
       case "bottom-left":
-        style.left = margin;
+        style.left = bounds.left + margin;
         style.top = window.innerHeight - margin - btnSize;
         break;
       case "bottom-right":
-        style.left = window.innerWidth - margin - btnSize;
+        style.left = bounds.right - margin - btnSize;
         style.top = window.innerHeight - margin - btnSize;
         break;
     }
@@ -389,9 +401,10 @@ export default function RedButton({
           alt="Red Button"
           width={minimized ? 80 : 180}
           height={minimized ? 80 : 180}
-          className="rounded-full select-none pointer-events-none redbtn-pulse"
+          className={`rounded-full select-none pointer-events-none transition-opacity duration-300 ${imgLoaded ? "opacity-100 redbtn-pulse" : "opacity-0"}`}
           draggable={false}
           priority
+          onLoad={() => setImgLoaded(true)}
         />
       </div>
     </div>

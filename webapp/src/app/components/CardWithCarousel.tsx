@@ -110,7 +110,7 @@ export default function CardWithCarousel({
             {page.contactForm ? (
               <div>
                 {page.body.length > 0 && (
-                  <div className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 space-y-2 leading-relaxed mb-4">
+                  <div className="text-sm sm:text-base text-text-secondary space-y-2 leading-relaxed mb-4">
                     {page.body.map((line, i) => (
                       <span key={i} className="block">{renderHTML(line)}</span>
                     ))}
@@ -119,7 +119,7 @@ export default function CardWithCarousel({
                 <InlineContactForm onSeeWork={pageCount > 1 ? onNextPage : undefined} />
               </div>
             ) : (
-            <div className={`${page.smallText ? "text-sm sm:text-base space-y-1.5" : "text-base sm:text-lg space-y-3"} text-zinc-600 dark:text-zinc-300 leading-relaxed`}>
+            <div className={`${page.smallText ? "text-sm sm:text-base space-y-1.5" : "text-base sm:text-lg space-y-3"} text-text-secondary leading-relaxed`}>
               {page.body.map((line, i) => {
                 // Last line with links: render inline
                 if (
@@ -140,7 +140,7 @@ export default function CardWithCarousel({
                             href={l.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-zinc-400 hover:text-red-600 dark:hover:text-zinc-100 transition-colors"
+                            className="text-text-muted hover:text-accent transition-colors"
                             aria-label={l.label || "Link"}
                           >
                             {cardIcons[l.icon] || cardIcons.external}
@@ -164,15 +164,15 @@ export default function CardWithCarousel({
 
       {/* Carousel controls (multi-page cards only) */}
       {pageCount > 1 && (
-        <div className="flex items-center justify-between mt-6 pt-4 border-t border-zinc-200/50 dark:border-zinc-700/50">
+        <div className="flex items-center justify-between mt-6 pt-4 border-t border-border/50">
           <button
             type="button"
             onClick={onPrevPage}
             disabled={pageIndex === 0}
             className={`transition-colors ${
               pageIndex === 0
-                ? "text-zinc-300 dark:text-zinc-700 cursor-default"
-                : "text-zinc-400 hover:text-red-600 dark:hover:text-zinc-100"
+                ? "text-text-disabled cursor-default"
+                : "text-text-muted hover:text-accent"
             }`}
             aria-label="Previous page"
           >
@@ -192,8 +192,8 @@ export default function CardWithCarousel({
                 <span
                   className={`block rounded-full transition-all ${
                     i === pageIndex
-                      ? "w-3 h-3 bg-red-600"
-                      : "w-2.5 h-2.5 bg-zinc-300 dark:bg-zinc-600 hover:bg-zinc-400 dark:hover:bg-zinc-500"
+                      ? "w-3 h-3 bg-accent"
+                      : "w-2.5 h-2.5 bg-text-disabled hover:bg-text-muted"
                   }`}
                 />
               </button>
@@ -206,8 +206,8 @@ export default function CardWithCarousel({
             disabled={pageIndex === pageCount - 1}
             className={`transition-colors ${
               pageIndex === pageCount - 1
-                ? "text-zinc-300 dark:text-zinc-700 cursor-default"
-                : "text-zinc-400 hover:text-red-600 dark:hover:text-zinc-100"
+                ? "text-text-disabled cursor-default"
+                : "text-text-muted hover:text-accent"
             }`}
             aria-label="Next page"
           >
@@ -250,13 +250,13 @@ function InlineContactForm({ onSeeWork }: { onSeeWork?: () => void }) {
   if (status === "sent") {
     return (
       <div className="flex flex-col items-center gap-2 py-4 text-center">
-        <div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M5 10l3.5 3.5L15 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M5 10l3.5 3.5L15 7" stroke="var(--accent-foreground)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
-        <p className="text-sm text-zinc-600 dark:text-zinc-300 font-medium">Message sent. We&apos;ll be in touch.</p>
-        <button onClick={() => setStatus("idle")} className="text-xs text-red-600 hover:underline mt-1">Send another</button>
+        <p className="text-sm text-text-secondary font-medium">Message sent. We&apos;ll be in touch.</p>
+        <button onClick={() => setStatus("idle")} className="text-xs text-accent-text hover:underline mt-1">Send another</button>
       </div>
     );
   }
@@ -270,7 +270,7 @@ function InlineContactForm({ onSeeWork }: { onSeeWork?: () => void }) {
         name="name"
         placeholder="Name"
         required
-        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500"
+        className="p-2.5 rounded-lg border border-border bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent"
       />
       <label htmlFor="contact-email" className="sr-only">Email</label>
       <input
@@ -279,7 +279,7 @@ function InlineContactForm({ onSeeWork }: { onSeeWork?: () => void }) {
         name="email"
         placeholder="Email"
         required
-        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500"
+        className="p-2.5 rounded-lg border border-border bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent"
       />
       <label htmlFor="contact-message" className="sr-only">Message</label>
       <textarea
@@ -288,12 +288,12 @@ function InlineContactForm({ onSeeWork }: { onSeeWork?: () => void }) {
         placeholder="Message"
         required
         rows={3}
-        className="p-2.5 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-red-500/40 focus:border-red-500 resize-none"
+        className="p-2.5 rounded-lg border border-border bg-transparent text-sm focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent resize-none"
       />
       <button
         type="submit"
         disabled={status === "sending"}
-        className="bg-red-600 hover:bg-red-700 text-white font-medium py-2.5 px-5 rounded-lg transition-colors text-sm disabled:opacity-50"
+        className="bg-accent hover:bg-accent-hover text-accent-foreground font-medium py-2.5 px-5 rounded-lg transition-colors text-sm disabled:opacity-50"
       >
         {status === "sending" ? "Sending..." : status === "error" ? "Try again" : "Send message"}
       </button>
@@ -301,7 +301,7 @@ function InlineContactForm({ onSeeWork }: { onSeeWork?: () => void }) {
         <button
           type="button"
           onClick={onSeeWork}
-          className="text-xs text-zinc-400 hover:text-red-600 transition-colors mt-2 flex items-center gap-1 self-center"
+          className="text-xs text-text-muted hover:text-accent transition-colors mt-2 flex items-center gap-1 self-center"
         >
           See the work <span className="text-sm">→</span>
         </button>
