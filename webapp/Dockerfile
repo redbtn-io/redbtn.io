@@ -4,17 +4,12 @@
 FROM node:22-alpine AS deps
 WORKDIR /app
 
-# Token for the private @redbtn npm registry, injected at build time as a
-# build-arg (never committed). RedRun passes appConfig.env values as
-# --build-arg, so set REDBTN_NPM_TOKEN in the workspace env.
-ARG REDBTN_NPM_TOKEN=""
-
 COPY package*.json ./
-RUN if [ -n "$REDBTN_NPM_TOKEN" ]; then \
-      printf '@redbtn:registry=https://registry.redbtn.io/\n//registry.redbtn.io/:_authToken=%s\n' "$REDBTN_NPM_TOKEN" > .npmrc; \
-    fi && \
-    npm ci && \
-    rm -f .npmrc
+# .npmrc is mounted as a BuildKit secret from the global NPMRC redsecret so
+# npm ci can authenticate to registry.redbtn.io for @redbtn packages. Never
+# baked into a layer; not readable after this RUN completes.
+RUN --mount=type=secret,id=npmrc,target=/app/.npmrc \
+    npm ci
 
 # ---- builder: compile the Next.js app (standalone output) ----
 FROM node:22-alpine AS builder
