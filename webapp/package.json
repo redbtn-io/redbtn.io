@@ -6,10 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "tsc --noEmit"
   },
   "dependencies": {
     "@redbtn/red": "^0.1.0",
+    "@redbtn/redstyle": "^0.6.1",
     "next": "^15.5.14",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

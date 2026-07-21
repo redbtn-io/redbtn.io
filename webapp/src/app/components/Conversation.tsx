@@ -146,7 +146,7 @@ export default function Conversation({
         }`}
       >
         <div
-          className="pointer-events-auto relative bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl w-full max-w-lg mx-4 flex flex-col h-[65vh] max-h-[560px] border border-zinc-200/40 dark:border-zinc-800/40 overflow-hidden"
+          className="pointer-events-auto relative bg-bg-elevated rounded-3xl shadow-2xl w-full max-w-lg mx-4 flex flex-col h-[65vh] max-h-[560px] border border-border/40 overflow-hidden"
           role="dialog"
           aria-modal="true"
           aria-label="Chat with Red"
@@ -155,12 +155,12 @@ export default function Conversation({
           <div className="flex items-center justify-between px-5 py-3.5">
             <div className="flex items-center gap-2.5">
               <div
-                className={`w-2.5 h-2.5 rounded-full bg-red-600 ${isStreaming ? "animate-pulse" : ""}`}
+                className={`w-2.5 h-2.5 rounded-full bg-accent ${isStreaming ? "animate-pulse" : ""}`}
               />
               <span className="font-semibold text-sm tracking-tight">
-                <span className="text-red-600">Red</span>
+                <span className="text-accent-text">Red</span>
                 {isStreaming && (
-                  <span className="text-zinc-400 dark:text-zinc-500 ml-1.5 font-normal text-xs">
+                  <span className="text-text-muted ml-1.5 font-normal text-xs">
                     thinking...
                   </span>
                 )}
@@ -173,7 +173,7 @@ export default function Conversation({
                     clear();
                     localStorage.removeItem(STORAGE_KEY);
                   }}
-                  className="text-zinc-400 hover:text-red-600 transition-colors text-[11px] px-2 py-1 rounded-full border border-zinc-200/50 dark:border-zinc-700/50 hover:border-red-600/30"
+                  className="text-text-muted hover:text-accent transition-colors text-[11px] px-2 py-1 rounded-full border border-border/50 hover:border-accent/30"
                   aria-label="Clear conversation"
                 >
                   Clear
@@ -181,7 +181,7 @@ export default function Conversation({
               )}
               <button
                 onClick={onClose}
-                className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 transition-colors p-1 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                className="text-text-muted hover:text-text-secondary transition-colors p-1 rounded-full hover:bg-bg-hover"
                 aria-label="Close chat"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -195,12 +195,12 @@ export default function Conversation({
           <div className="flex-1 overflow-y-auto px-5 py-3 space-y-4 scroll-smooth">
             {messages.length === 0 && (
               <div className="flex flex-col items-center justify-center h-full gap-4 text-center px-6">
-                <div className="w-10 h-10 rounded-full bg-red-600 shadow-lg shadow-red-600/20" />
+                <div className="w-10 h-10 rounded-full bg-accent shadow-lg shadow-accent/20" />
                 <div>
-                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                    Hi, I&apos;m <span className="text-red-600">Red</span>
+                  <p className="text-sm font-medium text-text-primary">
+                    Hi, I&apos;m <span className="text-accent-text">Red</span>
                   </p>
-                  <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1">
+                  <p className="text-xs text-text-muted mt-1">
                     Ask me anything about redbtn
                   </p>
                 </div>
@@ -217,14 +217,14 @@ export default function Conversation({
                   <div
                     className={`px-4 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap ${
                       msg.role === "user"
-                        ? "bg-red-600 text-white rounded-2xl rounded-br-sm"
-                        : "bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 rounded-2xl rounded-bl-sm"
+                        ? "bg-accent text-accent-foreground rounded-2xl rounded-br-sm"
+                        : "bg-bg-secondary/80 text-text-secondary rounded-2xl rounded-bl-sm"
                     }`}
                   >
                     {msg.content ||
                       (msg.isStreaming ? (
                         <span className="inline-flex items-center gap-1.5 py-0.5">
-                          <svg className="animate-spin h-3.5 w-3.5 text-red-500" viewBox="0 0 24 24" fill="none">
+                          <svg className="animate-spin h-3.5 w-3.5 text-accent" viewBox="0 0 24 24" fill="none">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                           </svg>
@@ -242,11 +242,11 @@ export default function Conversation({
             onSubmit={handleSend}
             className="flex items-center gap-2 px-4 py-3"
           >
-            <div className="flex-1 flex items-center gap-2 bg-zinc-50 dark:bg-zinc-800/60 rounded-full border border-zinc-200/60 dark:border-zinc-700/40 px-4 py-2 focus-within:ring-2 focus-within:ring-red-500/30 focus-within:border-red-500/50 transition-all">
+            <div className="flex-1 flex items-center gap-2 bg-bg-secondary/60 rounded-full border border-border/60 px-4 py-2 focus-within:ring-2 focus-within:ring-accent/30 focus-within:border-accent/50 transition-all">
               <input
                 ref={inputRef}
                 type="text"
-                className="flex-1 bg-transparent text-base focus:outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
+                className="flex-1 bg-transparent text-base focus:outline-none placeholder:text-text-muted"
                 placeholder="Talk to Red..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -255,7 +255,7 @@ export default function Conversation({
               />
               <button
                 type="submit"
-                className="text-red-600 hover:text-red-700 disabled:text-zinc-300 dark:disabled:text-zinc-600 transition-colors flex-shrink-0"
+                className="text-accent-text hover:text-accent-hover disabled:text-text-disabled transition-colors flex-shrink-0"
                 disabled={!input.trim() || isStreaming}
                 aria-label="Send"
               >
