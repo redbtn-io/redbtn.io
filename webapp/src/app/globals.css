@@ -46,18 +46,19 @@ button {
 }
 
 .redbtn-pulse {
+  --redbtn-pulse-ring: color-mix(in srgb, var(--accent) 45%, transparent);
   animation: redbtn-pulse 1.6s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 @keyframes redbtn-pulse {
   0% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+    box-shadow: 0 0 0 0 var(--redbtn-pulse-ring);
   }
   70% {
-    box-shadow: 0 0 0 20px color-mix(in srgb, var(--accent) 0%, transparent);
+    box-shadow: 0 0 0 20px transparent;
   }
   100% {
-    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent);
+    box-shadow: 0 0 0 0 transparent;
   }
 }
 
