@@ -195,3 +195,10 @@ button {
 .card-indicator {
   transition: all 0.3s ease;
 }
+
+/* ---- /apps launcher: scroll normally (the title screen stays locked) ---- */
+html:has(.apps-route),
+html:has(.apps-route) body {
+  overflow: auto;
+  height: auto;
+}
