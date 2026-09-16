@@ -26,7 +26,11 @@ const FLAG_CLASS: Record<AppFlag, string> = {
   offline: "border-error/40 text-error",
 };
 
-/** redBoard -> { prefix: "red", suffix: "board" }; anything else -> null. */
+/**
+ * redBoard -> { prefix: "red", suffix: "board" }. Only redApp wordmarks get
+ * the lowercase brand treatment; partner, site and infra names keep the
+ * casing they carry in apps.json.
+ */
 function splitWordmark(name: string) {
   const match = /^red([A-Z][A-Za-z]*)$/.exec(name);
   return match ? { prefix: "red", suffix: match[1].toLowerCase() } : null;
@@ -45,7 +49,7 @@ export function hostLabel(url: string | null): string {
 
 function Monogram({ name }: { name: string }) {
   const mark = splitWordmark(name);
-  const letter = (mark ? mark.suffix[0] : name[0] ?? "?").toLowerCase();
+  const letter = mark ? mark.suffix[0] : (name[0] ?? "?");
   return (
     <span
       aria-hidden="true"
@@ -62,10 +66,10 @@ function Wordmark({ name }: { name: string }) {
   const mark = splitWordmark(name);
   if (!mark) return <span className="text-text-primary">{name}</span>;
   return (
-    <>
+    <span className="lowercase">
       <span className="text-text-primary">{mark.prefix}</span>
       <span className="text-accent-text">{mark.suffix}</span>
-    </>
+    </span>
   );
 }
 
@@ -77,7 +81,10 @@ export default function AppCard({
   status: AppStatus;
 }) {
   const host = hostLabel(app.url);
+  const isOffline = app.flags.includes("offline");
   const isLink = Boolean(app.url) && !app.flags.includes("coming-soon");
+  // A curated offline entry never shows green, whatever its host answers.
+  const shown: AppStatus = isOffline ? "down" : status;
 
   const body = (
     <>
@@ -85,14 +92,14 @@ export default function AppCard({
         <Monogram name={app.name} />
         <span
           role="img"
-          title={`${app.name}: ${STATUS_TITLE[status]}`}
-          aria-label={`${app.name}: ${STATUS_TITLE[status]}`}
-          className={`mt-1 ml-auto h-2 w-2 shrink-0 rounded-full ${STATUS_DOT[status]}`}
+          title={`${app.name}: ${STATUS_TITLE[shown]}`}
+          aria-label={`${app.name}: ${STATUS_TITLE[shown]}`}
+          className={`mt-1 ml-auto h-2 w-2 shrink-0 rounded-full ${STATUS_DOT[shown]}`}
         />
       </div>
 
       <div className="mt-2 min-w-0">
-        <div className="truncate text-sm font-semibold leading-tight lowercase">
+        <div className="truncate text-sm font-semibold leading-tight">
           <Wordmark name={app.name} />
         </div>
         <p className="mt-1 line-clamp-2 text-xs leading-snug text-text-secondary">

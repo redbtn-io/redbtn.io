@@ -133,7 +133,8 @@
     "url": "https://print.redbtn.io",
     "description": "Markdown and HTML to PDF service.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "expect": [404]
   },
   {
     "id": "redbilling",
@@ -341,7 +342,8 @@
     "url": "https://redguard.redbtn.io",
     "description": "WireGuard mesh management.",
     "category": "infra",
-    "flags": []
+    "flags": [],
+    "expect": [401]
   },
   {
     "id": "models",
@@ -349,7 +351,8 @@
     "url": "https://models.redbtn.io",
     "description": "Model artifacts bucket.",
     "category": "infra",
-    "flags": []
+    "flags": [],
+    "expect": [403]
   },
   {
     "id": "github",
