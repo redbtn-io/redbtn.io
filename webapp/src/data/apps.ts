@@ -17,6 +17,12 @@ export type AppEntry = {
    * 403). Anything listed here counts as up; an unlisted 404 counts as down.
    */
   expect?: number[];
+  /** Path under /public. Falls back to a monogram tile when absent. */
+  logo?: string;
+  /** Light-coloured variant of `logo`, used in dark mode. */
+  logoLight?: string;
+  /** Named inline SVG mark, for brands we draw ourselves. */
+  icon?: "github";
 };
 
 /** Single source of truth for the /apps launcher and the status API. */

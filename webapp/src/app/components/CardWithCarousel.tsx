@@ -1,10 +1,32 @@
+/* eslint-disable @next/next/no-img-element -- client logos are mixed
+   png/svg/ico assets served straight from /public at a fixed tile size. */
+import Link from "next/link";
 import React, { useEffect, useRef, useState, JSX } from "react";
 import { sendContact } from "@/calls/contact";
+
+export type CardLogo = {
+  src: string;
+  alt: string;
+  href: string;
+  /** Light-coloured variant of `src`, used in dark mode. */
+  lightSrc?: string;
+};
+
+export type CardLink = {
+  link: string;
+  label?: string;
+  icon: string;
+  /** Route inside this site: same tab, client-side navigation. */
+  internal?: boolean;
+  /** Rendered as a labelled button instead of a bare icon. */
+  primary?: boolean;
+};
 
 export type CardPage = {
   titleParts: { text: string; className?: string }[];
   body: string[];
-  links?: { link: string; label?: string; icon: string }[];
+  links?: CardLink[];
+  logos?: CardLogo[];
   contactForm?: boolean;
   smallText?: boolean;
 };
@@ -24,6 +46,102 @@ type CardWithCarouselProps = {
   onSetPage: (page: number) => void;
   isActive: boolean;
 };
+
+function LogoGrid({ logos }: { logos: CardLogo[] }) {
+  return (
+    <div className="grid grid-cols-3 gap-2 pt-1 sm:grid-cols-6">
+      {logos.map((logo, i) => (
+        <a
+          key={i}
+          href={logo.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={logo.alt}
+          className="flex h-14 items-center justify-center rounded-lg border border-border/60 bg-bg-elevated p-2 transition-colors hover:border-accent"
+        >
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            width={40}
+            height={40}
+            loading="lazy"
+            decoding="async"
+            className={`max-h-8 w-auto max-w-full object-contain ${
+              logo.lightSrc ? "logo-on-light" : ""
+            }`}
+          />
+          {logo.lightSrc ? (
+            <img
+              src={logo.lightSrc}
+              alt=""
+              aria-hidden="true"
+              width={40}
+              height={40}
+              loading="lazy"
+              decoding="async"
+              className="logo-on-dark max-h-8 w-auto max-w-full object-contain"
+            />
+          ) : null}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function LinkRow({
+  links,
+  cardIcons,
+}: {
+  links: CardLink[];
+  cardIcons: Record<string, JSX.Element>;
+}) {
+  const primary = links.filter((l) => l.primary);
+  const rest = links.filter((l) => !l.primary);
+
+  return (
+    <div className="flex items-center justify-between gap-4 pt-2">
+      <span className="flex items-center gap-3">
+        {primary.map((l, j) =>
+          l.internal ? (
+            <Link
+              key={j}
+              href={l.link}
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-3 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
+            >
+              {cardIcons[l.icon] || cardIcons.external}
+              {l.label}
+            </Link>
+          ) : (
+            <a
+              key={j}
+              href={l.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-accent px-3 py-2 text-sm font-medium text-accent-foreground transition-colors hover:bg-accent-hover"
+            >
+              {cardIcons[l.icon] || cardIcons.external}
+              {l.label}
+            </a>
+          ),
+        )}
+      </span>
+      <span className="flex flex-shrink-0 gap-3">
+        {rest.map((l, j) => (
+          <a
+            key={j}
+            href={l.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-text-muted hover:text-accent transition-colors"
+            aria-label={l.label || "Link"}
+          >
+            {cardIcons[l.icon] || cardIcons.external}
+          </a>
+        ))}
+      </span>
+    </div>
+  );
+}
 
 export default function CardWithCarousel({
   card,
@@ -120,42 +238,56 @@ export default function CardWithCarousel({
               </div>
             ) : (
             <div className={`${page.smallText ? "text-sm sm:text-base space-y-1.5" : "text-base sm:text-lg space-y-3"} text-text-secondary leading-relaxed`}>
-              {page.body.map((line, i) => {
-                // Last line with links: render inline
-                if (
-                  i === page.body.length - 1 &&
-                  page.links &&
-                  page.links.length > 0
-                ) {
+              {page.logos && page.logos.length > 0 ? (
+                <>
+                  {page.body.map((line, i) => (
+                    <span key={i} className="block">
+                      {renderHTML(line)}
+                    </span>
+                  ))}
+                  <LogoGrid logos={page.logos} />
+                  {page.links && page.links.length > 0 && (
+                    <LinkRow links={page.links} cardIcons={cardIcons} />
+                  )}
+                </>
+              ) : (
+                page.body.map((line, i) => {
+                  // Last line with links: render inline
+                  if (
+                    i === page.body.length - 1 &&
+                    page.links &&
+                    page.links.length > 0
+                  ) {
+                    return (
+                      <div
+                        key={i}
+                        className="flex items-center justify-between gap-4 pt-1"
+                      >
+                        <span>{renderHTML(line)}</span>
+                        <span className="flex gap-3 flex-shrink-0">
+                          {page.links.map((l, j) => (
+                            <a
+                              key={j}
+                              href={l.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-text-muted hover:text-accent transition-colors"
+                              aria-label={l.label || "Link"}
+                            >
+                              {cardIcons[l.icon] || cardIcons.external}
+                            </a>
+                          ))}
+                        </span>
+                      </div>
+                    );
+                  }
                   return (
-                    <div
-                      key={i}
-                      className="flex items-center justify-between gap-4 pt-1"
-                    >
-                      <span>{renderHTML(line)}</span>
-                      <span className="flex gap-3 flex-shrink-0">
-                        {page.links.map((l, j) => (
-                          <a
-                            key={j}
-                            href={l.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-text-muted hover:text-accent transition-colors"
-                            aria-label={l.label || "Link"}
-                          >
-                            {cardIcons[l.icon] || cardIcons.external}
-                          </a>
-                        ))}
-                      </span>
-                    </div>
+                    <span key={i} className="block">
+                      {renderHTML(line)}
+                    </span>
                   );
-                }
-                return (
-                  <span key={i} className="block">
-                    {renderHTML(line)}
-                  </span>
-                );
-              })}
+                })
+              )}
             </div>
             )}
           </div>

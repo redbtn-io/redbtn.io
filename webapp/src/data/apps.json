@@ -5,7 +5,8 @@
     "url": "https://app.redbtn.io",
     "description": "AI agent hub. Graphs, neurons, automations and Red.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redchat",
@@ -13,7 +14,8 @@
     "url": "https://chat.redbtn.io",
     "description": "Chat with people and agents.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redrun",
@@ -21,7 +23,8 @@
     "url": "https://run.redbtn.io",
     "description": "Deploy apps, functions and workers from git.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redfleet",
@@ -29,7 +32,8 @@
     "url": "https://fleet.redbtn.io",
     "description": "Fleet, nodes and terminals.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redatlas",
@@ -37,7 +41,8 @@
     "url": "https://atlas.redbtn.io",
     "description": "Ecosystem dashboard and inventory.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redboard",
@@ -45,7 +50,8 @@
     "url": "https://board.redbtn.io",
     "description": "Kanban boards for teams and agents.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "reddeck",
@@ -53,7 +59,8 @@
     "url": "https://deck.redbtn.io",
     "description": "Sessions and decks, dealt as cards.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "rednote",
@@ -61,7 +68,8 @@
     "url": "https://note.redbtn.io",
     "description": "Block-based collaborative notes.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redbook",
@@ -69,7 +77,8 @@
     "url": "https://book.redbtn.io",
     "description": "CRM for clients, contacts and follow-ups.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redsign",
@@ -77,7 +86,8 @@
     "url": "https://sign.redbtn.io",
     "description": "E-signatures and signing pages.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redoffice",
@@ -85,7 +95,8 @@
     "url": "https://office.redbtn.io",
     "description": "Back office: books, contractors, agreements.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redinvite",
@@ -93,7 +104,8 @@
     "url": "https://invite.redbtn.io",
     "description": "Invitations and RSVPs.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redcast",
@@ -101,7 +113,8 @@
     "url": "https://cast.redbtn.io",
     "description": "Streaming control center.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redgen",
@@ -109,7 +122,8 @@
     "url": "https://gen.redbtn.io",
     "description": "AI video generation.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "reddlp",
@@ -117,7 +131,8 @@
     "url": "https://dlp.redbtn.io",
     "description": "AI-egress data loss prevention.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redsec",
@@ -125,7 +140,8 @@
     "url": "https://security.redbtn.io",
     "description": "Security services.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redprint",
@@ -134,7 +150,10 @@
     "description": "Markdown and HTML to PDF service.",
     "category": "redapps",
     "flags": [],
-    "expect": [404]
+    "expect": [
+      404
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "redbilling",
@@ -142,7 +161,10 @@
     "url": "https://billing.redbtn.io",
     "description": "Subscriptions and payments.",
     "category": "redapps",
-    "flags": ["internal"]
+    "flags": [
+      "internal"
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "redfinance",
@@ -150,7 +172,10 @@
     "url": "https://finance.redbtn.io",
     "description": "Statements and books.",
     "category": "redapps",
-    "flags": ["internal"]
+    "flags": [
+      "internal"
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "dashboards",
@@ -158,7 +183,10 @@
     "url": "https://dash.redbtn.io",
     "description": "Assorted dashboards.",
     "category": "redapps",
-    "flags": ["internal"]
+    "flags": [
+      "internal"
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "accounts",
@@ -166,7 +194,8 @@
     "url": "https://accounts.redbtn.io",
     "description": "One sign-in for every redApp.",
     "category": "redapps",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redact",
@@ -174,7 +203,10 @@
     "url": "https://thesecblock.com/redact",
     "description": "PII detection and redaction.",
     "category": "redapps",
-    "flags": ["offline"]
+    "flags": [
+      "offline"
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "reddoc",
@@ -182,7 +214,10 @@
     "url": "https://doc.redbtn.io",
     "description": "Documents.",
     "category": "redapps",
-    "flags": ["offline"]
+    "flags": [
+      "offline"
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "redmeet",
@@ -190,7 +225,10 @@
     "url": null,
     "description": "Scheduling and bookings.",
     "category": "redapps",
-    "flags": ["coming-soon"]
+    "flags": [
+      "coming-soon"
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "become",
@@ -198,15 +236,17 @@
     "url": "https://become.redbtn.io",
     "description": "Results-oriented coaching platform.",
     "category": "partners",
-    "flags": []
+    "flags": [],
+    "logo": "/logos/become.png"
   },
   {
     "id": "tpf",
     "name": "The Progression Fund",
-    "url": "https://tpf.redbtn.io",
+    "url": "https://theprogressionfund.com",
     "description": "Investment and progression tracking.",
     "category": "partners",
-    "flags": []
+    "flags": [],
+    "logo": "/logos/tpf.svg"
   },
   {
     "id": "elite-entries",
@@ -214,7 +254,8 @@
     "url": "https://elite-entries.redbtn.io",
     "description": "Algorithmic trading platform.",
     "category": "partners",
-    "flags": []
+    "flags": [],
+    "logo": "/eliteentries.ico"
   },
   {
     "id": "mshield-platform",
@@ -222,7 +263,8 @@
     "url": "https://mshield.redbtn.io",
     "description": "Clinical defense platform console.",
     "category": "partners",
-    "flags": []
+    "flags": [],
+    "logo": "/logos/mshield-platform.svg"
   },
   {
     "id": "prodsecframework",
@@ -230,7 +272,8 @@
     "url": "https://prodsecframework.redbtn.io",
     "description": "Product security framework demo.",
     "category": "partners",
-    "flags": []
+    "flags": [],
+    "logo": "/logos/prodsecframework.svg"
   },
   {
     "id": "thesecblock",
@@ -246,7 +289,47 @@
     "url": "https://mshield.io",
     "description": "MedTech cybersecurity site.",
     "category": "sites",
-    "flags": ["offline"]
+    "flags": [
+      "offline"
+    ],
+    "logo": "/logos/mshield-platform.svg"
+  },
+  {
+    "id": "elite-entries-site",
+    "name": "Elite Entries",
+    "url": "https://eliteentri.es",
+    "description": "Trading and strategy automation.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/eliteentries.ico"
+  },
+  {
+    "id": "george-anthony",
+    "name": "George Anthony",
+    "url": "https://georgeanthony.net",
+    "description": "Financial services and life insurance.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/ga.png"
+  },
+  {
+    "id": "bri-nicole",
+    "name": "Bri Nicole",
+    "url": "https://brinicole.com",
+    "description": "Caribbean artist portfolio and music.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/bri.png"
+  },
+  {
+    "id": "rose-digital-imaging",
+    "name": "Rose Digital Imaging",
+    "url": "https://rosedigitalimaging.com",
+    "description": "Graphic design and branding.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/rdi-light.png",
+    "logoLight": "/rdi.png"
   },
   {
     "id": "koriq",
@@ -262,7 +345,19 @@
     "url": "https://peak.redbtn.io",
     "description": "Logistics company site.",
     "category": "sites",
-    "flags": []
+    "flags": [],
+    "logo": "/peak.png"
+  },
+  {
+    "id": "peak-site",
+    "name": "Peak Solutions Logistics",
+    "url": "https://peaksolutionslogistics.com",
+    "description": "Logistics company public domain.",
+    "category": "sites",
+    "flags": [
+      "offline"
+    ],
+    "logo": "/peak.png"
   },
   {
     "id": "pitagrillhouse",
@@ -270,7 +365,8 @@
     "url": "https://pitagrillhouse.com",
     "description": "Restaurant site.",
     "category": "sites",
-    "flags": []
+    "flags": [],
+    "logo": "/logos/pitagrillhouse.png"
   },
   {
     "id": "panamahats",
@@ -310,7 +406,9 @@
     "url": "https://synchro.redbtn.io",
     "description": "Events company site.",
     "category": "sites",
-    "flags": ["offline"]
+    "flags": [
+      "offline"
+    ]
   },
   {
     "id": "redrouter",
@@ -318,7 +416,8 @@
     "url": "https://router.redbtn.io",
     "description": "Edge routing console.",
     "category": "infra",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "registry",
@@ -326,7 +425,8 @@
     "url": "https://registry.redbtn.io",
     "description": "Private npm registry.",
     "category": "infra",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "mcp-gateway",
@@ -334,7 +434,8 @@
     "url": "https://mcp.redbtn.io/health",
     "description": "Unified MCP namespaces.",
     "category": "infra",
-    "flags": []
+    "flags": [],
+    "logo": "/red.png"
   },
   {
     "id": "redguard",
@@ -343,7 +444,10 @@
     "description": "WireGuard mesh management.",
     "category": "infra",
     "flags": [],
-    "expect": [401]
+    "expect": [
+      401
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "models",
@@ -352,7 +456,10 @@
     "description": "Model artifacts bucket.",
     "category": "infra",
     "flags": [],
-    "expect": [403]
+    "expect": [
+      403
+    ],
+    "logo": "/red.png"
   },
   {
     "id": "github",
@@ -360,6 +467,7 @@
     "url": "https://github.com/redbtn-io",
     "description": "Source for everything.",
     "category": "infra",
-    "flags": []
+    "flags": [],
+    "icon": "github"
   }
 ]

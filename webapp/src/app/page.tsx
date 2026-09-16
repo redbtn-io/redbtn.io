@@ -20,6 +20,7 @@ type CardPage = {
   titleParts: { text: string; className?: string }[];
   body: string[];
   links?: { link: string; label?: string; icon: string }[];
+  logos?: { src: string; alt: string; href: string; lightSrc?: string }[];
 };
 
 type CardData = {
@@ -202,6 +203,11 @@ export default function Home() {
               {page.links?.map((lnk, lnkIdx: number) => (
                 <a key={lnkIdx} href={lnk.link}>
                   {lnk.label || lnk.link}
+                </a>
+              ))}
+              {page.logos?.map((logo, logoIdx: number) => (
+                <a key={`logo-${logoIdx}`} href={logo.href}>
+                  {logo.alt}
                 </a>
               ))}
             </section>
