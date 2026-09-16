@@ -6,6 +6,11 @@ export async function GET() {
     <lastmod>2026-03-27</lastmod>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://redbtn.io/apps</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.8</priority>
+  </url>
 </urlset>`;
   return new Response(body, {
     headers: { "Content-Type": "application/xml" },

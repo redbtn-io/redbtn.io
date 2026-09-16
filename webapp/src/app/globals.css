@@ -202,3 +202,22 @@ html:has(.apps-route) body {
   overflow: auto;
   height: auto;
 }
+
+/* ---- Theme-swapped logo variants ---- */
+/* The layout ships `light` on <html> and toggles it from prefers-color-scheme.
+   `.logo-on-dark` carries the light-coloured artwork for dark backgrounds. */
+.logo-on-light {
+  display: block;
+}
+
+.logo-on-dark {
+  display: none;
+}
+
+:root:not(.light) .logo-on-light {
+  display: none;
+}
+
+:root:not(.light) .logo-on-dark {
+  display: block;
+}
