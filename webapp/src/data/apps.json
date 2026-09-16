@@ -1,0 +1,362 @@
+[
+  {
+    "id": "redbtn",
+    "name": "redbtn",
+    "url": "https://app.redbtn.io",
+    "description": "AI agent hub. Graphs, neurons, automations and Red.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redchat",
+    "name": "redChat",
+    "url": "https://chat.redbtn.io",
+    "description": "Chat with people and agents.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redrun",
+    "name": "redRun",
+    "url": "https://run.redbtn.io",
+    "description": "Deploy apps, functions and workers from git.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redfleet",
+    "name": "redFleet",
+    "url": "https://fleet.redbtn.io",
+    "description": "Fleet, nodes and terminals.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redatlas",
+    "name": "redAtlas",
+    "url": "https://atlas.redbtn.io",
+    "description": "Ecosystem dashboard and inventory.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redboard",
+    "name": "redBoard",
+    "url": "https://board.redbtn.io",
+    "description": "Kanban boards for teams and agents.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "reddeck",
+    "name": "redDeck",
+    "url": "https://deck.redbtn.io",
+    "description": "Sessions and decks, dealt as cards.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "rednote",
+    "name": "redNote",
+    "url": "https://note.redbtn.io",
+    "description": "Block-based collaborative notes.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redbook",
+    "name": "redBook",
+    "url": "https://book.redbtn.io",
+    "description": "CRM for clients, contacts and follow-ups.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redsign",
+    "name": "redSign",
+    "url": "https://sign.redbtn.io",
+    "description": "E-signatures and signing pages.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redoffice",
+    "name": "redOffice",
+    "url": "https://office.redbtn.io",
+    "description": "Back office: books, contractors, agreements.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redinvite",
+    "name": "redInvite",
+    "url": "https://invite.redbtn.io",
+    "description": "Invitations and RSVPs.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redcast",
+    "name": "redCast",
+    "url": "https://cast.redbtn.io",
+    "description": "Streaming control center.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redgen",
+    "name": "redGen",
+    "url": "https://gen.redbtn.io",
+    "description": "AI video generation.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "reddlp",
+    "name": "redDLP",
+    "url": "https://dlp.redbtn.io",
+    "description": "AI-egress data loss prevention.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redsec",
+    "name": "redSec",
+    "url": "https://security.redbtn.io",
+    "description": "Security services.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redprint",
+    "name": "redPrint",
+    "url": "https://print.redbtn.io",
+    "description": "Markdown and HTML to PDF service.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redbilling",
+    "name": "redBilling",
+    "url": "https://billing.redbtn.io",
+    "description": "Subscriptions and payments.",
+    "category": "redapps",
+    "flags": ["internal"]
+  },
+  {
+    "id": "redfinance",
+    "name": "redFinance",
+    "url": "https://finance.redbtn.io",
+    "description": "Statements and books.",
+    "category": "redapps",
+    "flags": ["internal"]
+  },
+  {
+    "id": "dashboards",
+    "name": "Dashboards",
+    "url": "https://dash.redbtn.io",
+    "description": "Assorted dashboards.",
+    "category": "redapps",
+    "flags": ["internal"]
+  },
+  {
+    "id": "accounts",
+    "name": "Accounts",
+    "url": "https://accounts.redbtn.io",
+    "description": "One sign-in for every redApp.",
+    "category": "redapps",
+    "flags": []
+  },
+  {
+    "id": "redact",
+    "name": "redAct",
+    "url": "https://thesecblock.com/redact",
+    "description": "PII detection and redaction.",
+    "category": "redapps",
+    "flags": ["offline"]
+  },
+  {
+    "id": "reddoc",
+    "name": "redDoc",
+    "url": "https://doc.redbtn.io",
+    "description": "Documents.",
+    "category": "redapps",
+    "flags": ["offline"]
+  },
+  {
+    "id": "redmeet",
+    "name": "redMeet",
+    "url": null,
+    "description": "Scheduling and bookings.",
+    "category": "redapps",
+    "flags": ["coming-soon"]
+  },
+  {
+    "id": "become",
+    "name": "Become",
+    "url": "https://become.redbtn.io",
+    "description": "Results-oriented coaching platform.",
+    "category": "partners",
+    "flags": []
+  },
+  {
+    "id": "tpf",
+    "name": "The Progression Fund",
+    "url": "https://tpf.redbtn.io",
+    "description": "Investment and progression tracking.",
+    "category": "partners",
+    "flags": []
+  },
+  {
+    "id": "elite-entries",
+    "name": "Elite Entries",
+    "url": "https://elite-entries.redbtn.io",
+    "description": "Algorithmic trading platform.",
+    "category": "partners",
+    "flags": []
+  },
+  {
+    "id": "mshield-platform",
+    "name": "MedShield Platform",
+    "url": "https://mshield.redbtn.io",
+    "description": "Clinical defense platform console.",
+    "category": "partners",
+    "flags": []
+  },
+  {
+    "id": "prodsecframework",
+    "name": "Frameworks PSF",
+    "url": "https://prodsecframework.redbtn.io",
+    "description": "Product security framework demo.",
+    "category": "partners",
+    "flags": []
+  },
+  {
+    "id": "thesecblock",
+    "name": "The Sec Block",
+    "url": "https://thesecblock.com",
+    "description": "Cybersecurity services.",
+    "category": "partners",
+    "flags": []
+  },
+  {
+    "id": "mshield-site",
+    "name": "MedShield",
+    "url": "https://mshield.io",
+    "description": "MedTech cybersecurity site.",
+    "category": "sites",
+    "flags": ["offline"]
+  },
+  {
+    "id": "koriq",
+    "name": "Koriq",
+    "url": "https://koriq.redbtn.io",
+    "description": "Custom AI agentic solutions.",
+    "category": "sites",
+    "flags": []
+  },
+  {
+    "id": "peak",
+    "name": "Peak Solutions Logistics",
+    "url": "https://peak.redbtn.io",
+    "description": "Logistics company site.",
+    "category": "sites",
+    "flags": []
+  },
+  {
+    "id": "pitagrillhouse",
+    "name": "Pita Grill House",
+    "url": "https://pitagrillhouse.com",
+    "description": "Restaurant site.",
+    "category": "sites",
+    "flags": []
+  },
+  {
+    "id": "panamahats",
+    "name": "Panama Hats",
+    "url": "https://panamahats.redbtn.io",
+    "description": "Storefront.",
+    "category": "sites",
+    "flags": []
+  },
+  {
+    "id": "footycaps",
+    "name": "FootyCaps",
+    "url": "https://footycaps12.com",
+    "description": "Soccer caps store.",
+    "category": "sites",
+    "flags": []
+  },
+  {
+    "id": "elite-fitness",
+    "name": "Elite Fitness",
+    "url": "https://elite-fitness.redbtn.io",
+    "description": "Wellness and recovery center.",
+    "category": "sites",
+    "flags": []
+  },
+  {
+    "id": "indy-dhiman",
+    "name": "Indy Dhiman",
+    "url": "https://iq.redbtn.io",
+    "description": "Contact page.",
+    "category": "sites",
+    "flags": []
+  },
+  {
+    "id": "synchro",
+    "name": "Synchro Events",
+    "url": "https://synchro.redbtn.io",
+    "description": "Events company site.",
+    "category": "sites",
+    "flags": ["offline"]
+  },
+  {
+    "id": "redrouter",
+    "name": "redRouter",
+    "url": "https://router.redbtn.io",
+    "description": "Edge routing console.",
+    "category": "infra",
+    "flags": []
+  },
+  {
+    "id": "registry",
+    "name": "Registry",
+    "url": "https://registry.redbtn.io",
+    "description": "Private npm registry.",
+    "category": "infra",
+    "flags": []
+  },
+  {
+    "id": "mcp-gateway",
+    "name": "MCP Gateway",
+    "url": "https://mcp.redbtn.io/health",
+    "description": "Unified MCP namespaces.",
+    "category": "infra",
+    "flags": []
+  },
+  {
+    "id": "redguard",
+    "name": "redGuard",
+    "url": "https://redguard.redbtn.io",
+    "description": "WireGuard mesh management.",
+    "category": "infra",
+    "flags": []
+  },
+  {
+    "id": "models",
+    "name": "Models",
+    "url": "https://models.redbtn.io",
+    "description": "Model artifacts bucket.",
+    "category": "infra",
+    "flags": []
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "url": "https://github.com/redbtn-io",
+    "description": "Source for everything.",
+    "category": "infra",
+    "flags": []
+  }
+]
