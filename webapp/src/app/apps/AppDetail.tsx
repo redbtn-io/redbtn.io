@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element -- screenshots are pre-sized
    webp files served straight from /public. */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { AppEntry, AppStatus } from "@/data/apps";
 import {
   CATEGORY_LABEL,
@@ -30,19 +30,31 @@ function CloseIcon() {
   );
 }
 
+/**
+ * The visual block. The image is the nice-to-have and the monogram is the
+ * floor: an entry with no `screenshot`, an offline or coming-soon entry, and
+ * an entry whose file 404s all land on the same placeholder, so swapping the
+ * artwork out from under this component can never leave a broken tile.
+ */
 function Visual({ app }: { app: AppEntry }) {
-  const shot = app.flags.includes("offline") ? null : app.screenshot;
+  const [broken, setBroken] = useState(false);
+  const usable =
+    !app.flags.includes("offline") &&
+    !app.flags.includes("coming-soon") &&
+    Boolean(app.screenshot) &&
+    !broken;
 
   return (
     <div className="aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-background">
-      {shot ? (
+      {usable ? (
         <img
-          src={shot}
-          alt={`${app.name} front page`}
+          src={app.screenshot}
+          alt={`${app.name} preview`}
           width={800}
           height={500}
           loading="lazy"
           decoding="async"
+          onError={() => setBroken(true)}
           className="h-full w-full object-cover object-top"
         />
       ) : (
@@ -178,7 +190,7 @@ export default function AppDetail({
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
-          <Visual app={app} />
+          <Visual key={app.id} app={app} />
 
           <p className="mt-3 text-sm leading-relaxed text-text-secondary">
             {app.details}
