@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { apps, type AppCategory, type AppStatus } from "@/data/apps";
 import AppCard from "./AppCard";
 import AppDetail from "./AppDetail";
+import FeaturedCard from "./FeaturedCard";
 import { CATEGORY_LABEL, hostLabel } from "./parts";
 
 const FILTERS: { id: AppCategory | "all"; label: string }[] = [
@@ -17,6 +18,17 @@ const FILTERS: { id: AppCategory | "all"; label: string }[] = [
 ];
 
 const GROUP_ORDER: AppCategory[] = ["redapps", "partners", "sites", "infra"];
+
+/**
+ * The featured row, straight from the data: any entry carrying a `featured`
+ * rank, lowest first. Editing apps.json is the only way to change the set or
+ * the order.
+ */
+const featured = apps
+  .filter((app) => typeof app.featured === "number")
+  .sort((a, b) => (a.featured as number) - (b.featured as number));
+
+const featuredIds = new Set(featured.map((app) => app.id));
 
 function isStatus(value: unknown): value is AppStatus {
   return value === "up" || value === "down" || value === "unknown";
@@ -108,21 +120,27 @@ export default function AppsGrid() {
     });
   }, [query, category]);
 
-  const groups = useMemo(
-    () =>
-      GROUP_ORDER.map((id) => ({
-        id,
-        label: CATEGORY_LABEL[id],
-        items: filtered.filter((app) => app.category === id),
-      })).filter((group) => group.items.length > 0),
-    [filtered],
-  );
+  // Featured shows only at rest. Once the page is filtered the row goes away
+  // and those entries take their normal places in the grid.
+  const showFeatured =
+    featured.length > 0 && query.trim() === "" && category === "all";
+
+  const groups = useMemo(() => {
+    const items = showFeatured
+      ? filtered.filter((app) => !featuredIds.has(app.id))
+      : filtered;
+    return GROUP_ORDER.map((id) => ({
+      id,
+      label: CATEGORY_LABEL[id],
+      items: items.filter((app) => app.category === id),
+    })).filter((group) => group.items.length > 0);
+  }, [filtered, showFeatured]);
 
   const open = openId ? apps.find((app) => app.id === openId) : undefined;
 
   return (
     <main className="apps-route min-h-screen bg-background text-text-primary">
-      <header className="sticky top-0 z-10 border-b border-border bg-background/90 backdrop-blur">
+      <header className="sticky top-0 z-20 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto w-full max-w-6xl px-4 py-3">
           <div className="flex items-center gap-3">
             <Link
@@ -147,8 +165,33 @@ export default function AppsGrid() {
               {filtered.length}/{apps.length}
             </span>
           </div>
+        </div>
+      </header>
 
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-center">
+      <div className="mx-auto w-full max-w-6xl px-4 py-4">
+        {showFeatured ? (
+          <section className="mb-4" aria-labelledby="apps-featured">
+            <h2
+              id="apps-featured"
+              className="mb-2 text-lg font-semibold lowercase tracking-tight"
+            >
+              featured
+            </h2>
+            <div className="apps-featured-row">
+              {featured.map((app) => (
+                <FeaturedCard
+                  key={app.id}
+                  app={app}
+                  status={statuses[app.id] ?? "unknown"}
+                  onOpen={openApp}
+                />
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <div className="sticky top-[57px] z-10 -mx-4 mb-4 border-b border-border bg-background/90 px-4 py-2 backdrop-blur">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
             <input
               type="search"
               value={query}
@@ -179,10 +222,8 @@ export default function AppsGrid() {
             </div>
           </div>
         </div>
-      </header>
 
-      <div className="mx-auto w-full max-w-6xl px-4 py-4">
-        {groups.length === 0 ? (
+        {filtered.length === 0 ? (
           <p className="py-16 text-center text-sm text-text-muted">
             Nothing matches that search.
           </p>

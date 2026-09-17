@@ -272,3 +272,42 @@ html:has(.apps-route) body {
     animation: none;
   }
 }
+
+/* ---- /apps featured row: snap carousel on phones, 4-up grid from md ---- */
+.apps-featured-row {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* 100vw - 78vw card, halved, so the first and last card centre too. */
+  padding: 0 11vw 0.25rem;
+  margin: 0 -1rem;
+}
+
+.apps-featured-row::-webkit-scrollbar {
+  display: none;
+}
+
+.apps-featured-card {
+  flex: 0 0 auto;
+  width: 78vw;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+@media (min-width: 768px) {
+  .apps-featured-row {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .apps-featured-card {
+    width: auto;
+  }
+}

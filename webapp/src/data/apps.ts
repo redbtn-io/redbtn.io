@@ -35,6 +35,12 @@ export type AppEntry = {
   screenshot?: string;
   /** owner/name of a PUBLIC GitHub repo. Never set for a private one. */
   repo?: string;
+  /**
+   * Rank in the featured row at the top of /apps: lower sorts first. The
+   * set and its order live here, so featuring an entry is a data change.
+   * Absent for everything that is not featured.
+   */
+  featured?: number;
 };
 
 /** Single source of truth for the /apps launcher and the status API. */
