@@ -1,8 +1,6 @@
 "use client";
-/* eslint-disable @next/next/no-img-element -- screenshots are pre-sized
-   webp files served straight from /public. */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import type { AppEntry, AppStatus } from "@/data/apps";
 import {
   CATEGORY_LABEL,
@@ -11,9 +9,9 @@ import {
   STATUS_DOT,
   STATUS_LABEL,
   Tile,
+  Visual,
   Wordmark,
   hostLabel,
-  monogramLetter,
   shownStatus,
 } from "./parts";
 
@@ -27,47 +25,6 @@ function CloseIcon() {
         strokeLinecap="round"
       />
     </svg>
-  );
-}
-
-/**
- * The visual block. The image is the nice-to-have and the monogram is the
- * floor: an entry with no `screenshot`, an offline or coming-soon entry, and
- * an entry whose file 404s all land on the same placeholder, so swapping the
- * artwork out from under this component can never leave a broken tile.
- */
-function Visual({ app }: { app: AppEntry }) {
-  const [broken, setBroken] = useState(false);
-  const usable =
-    !app.flags.includes("offline") &&
-    !app.flags.includes("coming-soon") &&
-    Boolean(app.screenshot) &&
-    !broken;
-
-  return (
-    <div className="aspect-[16/10] w-full overflow-hidden rounded-xl border border-border bg-background">
-      {usable ? (
-        <img
-          src={app.screenshot}
-          alt={`${app.name} preview`}
-          width={800}
-          height={500}
-          loading="lazy"
-          decoding="async"
-          onError={() => setBroken(true)}
-          className="h-full w-full object-cover object-top"
-        />
-      ) : (
-        <div
-          className="flex h-full w-full items-center justify-center"
-          aria-hidden="true"
-        >
-          <span className="text-5xl font-semibold lowercase text-text-disabled">
-            {monogramLetter(app.name)}
-          </span>
-        </div>
-      )}
-    </div>
   );
 }
 
@@ -190,7 +147,7 @@ export default function AppDetail({
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-4">
-          <Visual key={app.id} app={app} />
+          <Visual key={app.id} app={app} className="rounded-xl border border-border" />
 
           <p className="mt-3 text-sm leading-relaxed text-text-secondary">
             {app.details}

@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element -- logos are mixed png/svg/ico
    assets served straight from /public at a fixed tile size. */
 
+import { useState } from "react";
 import type { AppCategory, AppEntry, AppFlag, AppStatus } from "@/data/apps";
 
 export const STATUS_LABEL: Record<AppStatus, string> = {
@@ -148,6 +149,57 @@ export function Tile({
         />
       ) : null}
     </span>
+  );
+}
+
+/**
+ * The visual block. The image is the nice-to-have and the monogram is the
+ * floor: an entry with no `screenshot`, an offline or coming-soon entry, and
+ * an entry whose file 404s all land on the same placeholder, so swapping the
+ * artwork out from under this component can never leave a broken tile.
+ * Shared by the detail panel and the featured cards; `className` carries the
+ * frame each of them wants around the same 16:10 box.
+ */
+export function Visual({
+  app,
+  className = "",
+}: {
+  app: AppEntry;
+  className?: string;
+}) {
+  const [broken, setBroken] = useState(false);
+  const usable =
+    !app.flags.includes("offline") &&
+    !app.flags.includes("coming-soon") &&
+    Boolean(app.screenshot) &&
+    !broken;
+
+  return (
+    <div
+      className={`aspect-[16/10] w-full overflow-hidden bg-background ${className}`}
+    >
+      {usable ? (
+        <img
+          src={app.screenshot}
+          alt={`${app.name} preview`}
+          width={800}
+          height={500}
+          loading="lazy"
+          decoding="async"
+          onError={() => setBroken(true)}
+          className="h-full w-full object-cover object-top"
+        />
+      ) : (
+        <div
+          className="flex h-full w-full items-center justify-center"
+          aria-hidden="true"
+        >
+          <span className="text-5xl font-semibold lowercase text-text-disabled">
+            {monogramLetter(app.name)}
+          </span>
+        </div>
+      )}
+    </div>
   );
 }
 
