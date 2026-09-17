@@ -11,6 +11,10 @@ export type AppEntry = {
   description: string;
   category: AppCategory;
   flags: AppFlag[];
+  /** Two or three short sentences for the detail panel. */
+  details: string;
+  /** Three to five chips for the detail panel. */
+  highlights: string[];
   /**
    * HTTP codes this entry is expected to answer with at its URL, for
    * API-only or auth-walled services (redPrint 404, redGuard 401, models
@@ -23,6 +27,14 @@ export type AppEntry = {
   logoLight?: string;
   /** Named inline SVG mark, for brands we draw ourselves. */
   icon?: "github";
+  /**
+   * Front-page capture under /public/shots, written by
+   * scripts/shots/capture.mjs. Absent when the entry is offline or does not
+   * serve a page we can shoot; the panel falls back to the monogram.
+   */
+  screenshot?: string;
+  /** owner/name of a PUBLIC GitHub repo. Never set for a private one. */
+  repo?: string;
 };
 
 /** Single source of truth for the /apps launcher and the status API. */

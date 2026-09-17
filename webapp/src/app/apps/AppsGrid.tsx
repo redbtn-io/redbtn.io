@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { apps, type AppCategory, type AppStatus } from "@/data/apps";
-import AppCard, { hostLabel } from "./AppCard";
+import AppCard from "./AppCard";
+import AppDetail from "./AppDetail";
+import { CATEGORY_LABEL, hostLabel } from "./parts";
 
 const FILTERS: { id: AppCategory | "all"; label: string }[] = [
   { id: "all", label: "All" },
@@ -13,13 +15,6 @@ const FILTERS: { id: AppCategory | "all"; label: string }[] = [
   { id: "sites", label: "Sites" },
   { id: "infra", label: "Infrastructure" },
 ];
-
-const GROUP_LABEL: Record<AppCategory, string> = {
-  redapps: "redApps",
-  partners: "Partners",
-  sites: "Sites",
-  infra: "Infrastructure",
-};
 
 const GROUP_ORDER: AppCategory[] = ["redapps", "partners", "sites", "infra"];
 
@@ -31,22 +26,53 @@ export default function AppsGrid() {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<AppCategory | "all">("all");
   const [statuses, setStatuses] = useState<Record<string, AppStatus>>({});
+  const [openId, setOpenId] = useState<string | null>(null);
+  // True while this component owns a history entry it pushed itself.
+  const pushed = useRef(false);
+
+  // Deep link on first paint, and keep the browser back button honest.
+  useEffect(() => {
+    const sync = () => {
+      const id = new URLSearchParams(window.location.search).get("app");
+      setOpenId(id && apps.some((app) => app.id === id) ? id : null);
+      pushed.current = false;
+    };
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
+
+  const openApp = useCallback((id: string) => {
+    setOpenId(id);
+    window.history.pushState({ appPanel: id }, "", `?app=${encodeURIComponent(id)}`);
+    pushed.current = true;
+  }, []);
+
+  const closeApp = useCallback(() => {
+    if (pushed.current) {
+      // Popping our own entry runs `sync`, which clears the panel.
+      window.history.back();
+      return;
+    }
+    window.history.replaceState({}, "", window.location.pathname);
+    setOpenId(null);
+  }, []);
 
   // The global stylesheet locks scrolling for the title screen. /apps is a
-  // normal scrolling page; globals.css handles this via :has(), this is the
-  // fallback for engines without it.
+  // normal scrolling page, except while a detail panel is open.
   useEffect(() => {
     const html = document.documentElement;
     const { body } = document;
     const prevHtml = html.style.overflow;
     const prevBody = body.style.overflow;
-    html.style.overflow = "auto";
-    body.style.overflow = "auto";
+    const value = openId ? "hidden" : "auto";
+    html.style.overflow = value;
+    body.style.overflow = value;
     return () => {
       html.style.overflow = prevHtml;
       body.style.overflow = prevBody;
     };
-  }, []);
+  }, [openId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -76,6 +102,7 @@ export default function AppsGrid() {
       return (
         app.name.toLowerCase().includes(q) ||
         app.description.toLowerCase().includes(q) ||
+        app.highlights.some((h) => h.toLowerCase().includes(q)) ||
         hostLabel(app.url).toLowerCase().includes(q)
       );
     });
@@ -85,11 +112,13 @@ export default function AppsGrid() {
     () =>
       GROUP_ORDER.map((id) => ({
         id,
-        label: GROUP_LABEL[id],
+        label: CATEGORY_LABEL[id],
         items: filtered.filter((app) => app.category === id),
       })).filter((group) => group.items.length > 0),
     [filtered],
   );
+
+  const open = openId ? apps.find((app) => app.id === openId) : undefined;
 
   return (
     <main className="apps-route min-h-screen bg-background text-text-primary">
@@ -137,7 +166,7 @@ export default function AppsGrid() {
                     type="button"
                     onClick={() => setCategory(filter.id)}
                     aria-pressed={active}
-                    className={`shrink-0 rounded-full border px-3 py-1 text-xs transition-colors ${
+                    className={`shrink-0 cursor-pointer rounded-full border px-3 py-1 text-xs transition-colors ${
                       active
                         ? "border-accent bg-accent text-accent-foreground"
                         : "border-border bg-bg-elevated text-text-secondary hover:border-border-hover hover:text-text-primary"
@@ -169,6 +198,7 @@ export default function AppsGrid() {
                     key={app.id}
                     app={app}
                     status={statuses[app.id] ?? "unknown"}
+                    onOpen={openApp}
                   />
                 ))}
               </div>
@@ -176,6 +206,14 @@ export default function AppsGrid() {
           ))
         )}
       </div>
+
+      {open ? (
+        <AppDetail
+          app={open}
+          status={statuses[open.id] ?? "unknown"}
+          onClose={closeApp}
+        />
+      ) : null}
     </main>
   );
 }
