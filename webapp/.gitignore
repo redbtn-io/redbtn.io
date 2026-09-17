@@ -40,3 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .npmrc
+
+# screenshot helper deps (self-contained, never part of the app build)
+scripts/shots/node_modules/

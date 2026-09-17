@@ -1,0 +1,14 @@
+{
+  "name": "redbtn-apps-shots",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Self-contained screenshot capture for the /apps detail panels. Not part of the Next.js app: its own node_modules is gitignored and the app's lockfile and Docker build never see it.",
+  "type": "module",
+  "scripts": {
+    "capture": "node capture.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0",
+    "sharp": "^0.33.5"
+  }
+}
