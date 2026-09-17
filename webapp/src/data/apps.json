@@ -568,23 +568,6 @@
     "screenshot": "/shots/bri-nicole.webp"
   },
   {
-    "id": "rose-digital-imaging",
-    "name": "Rose Digital Imaging",
-    "url": "https://rosedigitalimaging.com",
-    "description": "Graphic design and branding.",
-    "category": "sites",
-    "flags": [],
-    "logo": "/rdi-light.png",
-    "logoLight": "/rdi.png",
-    "details": "Benjamin Rose's design studio. Logos, photography and advertising, with a gallery for each.",
-    "highlights": [
-      "Logo design",
-      "Photography",
-      "Advertising"
-    ],
-    "screenshot": "/shots/rose-digital-imaging.webp"
-  },
-  {
     "id": "koriq",
     "name": "Koriq",
     "url": "https://koriq.redbtn.io",
