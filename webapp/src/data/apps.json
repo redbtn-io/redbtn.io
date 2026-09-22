@@ -149,6 +149,23 @@
     "screenshot": "/shots/redbook.webp"
   },
   {
+    "id": "redscan",
+    "name": "redScan",
+    "url": "https://scan.redbtn.io",
+    "description": "Code security scanning: SAST, dependencies, secrets, SBOM.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Connect a repository or upload a zip and get one prioritised list of what to fix: static analysis, vulnerable dependencies, leaked secrets and a software bill of materials, with AI triage and fix proposals.",
+    "highlights": [
+      "Four scanners, one list",
+      "AI triage and fixes",
+      "SBOM and SARIF exports"
+    ],
+    "repo": "redbtn-io/redscan",
+    "screenshot": "/shots/redscan.webp"
+  },
+  {
     "id": "redsign",
     "name": "redSign",
     "url": "https://sign.redbtn.io",
