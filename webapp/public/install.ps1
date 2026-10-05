@@ -32,7 +32,7 @@ if (-not $DistUrl) { $DistUrl = "https://models.redbtn.io/redbtn-models/cli/$Cha
 # --- node >= 20 -------------------------------------------------------------
 $node = Get-Command node -ErrorAction SilentlyContinue
 if (-not $node) { Fail 'node >= 20 is required and was not found. Install it from https://nodejs.org (LTS), then re-run.' }
-$nodeMajor = (& node -e 'console.log(process.versions.node.split(".")[0])').Trim()
+$nodeMajor = (& node -p "process.versions.node.split('.')[0]").Trim()
 if ([int]$nodeMajor -lt 20) { Fail "node >= 20 is required (found $(& node --version)). Install the LTS from https://nodejs.org, then re-run." }
 if (-not (Get-Command npm -ErrorAction SilentlyContinue)) { Fail 'npm was not found next to node. Reinstall node from https://nodejs.org, then re-run.' }
 
@@ -40,7 +40,7 @@ $tmp = Join-Path ([System.IO.Path]::GetTempPath()) ("redbtn-install-" + [System.
 New-Item -ItemType Directory -Path $tmp | Out-Null
 try {
   # --- latest.json ----------------------------------------------------------
-  Write-Host "→ channel: $Channel ($DistUrl)"
+  Write-Host "-> channel: $Channel ($DistUrl)"
   $latestPath = Join-Path $tmp 'latest.json'
   try {
     Invoke-WebRequest -Uri "$DistUrl/latest.json" -OutFile $latestPath -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
@@ -60,7 +60,7 @@ try {
   }
 
   # --- download -------------------------------------------------------------
-  Write-Host "→ downloading $Url"
+  Write-Host "-> downloading $Url"
   $tgzPath = Join-Path $tmp 'redbtn.tgz'
   try {
     Invoke-WebRequest -Uri $Url -OutFile $tgzPath -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
@@ -69,8 +69,8 @@ try {
   # --- verify sha512 --------------------------------------------------------
   if ($Sha) {
     $Actual = (Get-FileHash -Path $tgzPath -Algorithm SHA512).Hash
-    if ($Actual.ToLower() -ne $Sha.ToLower()) { Fail 'sha512 mismatch for the downloaded tarball: refusing to install. Do not retry blindly — the download is corrupt or was swapped.' }
-    Write-Host '→ sha512 ok'
+    if ($Actual.ToLower() -ne $Sha.ToLower()) { Fail 'sha512 mismatch for the downloaded tarball: refusing to install. Do not retry blindly - the download is corrupt or was swapped.' }
+    Write-Host '-> sha512 ok'
   }
 
   # --- install --------------------------------------------------------------
@@ -86,10 +86,10 @@ try {
   if (-not $item -or ($item.Attributes -band [System.IO.FileAttributes]::ReparsePoint)) {
     Fail "the global @redbtn/cli is not a real directory ($dir). If you used 'npm link' here, run 'npm unlink -g @redbtn/cli' and re-run this script."
   }
-  Write-Host "→ installed to $dir"
+  Write-Host "-> installed to $dir"
 
   $Installed = (& redbtn --version) 2>$null
-  Write-Host "✓ redbtn $Installed"
+  Write-Host "OK redbtn $Installed"
   Write-Host ''
   Write-Host 'next steps:'
   Write-Host '  redbtn login     sign in (opens the browser once)'
