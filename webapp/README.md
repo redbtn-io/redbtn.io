@@ -34,3 +34,26 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Passkey domain association (`public/.well-known/`)
+
+redbtn.io is the WebAuthn relying party id (rpID) for every redbtn app, so one
+passkey works across all of them. A native app can only use those passkeys if
+redbtn.io vouches for it:
+
+- `apple-app-site-association`: add the app's `<TeamID>.<bundle id>` to
+  `webcredentials.apps`, and add `webcredentials:redbtn.io` to the app's
+  associated domains. Keep `applinks` off this domain (universal links belong
+  on the app's own subdomain).
+- `assetlinks.json`: add one `delegate_permission/common.get_login_creds`
+  statement per Android package, listing the SHA-256 of every certificate that
+  signs a build you ship (test key and Play App Signing key). The app's server
+  must accept the matching `android:apk-key-hash:<base64url(sha256)>` origin.
+
+Both are served as `application/json` (see `next.config.ts`). After a deploy,
+check `https://app-site-association.cdn-apple.com/a/v1/redbtn.io` and
+`https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=https://redbtn.io&relation=delegate_permission/common.get_login_creds`.
+
+Current entries: Become (`io.redbtn.become`, Team Y7X4278T48). Its Android
+fingerprint `FA:C6:17:...` is the public React Native debug key used for test
+builds; replace it with the Play App Signing key before a public release.
