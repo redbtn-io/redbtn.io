@@ -166,6 +166,23 @@
     "screenshot": "/shots/redscan.webp"
   },
   {
+    "id": "redsocial",
+    "name": "redSocial",
+    "url": "https://social.redbtn.io",
+    "description": "Plan, preview and queue social posts per brand.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Line up social content for every brand. A media library, per-platform captions and crops, an Instagram grid you can drag to reorder, mockups that look like each platform, and a queue. People and agents both feed it.",
+    "highlights": [
+      "Grid planner",
+      "Platform mockups",
+      "Agents via MCP"
+    ],
+    "repo": "redbtn-io/redsocial",
+    "screenshot": "/shots/redsocial.webp"
+  },
+  {
     "id": "redsign",
     "name": "redSign",
     "url": "https://sign.redbtn.io",
