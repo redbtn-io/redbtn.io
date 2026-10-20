@@ -1,0 +1,845 @@
+[
+  {
+    "id": "redbtn",
+    "name": "redbtn",
+    "url": "https://app.redbtn.io",
+    "description": "AI agent hub. Graphs, neurons, automations and Red.",
+    "category": "redapps",
+    "featured": 1,
+    "flags": [],
+    "logo": "/red.png",
+    "details": "The hub for everything redbtn. Build graphs and neurons, wire up automations, and talk to Red. Every other redApp signs in through it.",
+    "highlights": [
+      "Graphs and neurons",
+      "Automations",
+      "Tools and MCP",
+      "Red built in"
+    ],
+    "repo": "redbtn-io/redbtn",
+    "screenshot": "/shots/redbtn.webp"
+  },
+  {
+    "id": "redchat",
+    "name": "redChat",
+    "url": "https://chat.redbtn.io",
+    "description": "Chat with people and agents.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Chat with people and agents in the same rooms. Red sits in every thread. Installs as a PWA.",
+    "highlights": [
+      "Rooms with people and agents",
+      "Red in every thread",
+      "Works as a PWA"
+    ],
+    "screenshot": "/shots/redchat.webp"
+  },
+  {
+    "id": "redrun",
+    "name": "redRun",
+    "url": "https://run.redbtn.io",
+    "description": "Deploy apps, functions and workers from git.",
+    "category": "redapps",
+    "featured": 2,
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Deploy from a git repo or a Docker image. Builds, logs, environment config and scaling are handled for you. Workers, functions and cron jobs run the same way.",
+    "highlights": [
+      "Git-source deploys",
+      "Builds and logs",
+      "Workers and schedules"
+    ],
+    "screenshot": "/shots/redrun.webp"
+  },
+  {
+    "id": "redfleet",
+    "name": "redFleet",
+    "url": "https://fleet.redbtn.io",
+    "description": "Fleet, nodes and terminals.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Fleet manager for the machines behind redbtn. Nodes, terminals and health checks in one dashboard, over agentless SSH and a WireGuard mesh.",
+    "highlights": [
+      "Nodes and terminals",
+      "Health checks",
+      "Agentless SSH"
+    ],
+    "screenshot": "/shots/redfleet.webp"
+  },
+  {
+    "id": "redatlas",
+    "name": "redAtlas",
+    "url": "https://atlas.redbtn.io",
+    "description": "Ecosystem dashboard and inventory.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "The ecosystem at a glance. Apps, services, projects and notes, with live status on each.",
+    "highlights": [
+      "Apps and services",
+      "Projects and notes",
+      "Live status"
+    ],
+    "screenshot": "/shots/redatlas.webp"
+  },
+  {
+    "id": "redboard",
+    "name": "redBoard",
+    "url": "https://board.redbtn.io",
+    "description": "Kanban boards for teams and agents.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Shared kanban boards for teams and agents. Checklists and comments on every card, and agents pick cards up themselves.",
+    "highlights": [
+      "Shared boards",
+      "Checklists and comments",
+      "Agents pick up cards"
+    ],
+    "screenshot": "/shots/redboard.webp"
+  },
+  {
+    "id": "reddeck",
+    "name": "redDeck",
+    "url": "https://deck.redbtn.io",
+    "description": "Sessions and decks, dealt as cards.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Your life, dealt as cards. Decks build themselves from what you are learning and what you need to handle. Play a short hand and what matters resurfaces when it is due.",
+    "highlights": [
+      "Decks and hands",
+      "Short sessions",
+      "Resurfaces when due"
+    ],
+    "screenshot": "/shots/reddeck.webp"
+  },
+  {
+    "id": "rednote",
+    "name": "redNote",
+    "url": "https://note.redbtn.io",
+    "description": "Block-based collaborative notes.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Block-based notes without limits. Drag blocks, nest pages, share with your team.",
+    "highlights": [
+      "Block editor",
+      "Nested pages",
+      "Collaboration"
+    ],
+    "screenshot": "/shots/rednote.webp"
+  },
+  {
+    "id": "redbook",
+    "name": "redBook",
+    "url": "https://book.redbtn.io",
+    "description": "CRM for clients, contacts and follow-ups.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "CRM for clients, contacts and follow-ups. Notes and every interaction sit in one place, with outreach you can automate.",
+    "highlights": [
+      "Clients and contacts",
+      "Notes and interactions",
+      "Automated outreach"
+    ],
+    "repo": "redbtn-io/redbook",
+    "screenshot": "/shots/redbook.webp"
+  },
+  {
+    "id": "redscan",
+    "name": "redScan",
+    "url": "https://scan.redbtn.io",
+    "description": "Code security scanning: SAST, dependencies, secrets, SBOM.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Connect a repository or upload a zip and get one prioritised list of what to fix: static analysis, vulnerable dependencies, leaked secrets and a software bill of materials, with AI triage and fix proposals.",
+    "highlights": [
+      "Four scanners, one list",
+      "AI triage and fixes",
+      "SBOM and SARIF exports"
+    ],
+    "repo": "redbtn-io/redscan",
+    "screenshot": "/shots/redscan.webp"
+  },
+  {
+    "id": "redsocial",
+    "name": "redSocial",
+    "url": "https://social.redbtn.io",
+    "description": "Plan, preview and queue social posts per brand.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Line up social content for every brand. A media library, per-platform captions and crops, an Instagram grid you can drag to reorder, mockups that look like each platform, and a queue. People and agents both feed it.",
+    "highlights": [
+      "Grid planner",
+      "Platform mockups",
+      "Agents via MCP"
+    ],
+    "repo": "redbtn-io/redsocial",
+    "screenshot": "/shots/redsocial.webp"
+  },
+  {
+    "id": "redsign",
+    "name": "redSign",
+    "url": "https://sign.redbtn.io",
+    "description": "E-signatures and signing pages.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "E-signatures and signing pages. Send envelopes, share signing links, keep an audit trail.",
+    "highlights": [
+      "Envelopes",
+      "Signing links",
+      "Audit trail"
+    ],
+    "repo": "redbtn-io/redsign",
+    "screenshot": "/shots/redsign.webp"
+  },
+  {
+    "id": "redoffice",
+    "name": "redOffice",
+    "url": "https://office.redbtn.io",
+    "description": "Back office: books, contractors, agreements.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "The back office for an organization. Books, contractors, agreements and compliance in one console.",
+    "highlights": [
+      "Books",
+      "Contractors",
+      "Compliance"
+    ],
+    "screenshot": "/shots/redoffice.webp"
+  },
+  {
+    "id": "redinvite",
+    "name": "redInvite",
+    "url": "https://invite.redbtn.io",
+    "description": "Invitations and RSVPs.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Event invitations and RSVPs. Build a guest list, send personalized invites, track every response.",
+    "highlights": [
+      "Invitations",
+      "RSVPs",
+      "Guest lists"
+    ],
+    "screenshot": "/shots/redinvite.webp"
+  },
+  {
+    "id": "redcast",
+    "name": "redCast",
+    "url": "https://cast.redbtn.io",
+    "description": "Streaming control center.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "One control center for a whole stream. Drives OBS, serves overlays from your own machine, merges every chat and fires macros. Offline first, with an optional cloud for the marketplace and settings sync.",
+    "highlights": [
+      "OBS control",
+      "Overlays served locally",
+      "Every chat in one column",
+      "Macros and scheduling",
+      "Offline first"
+    ],
+    "screenshot": "/shots/redcast.webp"
+  },
+  {
+    "id": "redgen",
+    "name": "redGen",
+    "url": "https://gen.redbtn.io",
+    "description": "AI video generation.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "AI video generation with virtual avatars. Write a script, pick a presenter, generate in minutes.",
+    "highlights": [
+      "Virtual avatars",
+      "Script to video",
+      "Minutes not hours"
+    ],
+    "screenshot": "/shots/redgen.webp"
+  },
+  {
+    "id": "reddlp",
+    "name": "redDLP",
+    "url": "https://dlp.redbtn.io",
+    "description": "AI-egress data loss prevention.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Data loss prevention for AI egress. Run a fleet of endpoint agents, set policy, and inspect events against a catalog of AI destinations.",
+    "highlights": [
+      "Fleet of agents",
+      "Events and policies",
+      "Catalog and analytics"
+    ],
+    "screenshot": "/shots/reddlp.webp"
+  },
+  {
+    "id": "redsec",
+    "name": "redSec",
+    "url": "https://security.redbtn.io",
+    "description": "Security services.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "The redbtn security suite for teams that use AI. redDLP stops sensitive data at the endpoint and redAct redacts it on demand. redEye is still to come.",
+    "highlights": [
+      "redDLP at the endpoint",
+      "redAct on demand",
+      "redEye coming"
+    ],
+    "screenshot": "/shots/redsec.webp"
+  },
+  {
+    "id": "redprint",
+    "name": "redPrint",
+    "url": "https://print.redbtn.io",
+    "description": "Markdown and HTML to PDF service.",
+    "category": "redapps",
+    "flags": [],
+    "expect": [
+      404
+    ],
+    "logo": "/red.png",
+    "details": "Turns markdown or HTML into a PDF. API only, so the root path answers 404 by design.",
+    "highlights": [
+      "Markdown to PDF",
+      "HTML to PDF",
+      "API only"
+    ]
+  },
+  {
+    "id": "redbilling",
+    "name": "redBilling",
+    "url": "https://billing.redbtn.io",
+    "description": "Subscriptions and payments.",
+    "category": "redapps",
+    "flags": [
+      "internal"
+    ],
+    "logo": "/red.png",
+    "details": "Subscriptions and payments for the ecosystem. Plans, invoices and receipts. Internal tool.",
+    "highlights": [
+      "Plans",
+      "Invoices",
+      "Receipts"
+    ],
+    "screenshot": "/shots/redbilling.webp"
+  },
+  {
+    "id": "redfinance",
+    "name": "redFinance",
+    "url": "https://finance.redbtn.io",
+    "description": "Statements and books.",
+    "category": "redapps",
+    "flags": [
+      "internal"
+    ],
+    "logo": "/red.png",
+    "details": "Back office books for the company. Statements, ledger and the tax pack. Internal tool.",
+    "highlights": [
+      "Statements",
+      "Ledger",
+      "Tax pack"
+    ],
+    "screenshot": "/shots/redfinance.webp"
+  },
+  {
+    "id": "dashboards",
+    "name": "Dashboards",
+    "url": "https://dash.redbtn.io",
+    "description": "Assorted dashboards.",
+    "category": "redapps",
+    "flags": [
+      "internal"
+    ],
+    "logo": "/red.png",
+    "details": "Assorted internal dashboards gathered behind one host. Operational views for the fleet and the platform, not a product surface.",
+    "highlights": [
+      "Internal only",
+      "Assorted views",
+      "Sign-in required"
+    ],
+    "screenshot": "/shots/dashboards.webp"
+  },
+  {
+    "id": "accounts",
+    "name": "Accounts",
+    "url": "https://accounts.redbtn.io",
+    "description": "One sign-in for every redApp.",
+    "category": "redapps",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "One account for every redApp. Sign in once and single sign-on carries across the ecosystem.",
+    "highlights": [
+      "Single sign-on",
+      "One account",
+      "Every redApp"
+    ],
+    "screenshot": "/shots/accounts.webp"
+  },
+  {
+    "id": "redact",
+    "name": "redAct",
+    "url": "https://thesecblock.com/redact",
+    "description": "PII detection and redaction.",
+    "category": "redapps",
+    "flags": [
+      "offline"
+    ],
+    "logo": "/red.png",
+    "details": "PII and PHI detection and redaction built on Microsoft Presidio. Handles PDFs, images and text. The hosted path is not serving right now.",
+    "highlights": [
+      "PII and PHI",
+      "Presidio engine",
+      "PDFs and images"
+    ]
+  },
+  {
+    "id": "reddoc",
+    "name": "redDoc",
+    "url": "https://doc.redbtn.io",
+    "description": "Documents.",
+    "category": "redapps",
+    "flags": [
+      "offline"
+    ],
+    "logo": "/red.png",
+    "details": "Documents and presentations with Red helping draft and format. The subdomain has no route configured right now.",
+    "highlights": [
+      "Documents and decks",
+      "AI drafting",
+      "Not routed"
+    ]
+  },
+  {
+    "id": "redmeet",
+    "name": "redMeet",
+    "url": null,
+    "description": "Scheduling and bookings.",
+    "category": "redapps",
+    "flags": [
+      "coming-soon"
+    ],
+    "logo": "/red.png",
+    "details": "Scheduling and bookings. Share a link, let people book, keep the calendar in sync. Not open yet.",
+    "highlights": [
+      "Booking links",
+      "Availability",
+      "Calendar sync"
+    ],
+    "repo": "redbtn-io/redmeet"
+  },
+  {
+    "id": "become",
+    "name": "Become",
+    "url": "https://become.redbtn.io",
+    "description": "Results-oriented coaching platform.",
+    "category": "partners",
+    "featured": 3,
+    "flags": [],
+    "logo": "/logos/become.png",
+    "details": "Coach-built training programs with photo-powered nutrition tracking, live workout logging and daily mindset work. One plan, so the next thing to do is always obvious.",
+    "highlights": [
+      "Coach-built programs",
+      "Photo nutrition tracking",
+      "Live workout logging",
+      "Daily mindset work"
+    ],
+    "screenshot": "/shots/become.webp"
+  },
+  {
+    "id": "tpf",
+    "name": "The Progression Fund",
+    "url": "https://theprogressionfund.com",
+    "description": "Investment and progression tracking.",
+    "category": "partners",
+    "flags": [],
+    "logo": "/logos/tpf.svg",
+    "details": "A transparent, data-driven investment fund. Portfolio performance updates in real time, with full visibility into every position.",
+    "highlights": [
+      "Real-time tracking",
+      "Visual analytics",
+      "Secure access"
+    ],
+    "screenshot": "/shots/tpf.webp"
+  },
+  {
+    "id": "elite-entries",
+    "name": "Elite Entries",
+    "url": "https://elite-entries.redbtn.io",
+    "description": "Algorithmic trading platform.",
+    "category": "partners",
+    "featured": 4,
+    "flags": [],
+    "logo": "/eliteentries.ico",
+    "details": "Algorithmic trading platform. Connect your trading accounts and build automated bots.",
+    "highlights": [
+      "Connected accounts",
+      "Automated bots",
+      "Algorithmic strategies"
+    ],
+    "screenshot": "/shots/elite-entries.webp"
+  },
+  {
+    "id": "mshield-platform",
+    "name": "MedShield Platform",
+    "url": "https://mshield.redbtn.io",
+    "description": "Clinical defense platform console.",
+    "category": "partners",
+    "flags": [],
+    "logo": "/logos/mshield-platform.svg",
+    "details": "Product security and FDA cybersecurity compliance console for medical device makers. Covers customer onboarding, design reviews and lifecycle governance, with traceability and exports.",
+    "highlights": [
+      "Customer onboarding",
+      "Design reviews",
+      "Lifecycle governance",
+      "Traceability"
+    ],
+    "screenshot": "/shots/mshield-platform.webp"
+  },
+  {
+    "id": "prodsecframework",
+    "name": "Frameworks PSF",
+    "url": "https://prodsecframework.redbtn.io",
+    "description": "Product security framework demo.",
+    "category": "partners",
+    "flags": [],
+    "logo": "/logos/prodsecframework.svg",
+    "details": "Visual demo of a governed Product Security Framework. Seven phases, nineteen deliverables, gates and RACI, with program evidence attached. Runs on mock data.",
+    "highlights": [
+      "Seven phases",
+      "Gates and deliverables",
+      "RACI and evidence",
+      "Mock data"
+    ],
+    "screenshot": "/shots/prodsecframework.webp"
+  },
+  {
+    "id": "thesecblock",
+    "name": "The Sec Block",
+    "url": "https://thesecblock.com",
+    "description": "Cybersecurity services.",
+    "category": "partners",
+    "flags": [],
+    "details": "Cybersecurity services partner. redAct is hosted under this domain. The apex currently forwards to a hosted design preview rather than a finished site.",
+    "highlights": [
+      "Cybersecurity services",
+      "Hosts redAct",
+      "Site in preview"
+    ]
+  },
+  {
+    "id": "mshield-site",
+    "name": "MedShield",
+    "url": "https://mshield.io",
+    "description": "MedTech cybersecurity site.",
+    "category": "sites",
+    "flags": [
+      "offline"
+    ],
+    "logo": "/logos/mshield-platform.svg",
+    "details": "The public MedShield brand site. The domain has no DNS record at the moment, so nothing is served.",
+    "highlights": [
+      "MedTech cybersecurity",
+      "Public brand site",
+      "Domain not resolving"
+    ]
+  },
+  {
+    "id": "elite-entries-site",
+    "name": "Elite Entries",
+    "url": "https://eliteentri.es",
+    "description": "Trading and strategy automation.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/eliteentries.ico",
+    "details": "The public front door for Elite Entries. Opens on a sign-in screen with wallet, social and email options.",
+    "highlights": [
+      "WalletConnect and Web3",
+      "Social and email login",
+      "Front door to the platform"
+    ],
+    "screenshot": "/shots/elite-entries-site.webp"
+  },
+  {
+    "id": "george-anthony",
+    "name": "George Anthony",
+    "url": "https://georgeanthony.net",
+    "description": "Financial services and life insurance.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/ga.png",
+    "details": "Financial and insurance services for individuals, families and businesses. Strategic advice, managed investments, and life and accident protection.",
+    "highlights": [
+      "Financial advice",
+      "Managed investments",
+      "Life and accident cover"
+    ],
+    "screenshot": "/shots/george-anthony.webp"
+  },
+  {
+    "id": "bri-nicole",
+    "name": "Bri Nicole",
+    "url": "https://brinicole.com",
+    "description": "Caribbean artist portfolio and music.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/bri.png",
+    "details": "Dominican-Jamaican singer and songwriter blending R&B with Afro-Caribbean rhythm. Portfolio site with streaming, video and socials in one place.",
+    "highlights": [
+      "R&B and Afro-Caribbean",
+      "Streaming links",
+      "Video and socials"
+    ],
+    "screenshot": "/shots/bri-nicole.webp"
+  },
+  {
+    "id": "koriq",
+    "name": "Koriq",
+    "url": "https://koriq.redbtn.io",
+    "description": "Custom AI agentic solutions.",
+    "category": "sites",
+    "flags": [],
+    "details": "Custom AI agentic solutions for engineering teams. Fronts Kor-Vu, an autonomous agent, over an agentic suite, compute and fleet, and compliance tooling.",
+    "highlights": [
+      "Autonomous agent",
+      "Compute and fleet",
+      "Compliance and redaction"
+    ],
+    "screenshot": "/shots/koriq.webp"
+  },
+  {
+    "id": "peak",
+    "name": "Peak Solutions Logistics",
+    "url": "https://peak.redbtn.io",
+    "description": "Logistics company site.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/peak.png",
+    "details": "Logistics operations dashboard for Peak Solutions. Load boards and real-time tracking for a third-party logistics operation.",
+    "highlights": [
+      "Operations dashboard",
+      "Load boards",
+      "Real-time tracking"
+    ],
+    "screenshot": "/shots/peak.webp"
+  },
+  {
+    "id": "peak-site",
+    "name": "Peak Solutions Logistics",
+    "url": "https://peaksolutionslogistics.com",
+    "description": "Logistics company public domain.",
+    "category": "sites",
+    "flags": [
+      "offline"
+    ],
+    "logo": "/peak.png",
+    "details": "The public Peak Solutions domain. It has no DNS record right now, so the live dashboard runs on peak.redbtn.io instead.",
+    "highlights": [
+      "Logistics company",
+      "Public domain",
+      "Not resolving"
+    ]
+  },
+  {
+    "id": "pitagrillhouse",
+    "name": "Pita Grill House",
+    "url": "https://pitagrillhouse.com",
+    "description": "Restaurant site.",
+    "category": "sites",
+    "flags": [],
+    "logo": "/logos/pitagrillhouse.png",
+    "details": "Fast-casual Greek grill in Merrick, New York. Build-your-own bowls, hand-carved gyros and pita wraps, all halal. Order online for pickup.",
+    "highlights": [
+      "Build-your-own bowls",
+      "100% halal",
+      "Order online"
+    ],
+    "screenshot": "/shots/pitagrillhouse.webp"
+  },
+  {
+    "id": "panamahats",
+    "name": "Panama Hats",
+    "url": "https://panamahats.redbtn.io",
+    "description": "Storefront.",
+    "category": "sites",
+    "flags": [],
+    "details": "Hand-woven Panama hats from Ecuador. Toquilla straw worked by weavers in Montecristi and Cuenca, shipped one at a time.",
+    "highlights": [
+      "Toquilla straw",
+      "Montecristi and Cuenca",
+      "Ships worldwide"
+    ],
+    "screenshot": "/shots/panamahats.webp"
+  },
+  {
+    "id": "footycaps",
+    "name": "FootyCaps",
+    "url": "https://footycaps12.com",
+    "description": "Soccer caps store.",
+    "category": "sites",
+    "flags": [],
+    "details": "Soccer caps store. National team designs, custom and wholesale orders, free shipping on two hats or more.",
+    "highlights": [
+      "National team caps",
+      "Custom and wholesale",
+      "Free shipping on two"
+    ],
+    "screenshot": "/shots/footycaps.webp"
+  },
+  {
+    "id": "elite-fitness",
+    "name": "Elite Fitness",
+    "url": "https://elite-fitness.redbtn.io",
+    "description": "Wellness and recovery center.",
+    "category": "sites",
+    "flags": [],
+    "details": "Wellness and recovery center. Massage, cryotherapy, infrared sauna, personal training and IV therapy, booked online.",
+    "highlights": [
+      "Massage and cryotherapy",
+      "Infrared sauna",
+      "Personal training",
+      "Book online"
+    ],
+    "screenshot": "/shots/elite-fitness.webp"
+  },
+  {
+    "id": "indy-dhiman",
+    "name": "Indy Dhiman",
+    "url": "https://iq.redbtn.io",
+    "description": "Contact page.",
+    "category": "sites",
+    "flags": [],
+    "details": "A single contact page. Send a message through the form or reach out directly.",
+    "highlights": [
+      "Contact form",
+      "Direct email",
+      "One page"
+    ],
+    "screenshot": "/shots/indy-dhiman.webp"
+  },
+  {
+    "id": "synchro",
+    "name": "Synchro Events",
+    "url": "https://synchro.redbtn.io",
+    "description": "Events company site.",
+    "category": "sites",
+    "flags": [
+      "offline"
+    ],
+    "details": "Events company site. The subdomain has no route configured, so nothing is served.",
+    "highlights": [
+      "Events company",
+      "No route configured",
+      "Offline"
+    ]
+  },
+  {
+    "id": "redrouter",
+    "name": "redRouter",
+    "url": "https://router.redbtn.io",
+    "description": "Edge routing console.",
+    "category": "infra",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Redis-backed reverse proxy manager. Owns the routes behind every redbtn.io host.",
+    "highlights": [
+      "Reverse proxy",
+      "Redis-backed",
+      "Route management"
+    ],
+    "screenshot": "/shots/redrouter.webp"
+  },
+  {
+    "id": "registry",
+    "name": "Registry",
+    "url": "https://registry.redbtn.io",
+    "description": "Private npm registry.",
+    "category": "infra",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "Private npm registry for the @redbtn scope. Standard npm client, gated reads and writes.",
+    "highlights": [
+      "Private packages",
+      "@redbtn scope",
+      "npm compatible"
+    ],
+    "screenshot": "/shots/registry.webp"
+  },
+  {
+    "id": "mcp-gateway",
+    "name": "MCP Gateway",
+    "url": "https://mcp.redbtn.io/health",
+    "description": "Unified MCP namespaces.",
+    "category": "infra",
+    "flags": [],
+    "logo": "/red.png",
+    "details": "One endpoint in front of every MCP tool namespace, from Google and Slack to Stripe and Discord. The URL listed here is its health check.",
+    "highlights": [
+      "32 namespaces",
+      "One endpoint",
+      "Health check"
+    ]
+  },
+  {
+    "id": "redguard",
+    "name": "redGuard",
+    "url": "https://redguard.redbtn.io",
+    "description": "WireGuard mesh management.",
+    "category": "infra",
+    "flags": [],
+    "expect": [
+      401
+    ],
+    "logo": "/red.png",
+    "details": "WireGuard mesh management for the fleet. Peers, keys and routes. The root path answers 401 until you sign in.",
+    "highlights": [
+      "WireGuard mesh",
+      "Peers and keys",
+      "Sign-in required"
+    ]
+  },
+  {
+    "id": "models",
+    "name": "Models",
+    "url": "https://models.redbtn.io",
+    "description": "Model artifacts bucket.",
+    "category": "infra",
+    "flags": [],
+    "expect": [
+      403
+    ],
+    "logo": "/red.png",
+    "details": "Model artifact host for the fleet. Serves files by path. A bare listing of the bucket root is blocked, which is expected.",
+    "highlights": [
+      "Model artifacts",
+      "Served by path",
+      "Listing blocked"
+    ]
+  },
+  {
+    "id": "github",
+    "name": "GitHub",
+    "url": "https://github.com/redbtn-io",
+    "description": "Source for everything.",
+    "category": "infra",
+    "flags": [],
+    "icon": "github",
+    "details": "Source for the platform. Eleven repositories are public, including the graph engine, redSign, redBook and this site.",
+    "highlights": [
+      "11 public repos",
+      "Graph engine",
+      "Issues and releases"
+    ],
+    "repo": "redbtn-io/redbtn.io",
+    "screenshot": "/shots/github.webp"
+  }
+]

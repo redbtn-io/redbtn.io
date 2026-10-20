@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#195AB5"/>
+      <stop offset="100%" stop-color="#0D2D5E"/>
+    </linearGradient>
+    <linearGradient id="topGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#067AA1"/>
+      <stop offset="100%" stop-color="#06A87E"/>
+    </linearGradient>
+  </defs>
+  <!-- Shield body -->
+  <path d="M100 8 L180 42 L180 120 C180 168 100 210 100 210 C100 210 20 168 20 120 L20 42 Z"
+    fill="url(#shieldGrad)" stroke="white" stroke-width="2" stroke-opacity="0.2"/>
+  <!-- Teal top band -->
+  <path d="M100 8 L180 42 L180 62 L20 62 L20 42 Z"
+    fill="url(#topGrad)" opacity="0.9"/>
+  <!-- White medical cross -->
+  <rect x="88" y="80" width="24" height="72" rx="4" fill="white" opacity="0.95"/>
+  <rect x="64" y="104" width="72" height="24" rx="4" fill="white" opacity="0.95"/>
+  <!-- Gold center dot -->
+  <circle cx="100" cy="116" r="10" fill="#D4AF37"/>
+</svg>
