@@ -97,9 +97,9 @@ export default function DownloadClient({
   }, [desktop, primary]);
 
   return (
-    <div className="mt-8 flex flex-col gap-6">
+    <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-2 xl:grid-cols-3">
       {/* ---------------- Desktop ---------------- */}
-      <section className="rounded-2xl border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-8">
+      <section id="desktop" className="flex h-full scroll-mt-8 flex-col rounded-[1.75rem] border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-7">
         <h2 className="text-xl font-semibold lowercase">redbtn Desktop</h2>
         <p className="mt-1 text-sm text-text-muted">
           The Red button for your machine: talk to Red, drive apps, keep this machine connected.
@@ -109,7 +109,7 @@ export default function DownloadClient({
           <div className="mt-5">
             <a
               href={primary.asset.url}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-lg font-semibold text-white shadow-lg transition-transform hover:scale-[1.02] sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-lg font-semibold text-white shadow-lg transition-transform hover:scale-[1.02]"
             >
               download {primary.label} · v{desktop.version} {mb(primary.asset.size) && `(${mb(primary.asset.size)})`}
             </a>
@@ -141,7 +141,8 @@ export default function DownloadClient({
           </p>
         )}
 
-        <div className="mt-5 rounded-xl border border-border/60 bg-background p-4 text-sm text-text-muted">
+        <div className="min-h-5 flex-1" aria-hidden="true" />
+        <div className="rounded-xl border border-border/60 bg-background p-4 text-sm text-text-muted">
           <p className="font-semibold text-text-primary">first-run notes (unsigned builds)</p>
           <ul className="mt-1.5 list-disc space-y-1 pl-5">
             <li>
@@ -157,7 +158,7 @@ export default function DownloadClient({
       </section>
 
       {/* ---------------- CLI ---------------- */}
-      <section className="rounded-2xl border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-8">
+      <section id="cli" className="flex h-full scroll-mt-8 flex-col rounded-[1.75rem] border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-7">
         <h2 className="text-xl font-semibold lowercase">redbtn CLI</h2>
         <p className="mt-1 text-sm text-text-muted">
           Run redbtn graphs from your terminal, on any machine with node 20+.{" "}
@@ -191,7 +192,8 @@ export default function DownloadClient({
           </div>
         </div>
 
-        <p className="mt-4 text-sm text-text-muted">
+        <div className="min-h-5 flex-1" aria-hidden="true" />
+        <p className="text-sm text-text-muted">
           Then: <code className="rounded bg-background px-1.5 py-0.5 text-[13px] text-text-primary">redbtn login</code>, then{" "}
           <code className="rounded bg-background px-1.5 py-0.5 text-[13px] text-text-primary">redbtn connect</code>.
           Alpha builds: <code className="rounded bg-background px-1.5 py-0.5 text-[13px] text-text-primary">--channel alpha</code>.
@@ -199,7 +201,7 @@ export default function DownloadClient({
       </section>
 
       {/* ---------------- Browser ---------------- */}
-      <section className="rounded-2xl border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-8">
+      <section id="browser" className="flex h-full scroll-mt-8 flex-col rounded-[1.75rem] border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-7">
         <h2 className="text-xl font-semibold lowercase">redbtn Browser</h2>
         <p className="mt-1 text-sm text-text-muted">
           The third connector: let your agents see and drive this Chrome profile — tabs, pages, clicks and
@@ -216,7 +218,7 @@ export default function DownloadClient({
           <div className="mt-5">
             <a
               href={browser.url}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-lg font-semibold text-white shadow-lg transition-transform hover:scale-[1.02] sm:w-auto"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-lg font-semibold text-white shadow-lg transition-transform hover:scale-[1.02]"
             >
               download for Chrome · v{browser.version} {kb(browser.size) && `(${kb(browser.size)})`}
             </a>
@@ -227,7 +229,8 @@ export default function DownloadClient({
           </p>
         )}
 
-        <div className="mt-5 rounded-xl border border-border/60 bg-background p-4 text-sm text-text-muted">
+        <div className="min-h-5 flex-1" aria-hidden="true" />
+        <div className="rounded-xl border border-border/60 bg-background p-4 text-sm text-text-muted">
           <p className="font-semibold text-text-primary">install (developer mode — not on the Chrome Web Store yet)</p>
           <ul className="mt-1.5 list-disc space-y-1 pl-5">
             <li>Unzip the download.</li>
@@ -245,26 +248,35 @@ export default function DownloadClient({
 
       {/* ---------------- versions ---------------- */}
       {(desktop?.releaseDate || cli?.notes || browser) && (
-        <section className="rounded-2xl border border-border/60 bg-bg-elevated/80 p-6 text-sm text-text-muted shadow-lg backdrop-blur-sm sm:p-8">
-          <h2 className="text-base font-semibold lowercase text-text-primary">versions</h2>
-          <ul className="mt-2 space-y-1.5">
+        <section className="rounded-[1.75rem] border border-border/60 bg-bg-elevated/80 p-6 text-sm text-text-muted shadow-lg backdrop-blur-sm sm:p-7 lg:col-span-2 xl:col-span-3">
+          <h2 className="text-xl font-semibold lowercase text-text-primary">current versions</h2>
+          <ul className="mt-4 grid gap-3 md:grid-cols-3">
             {desktop && (
-              <li>
-                Desktop v{desktop.version}
-                {desktop.releaseDate && ` · released ${desktop.releaseDate.slice(0, 10)}`}
+              <li className="rounded-xl bg-background p-4">
+                <span className="block font-semibold text-text-primary">Desktop</span>
+                <span>
+                  v{desktop.version}
+                  {desktop.releaseDate && ` · released ${desktop.releaseDate.slice(0, 10)}`}
+                </span>
               </li>
             )}
             {cli && (
-              <li>
-                CLI v{cli.version}
-                {cli.date && ` · ${cli.date}`}
-                {cli.notes && ` — ${cli.notes}`}
+              <li className="rounded-xl bg-background p-4">
+                <span className="block font-semibold text-text-primary">CLI</span>
+                <span>
+                  v{cli.version}
+                  {cli.date && ` · ${cli.date}`}
+                  {cli.notes && ` — ${cli.notes}`}
+                </span>
               </li>
             )}
             {browser && (
-              <li>
-                Browser v{browser.version}
-                {browser.date && ` · ${browser.date}`}
+              <li className="rounded-xl bg-background p-4">
+                <span className="block font-semibold text-text-primary">Browser</span>
+                <span>
+                  v{browser.version}
+                  {browser.date && ` · ${browser.date}`}
+                </span>
               </li>
             )}
           </ul>

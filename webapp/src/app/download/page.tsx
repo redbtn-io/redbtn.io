@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import DownloadClient from "./DownloadClient";
 
@@ -166,22 +167,111 @@ export default async function DownloadPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background text-text-primary">
-      <div className="mx-auto max-w-2xl px-5 py-10 sm:py-14">
-        <Link
-          href="/"
-          aria-label="Back to redbtn.io"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent shadow-lg transition-transform hover:scale-105"
-        >
-          <span className="h-4 w-4 rounded-full bg-white/90" />
-        </Link>
+    <main className="download-route min-h-screen overflow-x-clip bg-background text-text-primary">
+      <div className="mx-auto w-full max-w-[1440px] px-5 pb-16 pt-6 sm:px-8 lg:px-10 lg:pb-24 lg:pt-8">
+        <header className="flex items-center justify-between gap-6">
+          <Link href="/" className="group inline-flex items-center gap-3" aria-label="redbtn home">
+            <Image
+              src="/redbtn-logo.png"
+              alt="redbtn"
+              width={56}
+              height={56}
+              priority
+              className="h-12 w-12 drop-shadow-lg transition-transform group-hover:scale-105 sm:h-14 sm:w-14"
+            />
+            <span className="leading-none">
+              <span className="block text-2xl font-bold lowercase tracking-tight">redbtn</span>
+              <span className="mt-1 block text-xs font-medium uppercase tracking-[0.18em] text-text-muted">
+                downloads
+              </span>
+            </span>
+          </Link>
+          <Link
+            href="/apps"
+            className="hidden items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-text-muted transition-colors hover:border-accent hover:text-accent-text sm:inline-flex"
+          >
+            Explore the apps <span aria-hidden="true">→</span>
+          </Link>
+        </header>
 
-        <h1 className="mt-6 text-3xl font-bold lowercase tracking-tight sm:text-4xl">
-          download <span className="text-accent-text">redbtn</span>
-        </h1>
-        <p className="mt-2 text-text-muted">
-          Desktop for your machine, CLI for your terminal, Browser for your Chrome. Nothing else to install.
-        </p>
+        <section className="mt-12 grid items-center gap-10 lg:mt-16 lg:grid-cols-[minmax(0,1.1fr)_minmax(380px,0.9fr)] xl:gap-16">
+          <div>
+            <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-accent-text">
+              <span className="h-px w-10 bg-accent" aria-hidden="true" />
+              Downloads
+            </p>
+            <h1 className="mt-5 max-w-3xl text-5xl font-bold lowercase leading-[0.95] tracking-tight sm:text-6xl xl:text-7xl">
+              the <span className="text-accent-text">red button</span>, on every surface.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-muted">
+              Install redbtn where you work: Desktop for your machine, the CLI for your terminal, and
+              Browser for Chrome. Each surface connects through the same account, consent, and
+              permission model.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2.5">
+              {["One redbtn account", "Permissions stay explicit", "Desktop updates itself"].map(
+                (item) => (
+                  <span
+                    key={item}
+                    className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-bg-elevated/70 px-3.5 py-2 text-sm text-text-muted"
+                  >
+                    <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
+                    {item}
+                  </span>
+                ),
+              )}
+            </div>
+          </div>
+
+          <aside className="relative overflow-hidden rounded-[2rem] border border-border/60 bg-bg-elevated/80 p-7 shadow-2xl backdrop-blur-sm sm:p-9">
+            <div
+              className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/15 blur-3xl"
+              aria-hidden="true"
+            />
+            <Image
+              src="/redbtn-logo.png"
+              alt="The redbtn logo"
+              width={208}
+              height={208}
+              priority
+              className="relative mx-auto h-44 w-44 drop-shadow-2xl sm:h-52 sm:w-52"
+            />
+            <p className="relative mt-6 text-center text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">
+              Current releases
+            </p>
+            <div className="relative mt-4 divide-y divide-border/60 border-y border-border/60">
+              {[
+                {
+                  label: "Desktop",
+                  href: "#desktop",
+                  value: desktop ? `v${desktop.version}` : "Feed unavailable",
+                },
+                {
+                  label: "CLI",
+                  href: "#cli",
+                  value: cli ? `v${cli.version}` : "Feed unavailable",
+                },
+                {
+                  label: "Browser",
+                  href: "#browser",
+                  value: browser ? `v${browser.version}` : "Feed unavailable",
+                },
+              ].map((release) => (
+                <a
+                  key={release.label}
+                  href={release.href}
+                  className="flex items-center justify-between gap-4 py-3 text-sm transition-colors hover:text-accent-text"
+                >
+                  <span className="font-semibold">{release.label}</span>
+                  <span className="text-text-muted">{release.value} →</span>
+                </a>
+              ))}
+            </div>
+            <p className="relative mt-5 text-center text-sm text-text-muted">
+              Pick a surface below to install it.
+            </p>
+          </aside>
+        </section>
 
         <DownloadClient desktop={desktop} cli={cli} browser={browser} />
       </div>
