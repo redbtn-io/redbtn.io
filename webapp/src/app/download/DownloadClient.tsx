@@ -1,13 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import type { CliFeed, DesktopAsset, DesktopFeed } from "./page";
+import type { BrowserFeed, CliFeed, DesktopAsset, DesktopFeed } from "./page";
 
 const CURL_CMD = "curl -fsSL https://redbtn.io/install.sh | sh";
 const PS_CMD = "irm https://redbtn.io/install.ps1 | iex";
 
 function mb(size?: number): string {
   if (!size) return "";
+  return `${Math.round(size / 1048576)} MB`;
+}
+
+function kb(size?: number): string {
+  if (!size) return "";
+  if (size < 1048576) return `${Math.max(1, Math.round(size / 1024))} KB`;
   return `${Math.round(size / 1048576)} MB`;
 }
 
@@ -54,9 +60,11 @@ function detectOS(): OS {
 export default function DownloadClient({
   desktop,
   cli,
+  browser,
 }: {
   desktop: DesktopFeed | null;
   cli: CliFeed | null;
+  browser: BrowserFeed | null;
 }) {
   const [os, setOs] = useState<OS>("other");
   useEffect(() => setOs(detectOS()), []);
@@ -190,8 +198,53 @@ export default function DownloadClient({
         </p>
       </section>
 
+      {/* ---------------- Browser ---------------- */}
+      <section className="rounded-2xl border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-8">
+        <h2 className="text-xl font-semibold lowercase">redbtn Browser</h2>
+        <p className="mt-1 text-sm text-text-muted">
+          The third connector: let your agents see and drive this Chrome profile — tabs, pages, clicks and
+          typing — under the same consent + permission model as Desktop.{" "}
+          {browser && (
+            <span>
+              Current version: <span className="text-text-primary">v{browser.version}</span>
+              {browser.date && ` (${browser.date})`}.
+            </span>
+          )}
+        </p>
+
+        {browser ? (
+          <div className="mt-5">
+            <a
+              href={browser.url}
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-lg font-semibold text-white shadow-lg transition-transform hover:scale-[1.02] sm:w-auto"
+            >
+              download for Chrome · v{browser.version} {kb(browser.size) && `(${kb(browser.size)})`}
+            </a>
+          </div>
+        ) : (
+          <p className="mt-5 text-sm text-text-muted">
+            The Browser feed is unreachable right now — try again in a bit.
+          </p>
+        )}
+
+        <div className="mt-5 rounded-xl border border-border/60 bg-background p-4 text-sm text-text-muted">
+          <p className="font-semibold text-text-primary">install (developer mode — not on the Chrome Web Store yet)</p>
+          <ul className="mt-1.5 list-disc space-y-1 pl-5">
+            <li>Unzip the download.</li>
+            <li>
+              Open <span className="text-text-primary">chrome://extensions</span> and turn on{" "}
+              <span className="text-text-primary">Developer mode</span> (top right).
+            </li>
+            <li>
+              <span className="text-text-primary">Load unpacked</span> → choose the unzipped folder.
+            </li>
+            <li>Click the redbtn button in the toolbar and Connect — approve the device sign-in.</li>
+          </ul>
+        </div>
+      </section>
+
       {/* ---------------- versions ---------------- */}
-      {(desktop?.releaseDate || cli?.notes) && (
+      {(desktop?.releaseDate || cli?.notes || browser) && (
         <section className="rounded-2xl border border-border/60 bg-bg-elevated/80 p-6 text-sm text-text-muted shadow-lg backdrop-blur-sm sm:p-8">
           <h2 className="text-base font-semibold lowercase text-text-primary">versions</h2>
           <ul className="mt-2 space-y-1.5">
@@ -206,6 +259,12 @@ export default function DownloadClient({
                 CLI v{cli.version}
                 {cli.date && ` · ${cli.date}`}
                 {cli.notes && ` — ${cli.notes}`}
+              </li>
+            )}
+            {browser && (
+              <li>
+                Browser v{browser.version}
+                {browser.date && ` · ${browser.date}`}
               </li>
             )}
           </ul>
