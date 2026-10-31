@@ -5,17 +5,18 @@ import DownloadClient from "./DownloadClient";
 export const metadata: Metadata = {
   title: "Download — redbtn",
   description:
-    "Download redbtn Desktop for macOS or Windows, or install the redbtn CLI with one command.",
+    "Download redbtn Desktop for macOS or Windows, install the redbtn CLI with one command, or add the redbtn Browser extension to Chrome.",
   openGraph: {
     title: "Download — redbtn",
     description:
-      "redbtn Desktop for macOS and Windows, and the redbtn CLI for your terminal.",
+      "redbtn Desktop for macOS and Windows, the redbtn CLI for your terminal, and the redbtn Browser extension for Chrome.",
     url: "https://redbtn.io/download",
   },
 };
 
 const DESKTOP_BASE = "https://models.redbtn.io/redbtn-models/desktop/stable";
 const CLI_BASE = "https://models.redbtn.io/redbtn-models/cli/stable";
+const BROWSER_BASE = "https://models.redbtn.io/redbtn-models/browser/stable";
 const UA = "redbtn-io-site/1.0";
 
 export interface DesktopAsset {
@@ -36,6 +37,14 @@ export interface DesktopFeed {
 
 export interface CliFeed {
   version: string;
+  size?: number;
+  date?: string;
+  notes?: string;
+}
+
+export interface BrowserFeed {
+  version: string;
+  url: string;
   size?: number;
   date?: string;
   notes?: string;
@@ -103,10 +112,11 @@ function pick(assets: DesktopAsset[], pred: (name: string) => boolean): DesktopA
 }
 
 export default async function DownloadPage() {
-  const [winYml, macYml, cliText] = await Promise.all([
+  const [winYml, macYml, cliText, browserText] = await Promise.all([
     readText(`${DESKTOP_BASE}/latest.yml`),
     readText(`${DESKTOP_BASE}/latest-mac.yml`),
     readText(`${CLI_BASE}/latest.json`),
+    readText(`${BROWSER_BASE}/latest.json`),
   ]);
 
   let desktop: DesktopFeed | null = null;
@@ -145,6 +155,16 @@ export default async function DownloadPage() {
     cli = null;
   }
 
+  let browser: BrowserFeed | null = null;
+  try {
+    if (browserText) {
+      const b = JSON.parse(browserText) as BrowserFeed;
+      if (typeof b.version === "string" && typeof b.url === "string") browser = b;
+    }
+  } catch {
+    browser = null;
+  }
+
   return (
     <main className="min-h-screen bg-background text-text-primary">
       <div className="mx-auto max-w-2xl px-5 py-10 sm:py-14">
@@ -160,10 +180,10 @@ export default async function DownloadPage() {
           download <span className="text-accent-text">redbtn</span>
         </h1>
         <p className="mt-2 text-text-muted">
-          Desktop for your machine, CLI for your terminal. Nothing else to install.
+          Desktop for your machine, CLI for your terminal, Browser for your Chrome. Nothing else to install.
         </p>
 
-        <DownloadClient desktop={desktop} cli={cli} />
+        <DownloadClient desktop={desktop} cli={cli} browser={browser} />
       </div>
     </main>
   );
