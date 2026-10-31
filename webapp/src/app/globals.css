@@ -203,6 +203,14 @@ html:has(.apps-route) body {
   height: auto;
 }
 
+/* ---- /download: a normal long page, not the locked title-screen surface ---- */
+html:has(.download-route),
+html:has(.download-route) body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+}
+
 /* ---- Theme-swapped logo variants ---- */
 /* The layout ships `light` on <html> and toggles it from prefers-color-scheme.
    `.logo-on-dark` carries the light-coloured artwork for dark backgrounds. */
