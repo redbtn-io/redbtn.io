@@ -97,7 +97,7 @@ export default function DownloadClient({
   }, [desktop, primary]);
 
   return (
-    <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-2 xl:grid-cols-3">
+    <div className="mt-12 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 xl:grid-cols-3">
       {/* ---------------- Desktop ---------------- */}
       <section id="desktop" className="flex h-full scroll-mt-8 flex-col rounded-[1.75rem] border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-7">
         <h2 className="text-xl font-semibold lowercase">redbtn Desktop</h2>
