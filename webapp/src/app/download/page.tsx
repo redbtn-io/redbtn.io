@@ -200,6 +200,14 @@ export default async function DownloadPage() {
               <span className="h-px w-10 bg-accent" aria-hidden="true" />
               Downloads
             </p>
+            <Image
+              src="/redbtn-logo.png"
+              alt="The redbtn logo"
+              width={208}
+              height={208}
+              priority
+              className="mt-6 h-20 w-20 drop-shadow-2xl sm:h-24 sm:w-24"
+            />
             <h1 className="mt-5 max-w-3xl text-5xl font-bold lowercase leading-[0.95] tracking-tight sm:text-6xl xl:text-7xl">
               the <span className="text-accent-text">red button</span>, on every surface.
             </h1>
@@ -228,15 +236,7 @@ export default async function DownloadPage() {
               className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent/15 blur-3xl"
               aria-hidden="true"
             />
-            <Image
-              src="/redbtn-logo.png"
-              alt="The redbtn logo"
-              width={208}
-              height={208}
-              priority
-              className="relative mx-auto h-44 w-44 drop-shadow-2xl sm:h-52 sm:w-52"
-            />
-            <p className="relative mt-6 text-center text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">
+            <p className="relative text-center text-xs font-semibold uppercase tracking-[0.18em] text-text-muted">
               Current releases
             </p>
             <div className="relative mt-4 divide-y divide-border/60 border-y border-border/60">
