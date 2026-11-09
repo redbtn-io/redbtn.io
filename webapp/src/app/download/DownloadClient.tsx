@@ -161,7 +161,7 @@ export default function DownloadClient({
       <section id="cli" className="flex h-full scroll-mt-8 flex-col rounded-[1.75rem] border border-border/60 bg-bg-elevated/80 p-6 shadow-lg backdrop-blur-sm sm:p-7">
         <h2 className="text-xl font-semibold lowercase">redbtn CLI</h2>
         <p className="mt-1 text-sm text-text-muted">
-          Run redbtn graphs from your terminal, on any machine with node 20+.{" "}
+          Run redbtn graphs from your terminal, on any machine. No node yet? The installer offers to set up Node.js for you.{" "}
           {cli && (
             <span>
               Current version: <span className="text-text-primary">v{cli.version}</span>
