@@ -16,9 +16,19 @@ button {
   user-select: none;
 }
 
+/* ---- Home root: visible-viewport tall, not large-viewport tall ---- */
+.home-root {
+  height: 100vh;
+  height: 100dvh;
+}
+
 /* ---- Snap scroll container ---- */
 .snap-container {
+  /* 100dvh tracks the visible viewport on mobile browsers. 100vh is the
+     large viewport, taller than what is visible behind the browser chrome,
+     so centering inside a 100vh box sits the card low on phones. */
   height: 100vh;
+  height: 100dvh;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
@@ -31,6 +41,7 @@ button {
 
 .snap-card {
   height: 100vh;
+  height: 100dvh;
   scroll-snap-align: center;
   scroll-snap-stop: always;
   display: flex;
@@ -73,6 +84,7 @@ button {
   top: 0;
   width: 50vw;
   height: 100vh;
+  height: 100dvh;
   background: var(--bg-secondary);
   z-index: 10;
   transition: transform 0.7s cubic-bezier(0.4, 2, 0.6, 1);
@@ -89,6 +101,10 @@ button {
 /* ---- Animations ---- */
 .animate-fadein {
   animation: fadein 1.2s cubic-bezier(0.4, 0, 0.6, 1) forwards;
+}
+
+.animate-title-word {
+  animation: fadein 0.6s cubic-bezier(0.4, 0, 0.6, 1) forwards;
 }
 
 @keyframes fadein {

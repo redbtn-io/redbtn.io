@@ -69,7 +69,7 @@ export default function Home() {
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined;
     if (!minimized) {
-      timeout = setTimeout(() => setShowPrompt(true), 3000);
+      timeout = setTimeout(() => setShowPrompt(true), 1200);
     } else {
       setShowPrompt(false);
     }
@@ -186,7 +186,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative h-screen bg-background overflow-hidden max-w-[1024px] mx-auto">
+    <main className="relative home-root bg-background overflow-hidden max-w-[1024px] mx-auto">
       <h1 className="sr-only">redbtn — AI-powered tools, infrastructure, and automation</h1>
 
       {/* Hidden SEO content — static HTML for crawlers that don't execute JS */}

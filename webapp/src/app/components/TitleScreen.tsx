@@ -46,25 +46,25 @@ export default function TitleScreen({
               select-none pointer-events-none
             "
           >
-            <span className="inline-block text-text-primary animate-fadein">
+            <span className="inline-block text-text-primary animate-title-word">
               press
             </span>
             <br />
             <span
-              className="p-2 inline-block opacity-0 text-text-primary animate-fadein"
-              style={{ animationDelay: "1000ms" }}
+              className="p-2 inline-block opacity-0 text-text-primary animate-title-word"
+              style={{ animationDelay: "350ms" }}
             >
               the
             </span>
             <span
-              className="p-2 inline-block opacity-0 text-accent-text animate-fadein"
-              style={{ animationDelay: "1500ms" }}
+              className="p-2 inline-block opacity-0 text-accent-text animate-title-word"
+              style={{ animationDelay: "600ms" }}
             >
               red
             </span>
             <span
-              className="p-2 inline-block opacity-0 text-accent-text animate-fadein"
-              style={{ animationDelay: "2000ms" }}
+              className="p-2 inline-block opacity-0 text-accent-text animate-title-word"
+              style={{ animationDelay: "850ms" }}
             >
               button
             </span>
