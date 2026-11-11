@@ -20,6 +20,8 @@ export type CardLink = {
   internal?: boolean;
   /** Rendered as a labelled button instead of a bare icon. */
   primary?: boolean;
+  /** Key of a card to jump to (snap navigation) instead of opening a URL. */
+  gotoCard?: string;
 };
 
 export type CardPage = {
@@ -44,6 +46,8 @@ type CardWithCarouselProps = {
   onNextPage: () => void;
   onPrevPage: () => void;
   onSetPage: (page: number) => void;
+  /** Jump to a card by key (snap navigation), e.g. the contact card. */
+  onGoToCard?: (key: string) => void;
   isActive: boolean;
 };
 
@@ -151,6 +155,7 @@ export default function CardWithCarousel({
   onNextPage,
   onPrevPage,
   onSetPage,
+  onGoToCard,
   isActive,
 }: CardWithCarouselProps) {
   const pageCount = card.pages.length;
@@ -261,22 +266,37 @@ export default function CardWithCarousel({
                     return (
                       <div
                         key={i}
-                        className="flex items-center justify-between gap-4 pt-1"
+                        className="flex items-center justify-between gap-3 pt-1"
                       >
                         <span>{renderHTML(line)}</span>
-                        <span className="flex gap-3 flex-shrink-0">
-                          {page.links.map((l, j) => (
-                            <a
-                              key={j}
-                              href={l.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-text-muted hover:text-accent transition-colors"
-                              aria-label={l.label || "Link"}
-                            >
-                              {cardIcons[l.icon] || cardIcons.external}
-                            </a>
-                          ))}
+                        <span className="card-link-icons flex gap-2 flex-shrink-0">
+                          {page.links.map((l, j) =>
+                            l.gotoCard ? (
+                              <a
+                                key={j}
+                                href={l.link}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  onGoToCard?.(l.gotoCard as string);
+                                }}
+                                className="text-text-muted hover:text-accent transition-colors"
+                                aria-label={l.label || "Link"}
+                              >
+                                {cardIcons[l.icon] || cardIcons.external}
+                              </a>
+                            ) : (
+                              <a
+                                key={j}
+                                href={l.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-text-muted hover:text-accent transition-colors"
+                                aria-label={l.label || "Link"}
+                              >
+                                {cardIcons[l.icon] || cardIcons.external}
+                              </a>
+                            ),
+                          )}
                         </span>
                       </div>
                     );
