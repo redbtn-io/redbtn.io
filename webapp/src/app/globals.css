@@ -49,6 +49,17 @@ button {
   justify-content: center;
 }
 
+/* ---- Card link icons: smaller on phones so a last-line row with two
+   icons (e.g. mail + GitHub on the hero card) still fits on one line.
+   40px icons + the red CTA text need 18px more than a 390px row has. */
+@media (max-width: 639px) {
+  .card-link-icons svg,
+  .card-link-icons img {
+    width: 2rem;
+    height: auto;
+  }
+}
+
 /* ---- Red button ---- */
 .redbtn-shadow {
   box-shadow: 0 0 0 0 color-mix(in srgb, var(--shadow-color) 24%, transparent);

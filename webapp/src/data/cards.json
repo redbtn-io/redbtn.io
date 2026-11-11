@@ -20,6 +20,12 @@
         ],
         "links": [
           {
+            "link": "#contact",
+            "label": "Contact",
+            "icon": "mail",
+            "gotoCard": "cta"
+          },
+          {
             "link": "https://github.com/redbtn-io",
             "label": "GitHub",
             "icon": "github"

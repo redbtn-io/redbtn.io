@@ -19,7 +19,7 @@ function stripHTML(html: string): string {
 type CardPage = {
   titleParts: { text: string; className?: string }[];
   body: string[];
-  links?: { link: string; label?: string; icon: string }[];
+  links?: { link: string; label?: string; icon: string; gotoCard?: string }[];
   logos?: { src: string; alt: string; href: string; lightSrc?: string }[];
 };
 
@@ -253,6 +253,7 @@ export default function Home() {
           {cardsData.map((card: CardData, idx: number) => (
             <section
               key={card.key}
+              id={card.key === "cta" ? "contact" : undefined}
               className="snap-card"
               data-card-index={idx}
             >
@@ -268,6 +269,12 @@ export default function Home() {
                     }
                     onPrevPage={() => handlePrevPage(card.key)}
                     onSetPage={(page) => handleSetPage(card.key, page)}
+                    onGoToCard={(key) => {
+                      const target = cardsData.findIndex(
+                        (c) => c.key === key,
+                      );
+                      if (target >= 0) setCardIndex(target);
+                    }}
                     isActive={idx === cardIndex}
                   />
                 </div>
