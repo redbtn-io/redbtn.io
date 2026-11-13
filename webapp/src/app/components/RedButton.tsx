@@ -331,6 +331,9 @@ export default function RedButton({
     position: "fixed",
     zIndex: minimized ? 20 : 15,
     pointerEvents: dragging ? "none" : "auto",
+    // Stop iOS treating a double tap as a zoom gesture, so tap timing
+    // stays in the app's own tap detection.
+    touchAction: "manipulation",
     width: btnSize,
     height: btnSize,
     transition:

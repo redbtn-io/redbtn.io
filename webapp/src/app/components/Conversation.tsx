@@ -86,16 +86,38 @@ export default function Conversation({
     return () => clearTimeout(timeout);
   }, [open]);
 
-  // Auto-scroll to bottom
+  // Auto-scroll to bottom. On open, wait until the 300ms entrance
+  // animation finishes and scroll instantly, so the scroll cannot race
+  // the slide-in and the input focus. Later message updates scroll
+  // smoothly as before.
+  const didOpenScrollRef = useRef(false);
   useEffect(() => {
-    if (open && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    if (!open) {
+      didOpenScrollRef.current = false;
+      return;
     }
-  }, [messages, open]);
+    if (!animateIn || !messagesEndRef.current) return;
+    if (!didOpenScrollRef.current) {
+      didOpenScrollRef.current = true;
+      const t = setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
+      }, 300);
+      return () => clearTimeout(t);
+    }
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages, open, animateIn]);
 
-  // Focus input when opened
+  // Focus input when opened, desktop only. Touch devices have no real
+  // keyboard, and focusing on open races iOS scrolling and can leave the
+  // sheet blank, so touch users tap the input when they want the keyboard.
   useEffect(() => {
     if (open && animateIn) {
+      if (
+        typeof window !== "undefined" &&
+        window.matchMedia("(pointer: coarse)").matches
+      ) {
+        return;
+      }
       // Small delay to ensure DOM is ready after animation starts
       const t = setTimeout(() => inputRef.current?.focus(), 100);
       return () => clearTimeout(t);
@@ -251,7 +273,6 @@ export default function Conversation({
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={isStreaming}
-                autoFocus
               />
               <button
                 type="submit"
