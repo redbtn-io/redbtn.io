@@ -18,7 +18,10 @@
 # nodejs.org, verifies its sha256, and unpacks it into
 # ~/.local/redbtn-node (no sudo, no system package manager, any system
 # node left untouched), then adds that directory to the PATH of the
-# user's shell rc file. The offer is a prompt on the terminal, the
+# user's shell rc file. If the downloaded node will not run on the
+# machine (an operating system too old for the current Node line is the
+# usual cause), it retries once with the newest Node 20, the last line
+# that still runs on older systems, before giving up. The offer is a prompt on the terminal, the
 # script never installs node silently; --yes (or REDBTN_INSTALL_NODE=1)
 # pre-answers it for scripted installs. With no terminal to ask on,
 # it prints the manual instructions and stops, like before.
@@ -127,12 +130,26 @@ install_node() {
   esac
 
   dist="${REDBTN_NODE_DIST_URL:-https://nodejs.org/dist}"
-  ver="${REDBTN_NODE_VERSION:-}"
+  pinned="${REDBTN_NODE_VERSION:-}"
   btmp="$(mktemp -d)"
+
+  # The newest v20 LTS in index.json, or a known v20 when the index
+  # cannot be read. Node 20 is the fallback line: the last one that
+  # still runs on older operating systems (macOS before 13.5, for one),
+  # where the current LTS binary will not even start.
+  fallback_ver="v20.19.5"
+  if curl -fsSL -A 'redbtn-install/1.0' "$dist/index.json" -o "$btmp/index.json" 2>/dev/null; then
+    v20="$(grep '"version":"v20\.' "$btmp/index.json" | grep -m 1 '"lts":"' | sed -e 's/.*"version":"//' -e 's/".*//' || true)"
+    case "$v20" in
+      v20.*) fallback_ver="$v20" ;;
+    esac
+  fi
+
+  ver="$pinned"
   if [ -z "$ver" ]; then
     # index.json lists newest first, one object per line; the first entry
     # whose lts field is a string is the current LTS.
-    if curl -fsSL -A 'redbtn-install/1.0' "$dist/index.json" -o "$btmp/index.json" 2>/dev/null; then
+    if [ -f "$btmp/index.json" ]; then
       ver="$(grep -m 1 '"lts":"' "$btmp/index.json" | sed -e 's/.*"version":"//' -e 's/".*//' || true)"
     fi
     case "$ver" in
@@ -140,40 +157,62 @@ install_node() {
       *) ver="v22.14.0" ;; # parse failed: fall back to a known LTS
     esac
   fi
-  file="node-$ver-$os-$arch.tar.gz"
-  echo "→ downloading $file from nodejs.org"
-  curl -fsSL -A 'redbtn-install/1.0' "$dist/$ver/$file" -o "$btmp/node.tar.gz" \
-    || { rm -rf "$btmp"; die "could not download $dist/$ver/$file"; }
 
-  # Verify against the release's own SHASUMS256.txt.
-  if curl -fsSL -A 'redbtn-install/1.0' "$dist/$ver/SHASUMS256.txt" -o "$btmp/SHASUMS256.txt" 2>/dev/null; then
-    want="$(awk -v f="$file" '$2 == f {print $1}' "$btmp/SHASUMS256.txt")"
-    if [ -n "$want" ]; then
-      if command -v shasum >/dev/null 2>&1; then
-        got="$(shasum -a 256 "$btmp/node.tar.gz" | awk '{print $1}')"
-      elif command -v sha256sum >/dev/null 2>&1; then
-        got="$(sha256sum "$btmp/node.tar.gz" | awk '{print $1}')"
-      else
-        got=""
-        echo "→ no sha256 tool found; skipping node checksum verification" 1>&2
+  # try_node <version>: download, verify, and unpack that node into
+  # $btmp/node-x, succeeding only if the unpacked node actually runs
+  # and reports >= 20. A node that downloads fine but cannot execute on
+  # this machine fails the probe here, in the scratch dir, before
+  # anything is moved into place.
+  try_node() {
+    tfile="node-$1-$os-$arch.tar.gz"
+    rm -rf "$btmp/node-x"
+    echo "→ downloading $tfile from nodejs.org"
+    curl -fsSL -A 'redbtn-install/1.0' "$dist/$1/$tfile" -o "$btmp/node.tar.gz" || return 1
+
+    # Verify against the release's own SHASUMS256.txt. A mismatch is a
+    # corrupt or swapped download, not a machine problem: die at once,
+    # like before, instead of falling back.
+    if curl -fsSL -A 'redbtn-install/1.0' "$dist/$1/SHASUMS256.txt" -o "$btmp/SHASUMS256.txt" 2>/dev/null; then
+      want="$(awk -v f="$tfile" '$2 == f {print $1}' "$btmp/SHASUMS256.txt")"
+      if [ -n "$want" ]; then
+        if command -v shasum >/dev/null 2>&1; then
+          got="$(shasum -a 256 "$btmp/node.tar.gz" | awk '{print $1}')"
+        elif command -v sha256sum >/dev/null 2>&1; then
+          got="$(sha256sum "$btmp/node.tar.gz" | awk '{print $1}')"
+        else
+          got=""
+          echo "→ no sha256 tool found; skipping node checksum verification" 1>&2
+        fi
+        if [ -n "$got" ] && [ "$got" != "$want" ]; then
+          rm -rf "$btmp"
+          die "sha256 mismatch for $tfile: refusing to install. Do not retry blindly, the download is corrupt or was swapped."
+        fi
+        [ -n "$got" ] && echo "→ node sha256 ok"
       fi
-      if [ -n "$got" ] && [ "$got" != "$want" ]; then
-        rm -rf "$btmp"
-        die "sha256 mismatch for $file: refusing to install. Do not retry blindly, the download is corrupt or was swapped."
-      fi
-      [ -n "$got" ] && echo "→ node sha256 ok"
     fi
-  fi
 
-  # Unpack into a scratch dir first (-o: never chown to the tarball's
-  # recorded owner, which fails for root in containers), verify the
-  # result runs, and only then move it into place.
-  mkdir -p "$btmp/node-x"
-  tar -xzof "$btmp/node.tar.gz" -C "$btmp/node-x" --strip-components 1 \
-    || { rm -rf "$btmp"; die "could not unpack node into $NODE_HOME"; }
-  if [ ! -x "$btmp/node-x/bin/node" ] || [ ! -e "$btmp/node-x/bin/npm" ]; then
-    rm -rf "$btmp"
-    die "the downloaded node tarball does not contain a runnable node/npm pair."
+    # Unpack into a scratch dir first (-o: never chown to the tarball's
+    # recorded owner, which fails for root in containers) and probe the
+    # result before the caller moves it into place.
+    mkdir -p "$btmp/node-x"
+    tar -xzof "$btmp/node.tar.gz" -C "$btmp/node-x" --strip-components 1 || return 1
+    [ -x "$btmp/node-x/bin/node" ] && [ -e "$btmp/node-x/bin/npm" ] || return 1
+    probe="$("$btmp/node-x/bin/node" -e 'console.log(process.versions.node.split(".")[0])' 2>/dev/null || echo 0)"
+    [ "$probe" -ge 20 ] 2>/dev/null
+  }
+
+  if ! try_node "$ver"; then
+    if [ -n "$pinned" ]; then
+      rm -rf "$btmp"
+      die "node $pinned was downloaded but does not run on this machine, and a pinned version gets no fallback. Install node >= 20 from https://nodejs.org, then re-run."
+    fi
+    echo "install.sh: node $ver downloaded fine but does not run on this machine. That usually means the operating system is too old for the current Node.js line."
+    echo "install.sh: trying $fallback_ver instead, the last Node.js line that runs on older systems."
+    if ! try_node "$fallback_ver"; then
+      rm -rf "$btmp"
+      die "node does not run on this machine, not even the Node 20 fallback ($fallback_ver). The operating system is most likely too old for any current Node.js. Install node >= 20 from https://nodejs.org if a build exists for this system, then re-run."
+    fi
+    ver="$fallback_ver"
   fi
   rm -rf "$NODE_HOME"
   mkdir -p "$(dirname "$NODE_HOME")"
@@ -182,7 +221,7 @@ install_node() {
   PATH="$NODE_HOME/bin:$PATH"; export PATH
   hash -r 2>/dev/null || true
   if [ "$(node_major)" -lt 20 ]; then
-    die "the node bootstrap finished but node is still not >= 20 on PATH. Open a new terminal and re-run."
+    die "node was installed at $NODE_HOME but does not run from there. Install node >= 20 from https://nodejs.org, then re-run."
   fi
   echo "→ installed node $(node --version) at $NODE_HOME"
   NODE_BOOTSTRAPPED=1
