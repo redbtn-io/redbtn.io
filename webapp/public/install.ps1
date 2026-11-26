@@ -17,6 +17,10 @@
 # official zip from nodejs.org, verifies its sha256, and unpacks it into
 # %USERPROFILE%\.local\redbtn-node (no admin, no system installer, any
 # system node left untouched), then adds that directory to the user PATH.
+# If the downloaded node will not run on the machine (an operating
+# system too old for the current Node line is the usual cause), it
+# retries once with the newest Node 20, the last line that still runs
+# on older systems, before giving up.
 # The offer is a prompt, the script never installs node silently; -Yes
 # (or $env:REDBTN_INSTALL_NODE = '1', the only route under `irm | iex`)
 # pre-answers it for scripted installs. When there is no console to ask
@@ -55,6 +59,17 @@ function Get-NodeMajor {
   return 0
 }
 
+# The major version a specific node.exe reports, 0 when it will not
+# run at all. Used to probe an unpacked node before it is installed.
+function Get-NodeMajorAt([string]$NodeExe) {
+  if (-not (Test-Path $NodeExe)) { return 0 }
+  try {
+    $v = (& $NodeExe -p "process.versions.node.split('.')[0]") 2>$null
+    if ($v) { return [int]$v.Trim() }
+  } catch { }
+  return 0
+}
+
 function Confirm-NodeInstall {
   if ($Yes) { return $true }
   # No console to ask on (piped input, non-interactive host): never hang
@@ -64,6 +79,48 @@ function Confirm-NodeInstall {
     $ans = Read-Host "install.ps1: install the current Node.js LTS into $NodeHome now? [y/N]"
   } catch { return $false }
   return ($ans -match '^(y|yes)$')
+}
+
+# Download, verify, and unpack node $NV into $StageRoot, returning the
+# unpacked directory only if that node actually runs and reports
+# >= 20; $null on any failure. A node that downloads fine but cannot
+# execute on this machine fails the probe here, in the scratch dir,
+# before anything is moved into place. A sha256 mismatch is a corrupt
+# or swapped download, not a machine problem: Fail at once, like
+# before, instead of falling back.
+function Get-NodeCandidate([string]$NV, [string]$NDist, [string]$NArch, [string]$StageRoot) {
+  $file = "node-$NV-win-$NArch.zip"
+  $zipPath = Join-Path $StageRoot 'node.zip'
+  Write-Host "-> downloading $file from nodejs.org"
+  try {
+    Invoke-WebRequest -Uri "$NDist/$NV/$file" -OutFile $zipPath -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
+  } catch { return $null }
+
+  # Verify against the release's own SHASUMS256.txt.
+  try {
+    $sumsPath = Join-Path $StageRoot 'SHASUMS256.txt'
+    Invoke-WebRequest -Uri "$NDist/$NV/SHASUMS256.txt" -OutFile $sumsPath -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
+    $line = Get-Content $sumsPath | Where-Object { $_ -match [regex]::Escape($file) } | Select-Object -First 1
+    if ($line) {
+      $want = ($line -split '\s+')[0]
+      $got = (Get-FileHash -Path $zipPath -Algorithm SHA256).Hash
+      if ($got.ToLower() -ne $want.ToLower()) { Fail "sha256 mismatch for ${file}: refusing to install. Do not retry blindly, the download is corrupt or was swapped." }
+      Write-Host '-> node sha256 ok'
+    }
+  } catch {
+    if ($_.Exception.Message -like 'install.ps1:*') { throw }
+    Write-Warning 'could not verify the node checksum (SHASUMS256.txt unavailable); continuing.'
+  }
+
+  # Unpack into a scratch dir and probe the result before the caller
+  # moves it into place.
+  $stage = Join-Path $StageRoot 'node-x'
+  if (Test-Path $stage) { Remove-Item -Recurse -Force $stage }
+  try { Expand-Archive -Path $zipPath -DestinationPath $stage } catch { return $null }
+  $inner = Join-Path $stage "node-$NV-win-$NArch"
+  if (-not (Test-Path (Join-Path $inner 'node.exe')) -or -not (Test-Path (Join-Path $inner 'npm.cmd'))) { return $null }
+  if ((Get-NodeMajorAt (Join-Path $inner 'node.exe')) -lt 20) { return $null }
+  return $inner
 }
 
 function Install-Node {
@@ -85,51 +142,52 @@ function Install-Node {
   }
 
   $dist = $(if ($env:REDBTN_NODE_DIST_URL) { $env:REDBTN_NODE_DIST_URL } else { 'https://nodejs.org/dist' })
-  $ver = $env:REDBTN_NODE_VERSION
+  $pinned = $env:REDBTN_NODE_VERSION
   $btmp = Join-Path ([System.IO.Path]::GetTempPath()) ("redbtn-node-" + [System.Guid]::NewGuid().ToString('N'))
   New-Item -ItemType Directory -Path $btmp | Out-Null
   try {
     try { [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12 } catch { }
+
+    # Fetch index.json once: it names both the current LTS and the
+    # newest v20 LTS used as the fallback below.
+    $idx = $null
+    try {
+      $idx = Invoke-RestMethod -Uri "$dist/index.json" -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
+    } catch { }
+
+    # The newest v20 LTS in index.json, or a known v20 when the index
+    # cannot be read. Node 20 is the fallback line: the last one that
+    # still runs on older operating systems, where the current LTS
+    # binary will not even start.
+    $fallbackVer = 'v20.19.5'
+    if ($idx) {
+      $v20 = $idx | Where-Object { $_.version -like 'v20.*' -and $_.lts -is [string] } | Select-Object -First 1
+      if ($v20) { $fallbackVer = $v20.version }
+    }
+
+    $ver = $pinned
     if (-not $ver) {
-      # index.json lists newest first; the first entry whose lts field is
-      # a string is the current LTS.
-      try {
-        $idx = Invoke-RestMethod -Uri "$dist/index.json" -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
+      # index.json lists newest first; the first entry whose lts field
+      # is a string is the current LTS.
+      if ($idx) {
         $lts = $idx | Where-Object { $_.lts -is [string] } | Select-Object -First 1
         if ($lts) { $ver = $lts.version }
-      } catch { }
+      }
       if (-not $ver -or $ver -notmatch '^v\d') { $ver = 'v22.14.0' } # fetch/parse failed: fall back to a known LTS
     }
-    $file = "node-$ver-win-$arch.zip"
-    $zipPath = Join-Path $btmp 'node.zip'
-    Write-Host "-> downloading $file from nodejs.org"
-    try {
-      Invoke-WebRequest -Uri "$dist/$ver/$file" -OutFile $zipPath -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
-    } catch { Fail "could not download $dist/$ver/$file" }
 
-    # Verify against the release's own SHASUMS256.txt.
-    try {
-      $sumsPath = Join-Path $btmp 'SHASUMS256.txt'
-      Invoke-WebRequest -Uri "$dist/$ver/SHASUMS256.txt" -OutFile $sumsPath -UseBasicParsing -Headers @{ 'User-Agent' = 'redbtn-install/1.0' }
-      $line = Get-Content $sumsPath | Where-Object { $_ -match [regex]::Escape($file) } | Select-Object -First 1
-      if ($line) {
-        $want = ($line -split '\s+')[0]
-        $got = (Get-FileHash -Path $zipPath -Algorithm SHA256).Hash
-        if ($got.ToLower() -ne $want.ToLower()) { Fail "sha256 mismatch for ${file}: refusing to install. Do not retry blindly, the download is corrupt or was swapped." }
-        Write-Host '-> node sha256 ok'
+    $inner = Get-NodeCandidate $ver $dist $arch $btmp
+    if (-not $inner) {
+      if ($pinned) {
+        Fail "node $pinned was downloaded but does not run on this machine, and a pinned version gets no fallback. Install node >= 20 from https://nodejs.org, then re-run."
       }
-    } catch {
-      if ($_.Exception.Message -like 'install.ps1:*') { throw }
-      Write-Warning 'could not verify the node checksum (SHASUMS256.txt unavailable); continuing.'
-    }
-
-    # Unpack into a scratch dir first, verify the result runs, and only
-    # then move it into place.
-    $stage = Join-Path $btmp 'node-x'
-    Expand-Archive -Path $zipPath -DestinationPath $stage
-    $inner = Join-Path $stage "node-$ver-win-$arch"
-    if (-not (Test-Path (Join-Path $inner 'node.exe')) -or -not (Test-Path (Join-Path $inner 'npm.cmd'))) {
-      Fail 'the downloaded node zip does not contain a runnable node/npm pair.'
+      Write-Host "install.ps1: node $ver downloaded fine but does not run on this machine. That usually means the operating system is too old for the current Node.js line."
+      Write-Host "install.ps1: trying $fallbackVer instead, the last Node.js line that runs on older systems."
+      $inner = Get-NodeCandidate $fallbackVer $dist $arch $btmp
+      if (-not $inner) {
+        Fail "node does not run on this machine, not even the Node 20 fallback ($fallbackVer). The operating system is most likely too old for any current Node.js. Install node >= 20 from https://nodejs.org if a build exists for this system, then re-run."
+      }
+      $ver = $fallbackVer
     }
     if (Test-Path $NodeHome) { Remove-Item -Recurse -Force $NodeHome }
     New-Item -ItemType Directory -Path (Split-Path $NodeHome -Parent) -Force | Out-Null
@@ -138,7 +196,7 @@ function Install-Node {
     Remove-Item -Recurse -Force $btmp -ErrorAction SilentlyContinue
   }
   $env:PATH = "$NodeHome;$env:PATH"
-  if ((Get-NodeMajor) -lt 20) { Fail 'the node bootstrap finished but node is still not >= 20 on PATH. Open a new terminal and re-run.' }
+  if ((Get-NodeMajor) -lt 20) { Fail "node was installed at $NodeHome but does not run from there. Install node >= 20 from https://nodejs.org, then re-run." }
   Write-Host "-> installed node $(& node --version) at $NodeHome"
   $script:NodeBootstrapped = $true
 
